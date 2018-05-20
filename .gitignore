@@ -1,0 +1,13 @@
+oxport PATH=~/mongodb/mongodb-osx-x86_64-3.4.9/bin:$PATH
+
+expor
+.cache
+node_modules
+yarn-error.log
+
+# Build directory
+/public
+.DS_Store
+
+.env
+~/mongodb/mongodb-osx-x86_64-3.4.9/bin:$PATH

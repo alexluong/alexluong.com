@@ -1,0 +1,55 @@
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../assets/fonts/PT_Sans/PT_Sans-Web-Regular.ttf) format('opentype');
+}
+
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 800;
+  src: url(../assets/fonts/PT_Sans/PT_Sans-Web-Bold.ttf) format('opentype');
+}
+
+@font-face {
+  font-family: 'PT Sans';
+  font-style: italic;
+  font-weight: 800;
+  src: url(../assets/fonts/PT_Sans/PT_Sans-Web-BoldItalic.ttf) format('opentype');
+}
+
+@font-face {
+  font-family: 'PT Sans';
+  font-style: italic;
+  font-weight: 400;
+  src: url(../assets/fonts/PT_Sans/PT_Sans-Web-Italic.ttf) format('opentype');
+}
+
+@font-face {
+  font-family: 'PT Serif';
+  font-style: normal;
+  font-weight: 400;
+  src: url(../assets/fonts/PT_Serif/PT_Serif-Web-Regular.ttf) format('opentype');
+}
+
+@font-face {
+  font-family: 'PT Serif';
+  font-style: normal;
+  font-weight: 800;
+  src: url(../assets/fonts/PT_Serif/PT_Serif-Web-Bold.ttf) format('opentype');
+}
+
+@font-face {
+  font-family: 'PT Serif';
+  font-style: italic;
+  font-weight: 800;
+  src: url(../assets/fonts/PT_Serif/PT_Serif-Web-BoldItalic.ttf) format('opentype');
+}
+
+@font-face {
+  font-family: 'PT Serif';
+  font-style: italic;
+  font-weight: 400;
+  src: url(../assets/fonts/PT_Serif/PT_Serif-Web-Italic.ttf) format('opentype');
+}
