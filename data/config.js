@@ -7,7 +7,7 @@ module.exports = {
   siteDescription: "A college student talks about code.", // Website description used for RSS feeds/meta description tag.
   siteRss: "/rss.xml", // Path to the RSS file.
   siteFBAppID: "", // FB Application ID for using app insights
-  googleAnalyticsID: "", // GA tracking ID.
+  googleAnalyticsID: "UA-116347511-1", // GA tracking ID.
   disqusShortname: "alexluong", // Disqus shortname.
   userName: "Alex", // Username to display in the author segment.
   userTwitter: "ahtluong", // Optionally renders "Follow Me" in the UserInfo segment.
