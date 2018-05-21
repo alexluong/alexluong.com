@@ -1,4 +1,4 @@
-import styled      from 'styled-components';
+import styled from 'styled-components';
 
 const TypistWrapper = styled.div`
   display: ${props => props.isHome ? 'block' : 'none'};
@@ -19,4 +19,3 @@ const TypistContent = styled.h1`
 `;
 
 export { TypistWrapper, TypistContent };
-

@@ -45,6 +45,12 @@ const StyledScrollToTop = styled.button`
     transform: rotate(0);
     animation: ${bounce} .8s ease-in-out;
   }
+
+  @media screen and (max-width: ${props => props.theme.size.md}) {
+    &, &.fade-in, &.fade-out {
+      display: none;
+    }
+  }
 `;
 
 export default StyledScrollToTop;
