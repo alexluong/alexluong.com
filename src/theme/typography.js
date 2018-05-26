@@ -51,6 +51,10 @@ injectGlobal`
     color: ${linkHover};
   }
 
+  img {
+    width: 100%;
+  }
+
   .mt-0 {
     margin-top: 0;
   }
