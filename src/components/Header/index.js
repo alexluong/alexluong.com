@@ -1,23 +1,19 @@
-import React    from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
-import Img      from 'gatsby-image';
-import Typist   from 'react-typist';
+import Typist from 'react-typist';
 
 import theme from 'theme';
-
-import { StyledLink }  from '../styled';
-import Container       from './Container';
-import Wrapper         from './Wrapper';
-import Nav             from './Nav';
-import Logo            from './Logo';
-import {
-  TypistWrapper,
-  TypistContent
-} from './Typist';
+import { StyledLink } from '../styled';
+import Container from './Container';
+import Wrapper from './Wrapper';
+import Nav from './Nav';
+import Logo from './Logo';
+import HeaderImage from './Image';
+import { TypistWrapper, TypistContent } from './Typist';
 
 class Header extends React.Component {
   state = {
-    page: false
+    page: false,
   };
 
   componentDidUpdate(prevProps, prevState) {
@@ -33,36 +29,42 @@ class Header extends React.Component {
   }
 
   expandHeader() {
-    this.wrapper.animate([
-      { height: theme.header.pageHeight },
-      { height: theme.header.homeHeight }
-    ], {
-      duration: 225,
-      fill: 'forwards',
-      easing: 'ease-out',
-      iteration: 1
-    });
+    this.wrapper.animate(
+      [
+        { height: theme.header.pageHeight },
+        { height: theme.header.homeHeight },
+      ],
+      {
+        duration: 225,
+        fill: 'forwards',
+        easing: 'ease-out',
+        iteration: 1,
+      },
+    );
   }
 
   shortenHeader() {
-    this.wrapper.animate([
-      { height: theme.header.homeHeight },
-      { height: theme.header.pageHeight }
-    ], {
-      duration: 225,
-      fill: 'forwards',
-      easing: 'ease-out',
-      iteration: 1
-    });
+    this.wrapper.animate(
+      [
+        { height: theme.header.homeHeight },
+        { height: theme.header.pageHeight },
+      ],
+      {
+        duration: 225,
+        fill: 'forwards',
+        easing: 'ease-out',
+        iteration: 1,
+      },
+    );
   }
 
   render() {
-    const { data, location } = this.props;
-    const isHome = location.pathname === '/'; 
+    const { location } = this.props;
+    const isHome = location.pathname === '/';
     return (
       <Wrapper
         isHome={isHome}
-        ref={(wrapper) => this.wrapper = ReactDOM.findDOMNode(wrapper)}
+        ref={wrapper => (this.wrapper = ReactDOM.findDOMNode(wrapper))}
       >
         <Container isHome={isHome}>
           <Logo>
@@ -70,8 +72,12 @@ class Header extends React.Component {
           </Logo>
           <Nav>
             <ul>
-              <li><StyledLink to="/"     >Home</StyledLink></li>
-              <li><StyledLink to="/about">About</StyledLink></li>
+              <li>
+                <StyledLink to="/">Home</StyledLink>
+              </li>
+              <li>
+                <StyledLink to="/about">About</StyledLink>
+              </li>
             </ul>
           </Nav>
         </Container>
@@ -83,18 +89,7 @@ class Header extends React.Component {
           </Typist>
         </TypistWrapper>
 
-        <Img
-          alt="Background image"
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            width: '100%',
-            height: '100%',
-            opacity: 0.3
-          }}
-          sizes={data.background.sizes}
-        />
+        <HeaderImage />
       </Wrapper>
     );
   }

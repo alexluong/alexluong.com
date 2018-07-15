@@ -1,4 +1,4 @@
-exports.onClientEntry = () => {
-  // Load Web Animation Polyfill
-  require('web-animations-js/web-animations.min.js');
-}
+// exports.onClientEntry = () => {
+//   require('typeface-pt-sans');
+//   require('typeface-pt-serif');
+// };

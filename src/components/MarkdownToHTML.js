@@ -1,8 +1,11 @@
-import React    from 'react';
-import Link     from 'gatsby-link';
+import React from 'react';
+import { Link } from 'gatsby';
 import Markdown from 'markdown-to-jsx';
 
-const MarkdownToHTML = ({ md = "No markdown is passed", forceBlock = false }) => (
+const MarkdownToHTML = ({
+  md = 'No markdown is passed',
+  forceBlock = false,
+}) => (
   <Markdown
     children={md}
     options={{
@@ -10,8 +13,8 @@ const MarkdownToHTML = ({ md = "No markdown is passed", forceBlock = false }) =>
       overrides: {
         Link: {
           component: Link,
-        }
-      }
+        },
+      },
     }}
   />
 );

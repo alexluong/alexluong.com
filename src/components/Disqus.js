@@ -1,23 +1,22 @@
-import React               from 'react';
+import React from 'react';
 import ReactDisqusComments from 'react-disqus-comments';
-
 import config from '../../data/config';
 
 class Disqus extends React.Component {
   state = {
-    toasts: []
+    toasts: [],
   };
-  
+
   onSnackbarDismiss() {
     const [, ...toasts] = this.state.toasts;
     this.setState({ toasts });
   }
 
-  notifyAboutComment = () =>  {
+  notifyAboutComment = () => {
     const toasts = this.state.toasts.slice();
-    toasts.push({ text: "New comment available!" });
+    toasts.push({ text: 'New comment available!' });
     this.setState({ toasts });
-  }
+  };
 
   render() {
     const { postNode } = this.props;

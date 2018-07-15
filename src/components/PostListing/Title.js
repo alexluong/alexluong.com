@@ -1,6 +1,5 @@
-import React  from 'react';
+import React from 'react';
 import styled from 'styled-components';
-
 import { StyledLink } from '../styled';
 
 const StyledTitle = styled.h1`
@@ -14,7 +13,7 @@ const StyledTitle = styled.h1`
 const Title = ({ title, slug, className }) => (
   <StyledTitle className={className}>
     <StyledLink to={slug}>{title}</StyledLink>
-  </StyledTitle> 
+  </StyledTitle>
 );
 
 export default Title;

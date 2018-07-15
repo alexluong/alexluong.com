@@ -1,4 +1,4 @@
-import React  from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 const DataContainer = styled.div`
@@ -20,8 +20,8 @@ const DataContainer = styled.div`
 
 const Data = ({ name, description }) => (
   <DataContainer>
-    <h2>{ name }</h2>
-    <p>{ description }</p>
+    <h2>{name}</h2>
+    <p>{description}</p>
   </DataContainer>
 );
 
