@@ -11,12 +11,8 @@ import MarkdownToHTML from 'components/MarkdownToHTML';
 import AuthorBox from 'components/AuthorBox';
 import Disqus from 'components/Disqus';
 
-const MarginBottomHr = styled.hr`
-  margin-bottom: 3rem;
-`;
-
 const Post = props => {
-  const contentfulBlogPost = this.props.data.contentfulBlogPost;
+  const contentfulBlogPost = props.data.contentfulBlogPost;
   const {
     title,
     slug,
@@ -36,7 +32,7 @@ const Post = props => {
   };
 
   return (
-    <Layout>
+    <Layout location={props.location}>
       <Helmet>
         <title>{`${title} | ${config.siteTitle}`}</title>
       </Helmet>
@@ -99,5 +95,9 @@ const PostTitle = styled.h1`
 
 const PostSection = styled(MarkdownToHTML)`
   margin-top: 5rem;
+  margin-bottom: 3rem;
+`;
+
+const MarginBottomHr = styled.hr`
   margin-bottom: 3rem;
 `;

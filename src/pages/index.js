@@ -1,36 +1,27 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { StaticQuery } from 'gatsby';
+import { graphql } from 'gatsby';
 import config from '../../data/config';
 
 import Layout from 'components/Layout';
 import PostListing from 'components/PostListing';
 import SEO from 'components/SEO';
 
-const Index = props => {
-  console.log('index');
+const Index = ({ data, ...props }) => {
   return (
-    <StaticQuery
-      query={query}
-      render={data => {
-        console.log(data);
-        return (
-          <Layout location={props.location}>
-            <Helmet title={config.siteTitle} />
-            <SEO />
-            {data.allContentfulBlogPost.edges.map(({ node }) => (
-              <PostListing key={node.id} post={node} />
-            ))}
-          </Layout>
-        );
-      }}
-    />
+    <Layout location={props.location}>
+      <Helmet title={config.siteTitle} />
+      <SEO />
+      {data.allContentfulBlogPost.edges.map(({ node }) => (
+        <PostListing key={node.id} post={node} />
+      ))}
+    </Layout>
   );
 };
 
 export default Index;
 
-const query = graphql`
+export const query = graphql`
   query IndexQuery {
     allContentfulBlogPost(
       limit: 10

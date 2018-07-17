@@ -1,4 +1,9 @@
-// exports.onClientEntry = () => {
-//   require('typeface-pt-sans');
-//   require('typeface-pt-serif');
-// };
+exports.onClientEntry = () => {
+  const WebFont = require('webfontloader');
+
+  WebFont.load({
+    google: {
+      families: ['PT Sans', 'PT Serif'],
+    },
+  });
+};

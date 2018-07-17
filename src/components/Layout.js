@@ -9,22 +9,19 @@ import Footer from './Footer';
 import Main from './Main';
 import ScrollToTop from './ScrollToTop';
 
-const Layout = ({ children, location }) => {
-  console.log('layout');
-  return (
-    <ThemeProvider theme={theme}>
-      <div>
-        <Helmet
-          title={config.siteTitle}
-          meta={[{ name: 'description', content: config.siteDescription }]}
-        />
-        <Header location={location} />
-        <Main>{children}</Main>
-        <Footer />
-        <ScrollToTop />
-      </div>
-    </ThemeProvider>
-  );
-};
+const Layout = ({ children, location }) => (
+  <ThemeProvider theme={theme}>
+    <>
+      <Helmet
+        title={config.siteTitle}
+        meta={[{ name: 'description', content: config.siteDescription }]}
+      />
+      <Header location={location} />
+      <Main>{children}</Main>
+      <Footer />
+      <ScrollToTop />
+    </>
+  </ThemeProvider>
+);
 
 export default Layout;

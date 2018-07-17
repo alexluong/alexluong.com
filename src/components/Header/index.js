@@ -59,8 +59,7 @@ class Header extends React.Component {
   }
 
   render() {
-    const { location } = this.props;
-    const isHome = location.pathname === '/';
+    const isHome = this.props.location.pathname === '/';
     return (
       <Wrapper
         isHome={isHome}

@@ -7,7 +7,7 @@ import Layout from 'components/Layout';
 import PostListing from 'components/PostListing';
 
 const Category = props => {
-  const category = this.props.data.contentfulCategory;
+  const category = props.data.contentfulCategory;
   const { name, description, posts } = category;
 
   return (
