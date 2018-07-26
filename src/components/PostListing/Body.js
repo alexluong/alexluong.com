@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'react-emotion';
 
 const Body = styled.div`
   grid-area: body;

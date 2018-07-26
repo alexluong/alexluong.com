@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'react-emotion';
 
 const Article = styled.article`
   height: ${props => props.theme.blogListing.height};

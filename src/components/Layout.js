@@ -1,6 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider } from 'emotion-theming';
 
 import config from '../../data/config';
 import theme from 'theme';
@@ -9,18 +9,18 @@ import Footer from './Footer';
 import Main from './Main';
 import ScrollToTop from './ScrollToTop';
 
-const Layout = ({ children, location }) => (
+const Layout = ({ children }) => (
   <ThemeProvider theme={theme}>
-    <>
+    <React.Fragment>
       <Helmet
         title={config.siteTitle}
         meta={[{ name: 'description', content: config.siteDescription }]}
       />
-      <Header location={location} />
+      <Header />
       <Main>{children}</Main>
       <Footer />
       <ScrollToTop />
-    </>
+    </React.Fragment>
   </ThemeProvider>
 );
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'react-emotion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // import twitterLogo from 'assets/twitter.svg';

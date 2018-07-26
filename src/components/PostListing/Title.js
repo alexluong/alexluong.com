@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled from 'react-emotion';
 import { StyledLink } from '../styled';
 
 const StyledTitle = styled.h1`

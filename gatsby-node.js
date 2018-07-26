@@ -1,6 +1,4 @@
 const path = require('path');
-const postcssCssnext = require('postcss-cssnext');
-const poscssImport = require('postcss-import');
 
 const BLOGPOST = 'blogPost';
 const CATEGORY = 'category';
@@ -28,44 +26,12 @@ exports.createPages = ({ graphql, actions }) => {
   });
 };
 
-exports.onCreateWebpackConfig = ({ actions, loaders, getConfig }) => {
+exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
   actions.setWebpackConfig({
-    module: {
-      rules: [
-        {
-          test: /\.example/,
-          use: [{ loader: 'raw-loader' }],
-        },
-        {
-          test: /\.css$/,
-          use: [
-            loaders.miniCssExtract(),
-            loaders.css({ importLoaders: 1 }),
-
-            loaders.postcss({
-              ident: 'postcss',
-              plugins: () => [poscssImport(), postcssCssnext()],
-            }),
-          ],
-        },
-      ],
-    },
     resolve: {
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     },
   });
-
-  const configAfterSettings = getConfig();
-
-  const finalRules = configAfterSettings.module.rules.filter(rule => {
-    if (Object.prototype.hasOwnProperty.call(rule, 'oneOf')) {
-      return JSON.stringify(rule).indexOf('style-loader') === -1;
-    }
-    return true;
-  });
-
-  configAfterSettings.module.rules = finalRules;
-  actions.replaceWebpackConfig(configAfterSettings);
 };
 
 const getContentfulData = async graphql => {

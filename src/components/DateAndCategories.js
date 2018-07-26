@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'gatsby';
-import styled from 'styled-components';
+import styled from 'react-emotion';
 
 const DateAndCategories = props => {
   const { createdAt, categories } = props;

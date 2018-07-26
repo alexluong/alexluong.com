@@ -1,7 +1,8 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import Image from 'gatsby-image';
 import { graphql } from 'gatsby';
-import styled from 'styled-components';
+import styled, { css } from 'react-emotion';
 import config from '../../data/config';
 
 import Layout from '../components/Layout';
@@ -39,8 +40,15 @@ const Post = props => {
       <SEO postPath={`/${slug}`} postNode={postNode} postSEO />
 
       <article>
-        <PostTitle>{title}</PostTitle>
+        <h1 className={titleCss}>{title}</h1>
         <DateAndCategories createdAt={createdAt} categories={categories} />
+
+        <Image
+          alt={featuredImage.title}
+          fluid={featuredImage.fluid}
+          outerWrapperClassName={imageWrapperCss}
+        />
+
         <PostSection md={body.body} />
         <MarginBottomHr />
         <AuthorBox author={author} />
@@ -73,6 +81,10 @@ export const query = graphql`
         file {
           url
         }
+        title
+        fluid {
+          ...GatsbyContentfulFluid
+        }
       }
       author {
         displayName
@@ -89,7 +101,7 @@ export const query = graphql`
   }
 `;
 
-const PostTitle = styled.h1`
+const titleCss = css`
   margin-bottom: 0;
 `;
 
@@ -100,4 +112,8 @@ const PostSection = styled(MarkdownToHTML)`
 
 const MarginBottomHr = styled.hr`
   margin-bottom: 3rem;
+`;
+
+const imageWrapperCss = css`
+  margin: 1rem 0 3rem 0;
 `;

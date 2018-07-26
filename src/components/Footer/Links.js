@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'react-emotion';
 
 const Links = styled.ul`
   list-style: none;

@@ -7,17 +7,15 @@ import Layout from 'components/Layout';
 import PostListing from 'components/PostListing';
 import SEO from 'components/SEO';
 
-const Index = ({ data, ...props }) => {
-  return (
-    <Layout location={props.location}>
-      <Helmet title={config.siteTitle} />
-      <SEO />
-      {data.allContentfulBlogPost.edges.map(({ node }) => (
-        <PostListing key={node.id} post={node} />
-      ))}
-    </Layout>
-  );
-};
+const Index = ({ data, ...props }) => (
+  <Layout>
+    <Helmet title={config.siteTitle} />
+    <SEO />
+    {data.allContentfulBlogPost.edges.map(({ node }) => (
+      <PostListing key={node.id} post={node} />
+    ))}
+  </Layout>
+);
 
 export default Index;
 

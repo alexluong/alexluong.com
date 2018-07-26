@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'gatsby';
 import Img from 'gatsby-image';
-import styled from 'styled-components';
+import styled from 'react-emotion';
 
 const Container = styled.div`
   grid-area: image;
