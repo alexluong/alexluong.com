@@ -32,7 +32,8 @@ injectGlobal`
   }
 
   #___gatsby {
-    display: inline;
+    display: flex;
+    flex-direction: column;
     min-height: 100%;
   }
 
@@ -45,7 +46,7 @@ injectGlobal`
   }
 
   main {
-    flex-grow: 1;
+    flex: 1;
   }
 
   header, main, footer {
