@@ -1,4 +1,4 @@
-import { injectGlobal } from 'styled-components';
+import { injectGlobal } from 'react-emotion';
 
 injectGlobal`
   *,
@@ -27,12 +27,13 @@ injectGlobal`
     font-family: "PT Serif", sans-serif;
     font-weight: 400;
     font-size: 2rem;
-    line-height: 2;
+    line-height: 1.7;
     color: #000;
   }
 
   #___gatsby {
-    display: inline;
+    display: flex;
+    flex-direction: column;
     min-height: 100%;
   }
 
@@ -45,7 +46,7 @@ injectGlobal`
   }
 
   main {
-    flex-grow: 1;
+    flex: 1;
   }
 
   header, main, footer {

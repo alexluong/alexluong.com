@@ -1,4 +1,9 @@
 exports.onClientEntry = () => {
-  // Load Web Animation Polyfill
-  require('web-animations-js/web-animations.min.js');
-}
+  const WebFont = require('webfontloader');
+
+  WebFont.load({
+    google: {
+      families: ['PT Sans', 'PT Serif'],
+    },
+  });
+};

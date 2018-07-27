@@ -1,8 +1,11 @@
-import { injectGlobal } from 'styled-components';
-
+import { injectGlobal } from 'react-emotion';
 import { link, linkHover } from './colors';
 
 injectGlobal`
+  article p {
+    line-height: 2;
+  }
+
   h1 {
     margin-bottom: 3rem;
     font-size: 4.6rem;
@@ -33,14 +36,17 @@ injectGlobal`
     color: rgba(0,0,0,.72);
   }
 
+  code {
+    font-family: 'Fira Code', Monaco, monospace;
+    background-color: #ededed;
+    padding: 5px;
+    color: orangered;
+  }
+
   ul, ol {
     margin-bottom: 2rem;
     padding-left: 2rem;
     color: rgba(0,0,0,.72);
-  }
-
-  li:not(:last-of-type) {
-    margin-bottom: 1rem;
   }
 
   a, a:visited {

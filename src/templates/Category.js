@@ -1,37 +1,34 @@
-import React  from 'react';
+import React from 'react';
 import Helmet from 'react-helmet';
-
+import { graphql } from 'gatsby';
 import config from '../../data/config';
 
+import Layout from 'components/Layout';
 import PostListing from 'components/PostListing';
 
-class Category extends React.Component {
-  render() {
-    const category = this.props.data.contentfulCategory;
-    const { name, description, posts } = category;
+const Category = props => {
+  const category = props.data.contentfulCategory;
+  const { name, description, posts } = category;
 
-    return (
-      <div>
-        <Helmet>
-          <title>{`${name} | ${config.siteTitle}`}</title>
-        </Helmet>
+  return (
+    <Layout location={props.location}>
+      <Helmet>
+        <title>{`${name} | ${config.siteTitle}`}</title>
+      </Helmet>
 
-        <h1 className="mb-0">{name}</h1>
-        <p>{description}</p>
-        <hr />
-        {posts.map(post => (
-          <PostListing key={post.id} post={post} />
-        ))}
-      </div>
-    );
-  };
-}
+      <h1 className="mb-0">{name}</h1>
+      <p>{description}</p>
+      <hr />
+      {posts.map(post => <PostListing key={post.id} post={post} />)}
+    </Layout>
+  );
+};
 
 export default Category;
 
 export const query = graphql`
-  query CategoryQuery($slug: String!) {
-    contentfulCategory(slug:{ eq: $slug }) {
+  query($slug: String!) {
+    contentfulCategory(slug: { eq: $slug }) {
       name
       description
       posts: blog_post {

@@ -1,56 +1,69 @@
-import React  from 'react';
+import React from 'react';
 import Helmet from 'react-helmet';
-import styled from 'styled-components';
-
+import Image from 'gatsby-image';
+import { graphql } from 'gatsby';
+import styled, { css } from 'react-emotion';
 import config from '../../data/config';
 
-import SEO               from 'components/SEO';
+import Layout from '../components/Layout';
+import SEO from 'components/SEO';
 import DateAndCategories from 'components/DateAndCategories';
-import MarkdownToHTML    from 'components/MarkdownToHTML';
-import AuthorBox         from 'components/AuthorBox';
-import Disqus            from 'components/Disqus';
+import MarkdownToHTML from 'components/MarkdownToHTML';
+import AuthorBox from 'components/AuthorBox';
+import Disqus from 'components/Disqus';
 
-const MarginBottomHr = styled.hr`
-  margin-bottom: 3rem;
-`;
+const Post = props => {
+  const contentfulBlogPost = props.data.contentfulBlogPost;
+  const {
+    title,
+    slug,
+    excerpt,
+    createdAt,
+    categories,
+    body,
+    author,
+    featuredImage,
+  } = contentfulBlogPost;
 
-class Post extends React.Component {
-  render() {
-    const { data: { contentfulBlogPost } } = this.props;
-    const { title, slug, excerpt, createdAt, categories, body, author, featuredImage } = contentfulBlogPost;
-    const postNode = {
-      title,
-      description: excerpt.excerpt,
-      featuredImage: `https:${featuredImage.file.url}`,
-      slug
-    };
+  const postNode = {
+    title,
+    description: excerpt.excerpt,
+    featuredImage: `https:${featuredImage.file.url}`,
+    slug,
+  };
 
-    return (
-      <div>
-        <Helmet>
-          <title>{`${title} | ${config.siteTitle}`}</title>
-        </Helmet>
-        <SEO postPath={`/${slug}`} postNode={postNode} postSEO />
+  return (
+    <Layout location={props.location}>
+      <Helmet>
+        <title>{`${title} | ${config.siteTitle}`}</title>
+      </Helmet>
+      <SEO postPath={`/${slug}`} postNode={postNode} postSEO />
 
-        <article>
-          <PostTitle>{ title }</PostTitle>
-          <DateAndCategories createdAt={createdAt} categories={categories} />
-          <PostSection md={body.body} />
-          <MarginBottomHr />
-          <AuthorBox author={author} />
-          <MarginBottomHr />
-          <Disqus postNode={postNode} />
-        </article>
-      </div>
-    );
-  }
+      <article>
+        <h1 className={titleCss}>{title}</h1>
+        <DateAndCategories createdAt={createdAt} categories={categories} />
+
+        <Image
+          alt={featuredImage.title}
+          fluid={featuredImage.fluid}
+          outerWrapperClassName={imageWrapperCss}
+        />
+
+        <PostSection md={body.body} />
+        <MarginBottomHr />
+        <AuthorBox author={author} />
+        <MarginBottomHr />
+        <Disqus postNode={postNode} />
+      </article>
+    </Layout>
+  );
 };
 
 export default Post;
 
 export const query = graphql`
-  query PostQuery($slug: String!) {
-    contentfulBlogPost(slug: {eq: $slug}) {
+  query($slug: String!) {
+    contentfulBlogPost(slug: { eq: $slug }) {
       title
       slug
       createdAt(formatString: "MMMM DD, YYYY")
@@ -68,6 +81,10 @@ export const query = graphql`
         file {
           url
         }
+        title
+        fluid {
+          ...GatsbyContentfulFluid
+        }
       }
       author {
         displayName
@@ -84,11 +101,19 @@ export const query = graphql`
   }
 `;
 
-const PostTitle = styled.h1`
+const titleCss = css`
   margin-bottom: 0;
 `;
 
 const PostSection = styled(MarkdownToHTML)`
   margin-top: 5rem;
   margin-bottom: 3rem;
+`;
+
+const MarginBottomHr = styled.hr`
+  margin-bottom: 3rem;
+`;
+
+const imageWrapperCss = css`
+  margin: 1rem 0 3rem 0;
 `;

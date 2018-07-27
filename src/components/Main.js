@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from 'react-emotion';
 
 const Main = styled.main`
   margin: 0 auto;

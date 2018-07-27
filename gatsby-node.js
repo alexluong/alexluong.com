@@ -2,10 +2,10 @@ const path = require('path');
 
 const BLOGPOST = 'blogPost';
 const CATEGORY = 'category';
-const PAGE     = 'page';
+const PAGE = 'page';
 
-exports.createPages = ({ graphql, boundActionCreators }) => {
-  const { createPage } = boundActionCreators;
+exports.createPages = ({ graphql, actions }) => {
+  const { createPage } = actions;
 
   return new Promise(async (resolve, reject) => {
     const result = await getContentfulData(graphql);
@@ -26,15 +26,13 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   });
 };
 
-exports.modifyWebpackConfig = ({ config, stage }) => {
-  // add this to have absolute imports
-  config.merge(function(current) {
-    current.resolve.root = path.resolve('./src');
-    return current;
+exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
+  actions.setWebpackConfig({
+    resolve: {
+      modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    },
   });
-
-  return config;
-}
+};
 
 const getContentfulData = async graphql => {
   return graphql(`
@@ -68,7 +66,7 @@ const createPageWithData = (createPage, node, type) => {
   let componentPath;
   switch (type) {
     case BLOGPOST:
-      componentPath = path.resolve('./src/templates/Post.js');  
+      componentPath = path.resolve('./src/templates/Post.js');
       break;
     case CATEGORY:
       componentPath = path.resolve('./src/templates/Category.js');
@@ -82,10 +80,10 @@ const createPageWithData = (createPage, node, type) => {
   }
 
   createPage({
-    path     : node.slug,
+    path: node.slug,
     component: componentPath,
-    context  : {
-      slug: node.slug
-    }
+    context: {
+      slug: node.slug,
+    },
   });
 };

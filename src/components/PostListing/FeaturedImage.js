@@ -1,7 +1,7 @@
-import React  from 'react';
-import Link   from 'gatsby-link';
-import Img    from 'gatsby-image';
-import styled from 'styled-components';
+import React from 'react';
+import { Link } from 'gatsby';
+import Img from 'gatsby-image';
+import styled from 'react-emotion';
 
 const Container = styled.div`
   grid-area: image;
@@ -12,7 +12,7 @@ const FeaturedImage = ({ slug, featuredImage }) => {
   if (!featuredImage) {
     return null;
   }
-  
+
   return (
     <Container>
       <Link to={slug}>

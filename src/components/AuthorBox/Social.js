@@ -1,6 +1,6 @@
-import React  from 'react';
-import styled from 'styled-components';
-import FontAwesomeIcon from '@fortawesome/react-fontawesome';
+import React from 'react';
+import styled from 'react-emotion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 // import twitterLogo from 'assets/twitter.svg';
 
@@ -31,14 +31,38 @@ const Social = ({ website, github, youtube, facebook, twitter, linkedin }) => {
 
   return (
     <SocialContainer>
-      { website  && <a target="_blank" href={website }><FontAwesomeIcon icon="globe"               /></a>}
-      { youtube  && <a target="_blank" href={youtube }><FontAwesomeIcon icon={['fab', 'youtube' ]} /></a>}
-      { github   && <a target="_blank" href={github  }><FontAwesomeIcon icon={['fab', 'github'  ]} /></a>}
-      { linkedin && <a target="_blank" href={linkedin}><FontAwesomeIcon icon={['fab', 'linkedin']} /></a>}
-      { twitter  && <a target="_blank" href={twitter }><FontAwesomeIcon icon={['fab', 'twitter' ]} /></a>}
-      { facebook && <a target="_blank" href={facebook}><FontAwesomeIcon icon={['fab', 'facebook']} /></a>}
+      {website && (
+        <a target="_blank" rel="noopener noreferrer" href={website}>
+          <FontAwesomeIcon icon="globe" />
+        </a>
+      )}
+      {youtube && (
+        <a target="_blank" rel="noopener noreferrer" href={youtube}>
+          <FontAwesomeIcon icon={['fab', 'youtube']} />
+        </a>
+      )}
+      {github && (
+        <a target="_blank" rel="noopener noreferrer" href={github}>
+          <FontAwesomeIcon icon={['fab', 'github']} />
+        </a>
+      )}
+      {linkedin && (
+        <a target="_blank" rel="noopener noreferrer" href={linkedin}>
+          <FontAwesomeIcon icon={['fab', 'linkedin']} />
+        </a>
+      )}
+      {twitter && (
+        <a target="_blank" rel="noopener noreferrer" href={twitter}>
+          <FontAwesomeIcon icon={['fab', 'twitter']} />
+        </a>
+      )}
+      {facebook && (
+        <a target="_blank" rel="noopener noreferrer" href={facebook}>
+          <FontAwesomeIcon icon={['fab', 'facebook']} />
+        </a>
+      )}
     </SocialContainer>
   );
-}
+};
 
 export default Social;

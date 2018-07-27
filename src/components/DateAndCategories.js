@@ -1,12 +1,8 @@
 import React from 'react';
-import Link   from 'gatsby-link';
-import styled from 'styled-components';
+import { Link } from 'gatsby';
+import styled from 'react-emotion';
 
-const ItalicLink = styled(Link)`
-  font-style: italic;
-`;
-
-const DateAndCategories = (props) => {
+const DateAndCategories = props => {
   const { createdAt, categories } = props;
 
   const changedProps = Object.assign({}, props);
@@ -16,15 +12,15 @@ const DateAndCategories = (props) => {
   return (
     <h4>
       {createdAt}
-      { categories && (
+      {categories && (
         <span>
           &nbsp;|&nbsp;
           {categories.map((category, i) => (
             <span key={i}>
-              <ItalicLink to={category.slug} {...changedProps}>{category.name}</ItalicLink>
-              {i < categories.length - 1
-                ? (<span>&nbsp;|&nbsp;</span>)
-                : null}
+              <ItalicLink to={category.slug} {...changedProps}>
+                {category.name}
+              </ItalicLink>
+              {i < categories.length - 1 ? <span>&nbsp;|&nbsp;</span> : null}
             </span>
           ))}
         </span>
@@ -34,3 +30,7 @@ const DateAndCategories = (props) => {
 };
 
 export default DateAndCategories;
+
+const ItalicLink = styled(Link)`
+  font-style: italic;
+`;

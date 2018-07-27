@@ -6,20 +6,16 @@ const theme = {
   size: {
     sm: '479px',
     md: '760px',
-    lg: '991px'
+    lg: '991px',
   },
   xPadding: '3rem',
   maxWidth: '760px',
-  header: {
-    homeHeight: '70vh',
-    pageHeight: '10vh'
-  },
   blogListing: {
     height: '175px',
     articleSpacing: '11rem',
     titleSize: '2rem',
-    descriptionSize: '1.5rem'
-  }
+    descriptionSize: '1.5rem',
+  },
 };
 
 export default theme;

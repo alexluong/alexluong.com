@@ -1,5 +1,5 @@
-import React  from 'react';
-import styled from 'styled-components';
+import React from 'react';
+import styled from 'react-emotion';
 
 const DataContainer = styled.div`
   grid-area: data;
@@ -20,8 +20,8 @@ const DataContainer = styled.div`
 
 const Data = ({ name, description }) => (
   <DataContainer>
-    <h2>{ name }</h2>
-    <p>{ description }</p>
+    <h2>{name}</h2>
+    <p>{description}</p>
   </DataContainer>
 );
 

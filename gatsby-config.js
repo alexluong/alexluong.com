@@ -1,8 +1,5 @@
 require('dotenv').config();
-const {
-  CONTENTFUL_SPACE_ID,
-  CONTENTFUL_ACCESS_TOKEN
-} = process.env;
+const { CONTENTFUL_SPACE_ID, CONTENTFUL_ACCESS_TOKEN } = process.env;
 
 const config = require('./data/config');
 
@@ -16,51 +13,51 @@ module.exports = {
       description: config.siteDescription,
       image_url: `${config.siteUrl + config.pathPrefix}/logos/logo-512.png`,
       author: config.userName,
-      copyright: config.copyright
-    }
+      copyright: config.copyright,
+    },
   },
   plugins: [
     'gatsby-plugin-react-helmet',
-    'gatsby-plugin-styled-components',
+    'gatsby-plugin-emotion',
     {
       resolve: 'gatsby-source-contentful',
       options: {
         spaceId: CONTENTFUL_SPACE_ID,
-        accessToken: CONTENTFUL_ACCESS_TOKEN
-      }
+        accessToken: CONTENTFUL_ACCESS_TOKEN,
+      },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'src',
-        path: `${__dirname}/src/`
-      }
+        path: `${__dirname}/src/`,
+      },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'img',
-        path: `${__dirname}/src/assets`
-      }
+        path: `${__dirname}/src/assets`,
+      },
     },
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
         host: config.siteUrl + config.pathPrefix,
         sitemap: config.siteUrl + config.pathPrefix + '/sitemap.xml',
-        policy: [{ userAgent: '*', allow: '/' }]
-      }
+        policy: [{ userAgent: '*', allow: '/' }],
+      },
     },
     {
-      resolve: "gatsby-plugin-google-analytics",
+      resolve: 'gatsby-plugin-google-analytics',
       options: {
         trackingId: config.googleAnalyticsID,
-        respectDNT: true
-      }
+        respectDNT: true,
+      },
     },
     'gatsby-plugin-sitemap',
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
-    'gatsby-transformer-remark'
-  ]
+    'gatsby-transformer-remark',
+  ],
 };
