@@ -1,5 +1,6 @@
 import React from 'react';
 import Helmet from 'react-helmet';
+import { css } from 'react-emotion';
 import { graphql } from 'gatsby';
 import config from '../../data/config';
 
@@ -11,9 +12,14 @@ const Index = ({ data, ...props }) => (
   <Layout>
     <Helmet title={config.siteTitle} />
     <SEO />
-    {data.allContentfulBlogPost.edges.map(({ node }) => (
-      <PostListing key={node.id} post={node} />
-    ))}
+
+    <h1 className={taglineCss}>My Journey in Tech</h1>
+
+    <div>
+      {data.allContentfulBlogPost.edges.map(({ node }) => (
+        <PostListing key={node.id} post={node} />
+      ))}
+    </div>
   </Layout>
 );
 
@@ -55,4 +61,9 @@ export const query = graphql`
       }
     }
   }
+`;
+
+const taglineCss = css`
+  text-align: center;
+  margin: 0;
 `;
