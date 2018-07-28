@@ -1,15 +1,17 @@
 import React from 'react';
+import StyledLink from 'components/styled';
 import Layout from 'components/Layout';
 
 const IndexPage = props => (
   <Layout>
     <p>
-      Lorem ipsum dolor amet put a bird on it gluten-free woke, shoreditch tote
-      bag organic irony. Ennui tousled marfa synth poutine banjo williamsburg.
-      Vegan VHS irony yuccie PBR&B. Taiyaki poke vexillologist marfa, roof party
-      tacos polaroid crucifix cronut dreamcatcher succulents master cleanse.Oh.
-      You need a little dummy text for your mockup? How quaint.I bet you’re
-      still using Bootstrap too…
+      My name is Alex Luong. I'm a Computer Science student at The University of
+      Alabama. In my free time, I like to build websites and web apps.
+    </p>
+
+    <p>
+      I'm trying to get more involved with the open source community. Please
+      check out my journey <StyledLink to="/open-source">here</StyledLink>.
     </p>
   </Layout>
 );
