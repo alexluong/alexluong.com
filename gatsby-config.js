@@ -19,6 +19,10 @@ module.exports = {
   plugins: [
     'gatsby-plugin-react-helmet',
     'gatsby-plugin-emotion',
+    'gatsby-plugin-sitemap',
+    'gatsby-transformer-sharp',
+    'gatsby-plugin-sharp',
+    'gatsby-plugin-catch-links',
     {
       resolve: 'gatsby-source-contentful',
       options: {
@@ -55,9 +59,11 @@ module.exports = {
         respectDNT: true,
       },
     },
-    'gatsby-plugin-sitemap',
-    'gatsby-transformer-sharp',
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-remark',
+    {
+      resolve: 'gatsby-transformer-remark',
+      options: {
+        plugins: ['gatsby-remark-prismjs', 'gatsby-remark-smartypants'],
+      },
+    },
   ],
 };

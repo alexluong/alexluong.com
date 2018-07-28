@@ -8,7 +8,7 @@ import config from '../../data/config';
 import Layout from '../components/Layout';
 import SEO from 'components/SEO';
 import DateAndCategories from 'components/DateAndCategories';
-import MarkdownToHTML from 'components/MarkdownToHTML';
+import HTMLBody from 'components/HTMLBody';
 import AuthorBox from 'components/AuthorBox';
 import Disqus from 'components/Disqus';
 
@@ -49,7 +49,7 @@ const Post = props => {
           outerWrapperClassName={imageWrapperCss}
         />
 
-        <PostSection md={body.body} />
+        <PostSection html={body.childMarkdownRemark.html} />
         <MarginBottomHr />
         <AuthorBox author={author} />
         <MarginBottomHr />
@@ -75,7 +75,9 @@ export const query = graphql`
         excerpt
       }
       body {
-        body
+        childMarkdownRemark {
+          html
+        }
       }
       featuredImage {
         file {
@@ -105,7 +107,7 @@ const titleCss = css`
   margin-bottom: 0;
 `;
 
-const PostSection = styled(MarkdownToHTML)`
+const PostSection = styled(HTMLBody)`
   margin-top: 5rem;
   margin-bottom: 3rem;
 `;

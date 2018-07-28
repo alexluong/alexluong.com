@@ -38,9 +38,25 @@ injectGlobal`
 
   code {
     font-family: 'Fira Code', Monaco, monospace;
-    background-color: #ededed;
+    background-color: hsla(0,0%,0%,0.04);
     padding: 5px;
     color: orangered;
+    font-size: 85%;
+  }
+
+  pre {
+    margin: 2rem 0;
+    padding: 1.05rem;
+    font-size: 85%;
+    line-height: 1.6;
+    background-color: hsla(0,0%,0%,0.04);
+    border-radius: 3px;
+    overflow: auto;
+    word-wrap: normal;
+
+    code {
+      background-color: transparent;
+    }
   }
 
   ul, ol {
