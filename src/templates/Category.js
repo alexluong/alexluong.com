@@ -19,7 +19,7 @@ const Category = props => {
       <h1 className="mb-0">{name}</h1>
       <p>{description}</p>
       <hr />
-      {posts.map(post => <PostListing key={post.id} post={post} />)}
+      {posts && posts.map(post => <PostListing key={post.id} post={post} />)}
     </Layout>
   );
 };

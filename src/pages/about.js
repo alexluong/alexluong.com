@@ -1,5 +1,5 @@
 import React from 'react';
-import StyledLink from 'components/styled';
+import { StyledLink } from 'components/styled';
 import Layout from 'components/Layout';
 
 const IndexPage = props => (
