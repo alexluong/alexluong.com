@@ -37,7 +37,7 @@ injectGlobal`
   }
 
   code {
-    font-family: 'Fira Code', Monaco, monospace;
+    font-family: 'PT Mono', Monaco, monospace !important;
     background-color: hsla(0,0%,0%,0.04);
     padding: 5px;
     color: orangered;
@@ -45,6 +45,7 @@ injectGlobal`
   }
 
   pre {
+    font-family: 'PT Mono', Monaco, monospace !important;
     margin: 2rem 0;
     padding: 1.05rem;
     font-size: 85%;

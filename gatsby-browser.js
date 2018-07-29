@@ -3,7 +3,7 @@ exports.onClientEntry = () => {
 
   WebFont.load({
     google: {
-      families: ['PT Sans', 'PT Serif'],
+      families: ['PT Sans', 'PT Serif', 'PT Mono'],
     },
   });
 };
