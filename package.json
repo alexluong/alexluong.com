@@ -1,0 +1,76 @@
+{
+  "name": "blog.alexluong.com",
+  "author": "Alex Luong",
+  "version": "2.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop -p 8000",
+    "start": "yarn develop"
+  },
+  "husky": {
+    "husky": {
+      "hooks": {
+        "pre-commit": "lint-staged"
+      }
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx}": [
+      "eslint"
+    ],
+    "**/*.+(js|jsx|ts|tsx|css|yml|yaml)": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "gatsby": "^2.0.53",
+    "gatsby-image": "^2.0.20",
+    "gatsby-plugin-layout": "^1.0.9",
+    "gatsby-plugin-manifest": "^2.0.9",
+    "gatsby-plugin-offline": "^2.0.16",
+    "gatsby-plugin-react-helmet": "^3.0.2",
+    "gatsby-plugin-sharp": "^2.0.12",
+    "gatsby-plugin-styled-components": "^3.0.3",
+    "gatsby-remark-copy-linked-files": "^2.0.6",
+    "gatsby-remark-emojis": "^0.2.3",
+    "gatsby-remark-images": "^2.0.6",
+    "gatsby-remark-prismjs": "^3.0.3",
+    "gatsby-remark-smartypants": "^2.0.6",
+    "gatsby-source-filesystem": "^2.0.8",
+    "gatsby-transformer-remark": "^2.1.12",
+    "gatsby-transformer-sharp": "^2.1.8",
+    "prismjs": "^1.15.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.7.0-alpha.1",
+    "react-dom": "^16.7.0-alpha.1",
+    "react-helmet": "^5.2.0",
+    "styled-components": "^4.1.1",
+    "turndown": "^5.0.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "babel-plugin-styled-components": "^1.8.0",
+    "commitizen": "^3.0.4",
+    "cz-conventional-changelog": "^2.1.0",
+    "dotenv": "^6.1.0",
+    "eslint": "^5.9.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^3.3.0",
+    "eslint-loader": "^2.1.1",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-react": "^7.11.1",
+    "gatsby-plugin-eslint": "^2.0.1",
+    "husky": "^1.2.0",
+    "lint-staged": "^8.0.5",
+    "prettier": "^1.15.2",
+    "yarn": "^1.12.3"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  }
+}
