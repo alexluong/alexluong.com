@@ -21,11 +21,24 @@ const Card = styled(Link)`
   }
 
   display: grid;
-  grid-template-rows: 30rem 22rem;
+  grid-template-rows: 30rem 25rem;
+
+  &:hover {
+    ${CardContent} {
+      h2 {
+        color: red;
+      }
+
+      p {
+        opacity: 1;
+      }
+    }
+  }
 `
 
 const CardContent = styled.div`
   padding: 0 2rem;
+  color: #333;
 
   h2 {
     font-size: 2.4rem;
@@ -33,7 +46,9 @@ const CardContent = styled.div`
   }
 
   p {
+    font-size: 2rem;
     margin: 1rem 0;
+    opacity: 0.75;
   }
 `
 
