@@ -21,46 +21,35 @@ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascr
   * @license MIT 2016-2018
   */
 
-  pre::-webkit-scrollbar {
-    width: 14px;
+  pre[class*="language-"] {
+    &::-webkit-scrollbar {
+      width: 14px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background-color: #6272a4;
+      border-radius: 0px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #bd93f9;
+      border-radius: 0px;
+    }
   }
 
-  pre::-webkit-scrollbar-track {
-    background-color: #6272a4;
-    border-radius: 0px;
-  }
-
-  pre::-webkit-scrollbar-thumb {
-    background-color: #bd93f9;
-    border-radius: 0px;
-  }
-
-  code,
-  pre {
+  code[class*="language-"],
+  pre[class*="language-"] {
     color: #ccc;
     background: rgb(40, 41, 54);
   }
 
-  pre::selection,
-  pre *::selection,
-  code::selection,
-  code *::selection {
-    text-shadow: none;
-    background-color: #5a5f80;
-  }
-
-  /* Code blocks */
-  pre {
-    background: rgba(40, 41, 54, 1) !important;
-    /* border-radius: 0.5em; */
-    padding: 1em;
-    margin: 0.5em 0;
-    overflow: auto;
-    height: auto;
-  }
-
-  pre {
-    background: rgba(40, 41, 54, 1);
+  code[class*="language-"],
+  pre[class*="language-"] {
+    &::selection,
+    *::selection {
+      text-shadow: none;
+      background-color: #5a5f80;
+    }
   }
 
   .limit-300 {
@@ -204,73 +193,89 @@ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascr
     color: #ff79c6;
   }
 
-  .cpp .token.string {
-    color: #8be9fd;
+  .language-cpp {
+    .token.string {
+      color: #8be9fd;
+    }
   }
 
-  .c .token.string {
-    color: #8be9fd;
+  .language-c {
+    .token.string {
+      color: #8be9fd;
+    }
   }
 
-  .css .token.selector {
-    color: rgba(80, 250, 123, 1);
+  .language-css {
+    .token.selector {
+      color: rgba(80, 250, 123, 1);
+    }
+
+    .token.property {
+      color: rgba(255, 184, 108, 1);
+    }
   }
 
-  .css .token.property {
-    color: rgba(255, 184, 108, 1);
+  .language-java {
+    .token.class-name {
+      color: #8be9fd;
+    }
+
+    .token.class-name {
+      color: #8be9fd;
+    }
   }
 
-  .java span.token.class-name {
-    color: #8be9fd;
+  .language-markup {
+    .token.attr-value {
+      color: rgba(102, 217, 239, 1);
+    }
+
+    .token.tag {
+      color: rgba(80, 250, 123, 1);
+    }
   }
 
-  .java .token.class-name {
-    color: #8be9fd;
+  .language-objectivec {
+    .token.property {
+      color: #66d9ef;
+    }
+
+    .token.string {
+      color: #50fa7b;
+    }
   }
 
-  .markup .token.attr-value {
-    color: rgba(102, 217, 239, 1);
+  .language-php {
+    .token.boolean {
+      color: #8be9fd;
+    }
+
+    .token.function {
+      color: #ff79c6;
+    }
+
+    .token.keyword {
+      color: #66d9ef;
+    }
   }
 
-  .markup .token.tag {
-    color: rgba(80, 250, 123, 1);
+  .language-ruby {
+    .token.symbol {
+      color: #8be9fd;
+    }
+
+    .token.class-name {
+      color: #cfcfc2;
+    }
   }
 
-  .objectivec .token.property {
-    color: #66d9ef;
-  }
-
-  .objectivec .token.string {
-    color: #50fa7b;
-  }
-
-  .php .token.boolean {
-    color: #8be9fd;
-  }
-
-  .php .token.function {
-    color: #ff79c6;
-  }
-
-  .php .token.keyword {
-    color: #66d9ef;
-  }
-
-  .ruby .token.symbol {
-    color: #8be9fd;
-  }
-
-  .ruby .token.class-name {
-    color: #cfcfc2;
-  }
-
-  pre.line-numbers {
+  .line-numbers {
     position: relative;
     padding-left: 3.8em;
     counter-reset: linenumber;
   }
 
-  pre.line-numbers > code {
+  .line-numbers > code {
     position: relative;
     white-space: inherit;
   }

@@ -2,6 +2,8 @@ import React, { Fragment } from "react"
 import PropTypes from "prop-types"
 import { StaticQuery, graphql } from "gatsby"
 // UIs
+import Header from "components/Header"
+import Footer from "components/Footer"
 import Meta from "components/Meta"
 import GlobalStyle from "config/styles"
 import PrismStyle from "config/prism"
@@ -17,7 +19,9 @@ function App({ children, data }) {
       <PrismStyle />
       <GlobalStyle />
 
+      <Header />
       {children}
+      <Footer />
     </Fragment>
   )
 }

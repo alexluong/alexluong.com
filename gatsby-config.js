@@ -13,12 +13,11 @@ module.exports = {
     "gatsby-plugin-sharp",
     "gatsby-plugin-eslint",
 
-    // Get markdown files
     {
-      resolve: "gatsby-source-filesystem",
+      resolve: "gatsby-source-contentful",
       options: {
-        name: "posts",
-        path: `${__dirname}/content/posts`,
+        spaceId: process.env.CONTENTFUL_SPACE_ID,
+        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
       },
     },
 
@@ -33,13 +32,11 @@ module.exports = {
               maxWidth: 590,
             },
           },
-          "gatsby-remark-copy-linked-files",
           "gatsby-remark-smartypants",
           "gatsby-remark-emojis",
           {
             resolve: "gatsby-remark-prismjs",
             options: {
-              classPrefix: "",
               inlineCodeMarker: ">",
               noInlineHighlight: true,
             },
@@ -48,20 +45,30 @@ module.exports = {
       },
     },
 
-    // Get assets (images)
-    {
-      resolve: "gatsby-source-filesystem",
-      options: {
-        name: "images",
-        path: `${__dirname}/content/assets`,
-      },
-    },
+    // // Get assets (images)
+    // {
+    //   resolve: "gatsby-source-filesystem",
+    //   options: {
+    //     name: "images",
+    //     path: `${__dirname}/content/assets`,
+    //   },
+    // },
 
     // Layout wrapper
     {
       resolve: "gatsby-plugin-layout",
       options: {
         component: require.resolve(`${__dirname}/src/index.js`),
+      },
+    },
+
+    // Fonts
+    {
+      resolve: "gatsby-plugin-web-font-loader",
+      options: {
+        google: {
+          families: ["Source Sans Pro", "Inconsolata"],
+        },
       },
     },
   ],

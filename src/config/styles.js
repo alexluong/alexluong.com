@@ -12,7 +12,8 @@ const GlobalStyle = createGlobalStyle`
   }
   html,
   body,
-  #root {
+  #___gatsby,
+  #___gatsby > div {
     height: 100%;
     width: 100%;
   }
@@ -21,11 +22,16 @@ const GlobalStyle = createGlobalStyle`
   }
   body {
     box-sizing: border-box;
-    font-family: sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-weight: 400;
     font-size: 1.6rem;
     line-height: 1.7;
     color: #666;
+    -webkit-font-smoothing: antialiased;
+  }
+  #___gatsby > div {
+    display: grid;
+    grid-template-rows: 8rem auto 8rem;
   }
 `
 

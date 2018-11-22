@@ -15,9 +15,9 @@ exports.createPages = ({ graphql, actions }) => {
     const result = await getData(graphql)
 
     // Create blog posts
-    result.data.posts.edges.forEach(({ node }) => {
+    result.data.allPosts.edges.forEach(({ node }) => {
       createPage({
-        path: `/${node.frontmatter.slug}`,
+        path: `/${node.slug}`,
         context: { id: node.id },
         component: path.resolve(`${__dirname}/src/templates/Post.js`),
       })
@@ -28,20 +28,24 @@ exports.createPages = ({ graphql, actions }) => {
 }
 
 async function getData(graphql) {
-  return graphql(
-    `
-      {
-        posts: allMarkdownRemark {
-          edges {
-            node {
-              id
-              frontmatter {
-                slug
-              }
-            }
+  return graphql(`
+    {
+      allPosts: allContentfulBlogPost {
+        edges {
+          node {
+            id
+            slug
           }
         }
       }
-    `,
-  )
+      allCategories: allContentfulCategory {
+        edges {
+          node {
+            id
+            slug
+          }
+        }
+      }
+    }
+  `)
 }
