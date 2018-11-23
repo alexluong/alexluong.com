@@ -3,7 +3,7 @@ import styled from "styled-components"
 
 const StyledFooter = styled.footer`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   padding: 0 3rem;
   background: #000;

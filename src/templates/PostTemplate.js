@@ -1,37 +1,57 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { graphql } from "gatsby"
+import { Link, graphql } from "gatsby"
 import Img from "gatsby-image"
+import styled from "styled-components"
 // UIs
 import Article from "components/Article"
+import ArticleLayout from "components/ArticleLayout"
 import HtmlRenderer from "components/HtmlRenderer"
+
+const TitleContainer = styled.div`
+  margin: 3rem auto 0 auto;
+  padding: 0 2rem;
+  max-width: 120ch;
+  text-align: center;
+
+  h1 {
+    margin-bottom: 0;
+  }
+`
+
+const ItalicLink = styled(Link)`
+  font-style: italic;
+`
 
 function PostTemplate({
   data: {
     post: {
       title,
       featuredImage,
+      date,
+      categories,
       body: {
         childMarkdownRemark: { htmlAst },
       },
     },
   },
 }) {
-  const titleAst = {
-    type: "element",
-    tagName: "h1",
-    properties: {},
-    children: [{ type: "text", value: title }],
-  }
-
-  // Just checking this for HMR
-  if (htmlAst.children[0].tagName !== "h1") {
-    htmlAst.children.unshift(titleAst)
-  }
-
   return (
-    <div>
-      <Article>
+    <Article>
+      <TitleContainer>
+        <h1>{title}</h1>
+        <h4>
+          <span>{date} | </span>
+          {categories.map((category, i) => (
+            <span key={i}>
+              <ItalicLink to={category.slug}>{category.name}</ItalicLink>
+              {i < categories.length - 1 ? <span>&nbsp;|&nbsp;</span> : null}
+            </span>
+          ))}
+        </h4>
+      </TitleContainer>
+
+      <ArticleLayout>
         <Img
           alt={featuredImage.title}
           fluid={featuredImage.fluid}
@@ -43,8 +63,8 @@ function PostTemplate({
         />
 
         <HtmlRenderer>{htmlAst}</HtmlRenderer>
-      </Article>
-    </div>
+      </ArticleLayout>
+    </Article>
   )
 }
 

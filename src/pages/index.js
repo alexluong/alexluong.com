@@ -35,7 +35,7 @@ function IndexPage({
     <div style={{ background: "#f4f8fb" }}>
       <Container>
         {allPosts.map(({ post }) => (
-          <Post id={post.id} post={post} />
+          <Post key={post.id} id={post.id} post={post} />
         ))}
       </Container>
     </div>
