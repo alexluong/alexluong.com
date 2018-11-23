@@ -17,9 +17,20 @@ exports.createPages = ({ graphql, actions }) => {
     // Create blog posts
     result.data.allPosts.edges.forEach(({ node }) => {
       createPage({
-        path: `/${node.slug}`,
+        path: node.slug,
         context: { id: node.id },
         component: path.resolve(`${__dirname}/src/templates/PostTemplate.js`),
+      })
+    })
+
+    // Create category pages
+    result.data.allCategories.edges.forEach(({ node }) => {
+      createPage({
+        path: node.slug,
+        context: { id: node.id },
+        component: path.resolve(
+          `${__dirname}/src/templates/CategoryTemplate.js`,
+        ),
       })
     })
 

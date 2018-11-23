@@ -19,6 +19,7 @@
     "no-unused-vars": "warn",
     "no-use-before-define": "off",
     "generator-star-spacing": "off",
+    "prefer-destructuring": "off",
     "import/prefer-default-export": "off",
     "import/no-unresolved": "error",
     "import/no-named-as-default": "off",

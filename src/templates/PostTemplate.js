@@ -6,23 +6,14 @@ import styled from "styled-components"
 // UIs
 import Article from "components/Article"
 import ArticleLayout from "components/ArticleLayout"
+import TitleContainer from "components/TitleContainer"
 import HtmlRenderer from "components/HtmlRenderer"
-
-const TitleContainer = styled.div`
-  margin: 3rem auto 0 auto;
-  padding: 0 2rem;
-  max-width: 120ch;
-  text-align: center;
-
-  h1 {
-    margin-bottom: 0;
-  }
-`
 
 const ItalicLink = styled(Link)`
   font-style: italic;
 `
 
+// TODO: Add Helmet
 function PostTemplate({
   data: {
     post: {

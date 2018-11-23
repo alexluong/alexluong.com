@@ -20,7 +20,6 @@ const Article = styled.article`
   h6 {
     font-weight: 800;
     font-family: "Dank Mono", sans-serif;
-    text-rendering: optimizeLegibility;
   }
 
   h1 {
