@@ -24,7 +24,7 @@ const Container = styled.div`
   }
 `
 
-function PostListing({ posts, ...props }) {
+function PostList({ posts, ...props }) {
   return (
     <Container {...props}>
       {posts.map(data => {
@@ -45,8 +45,8 @@ function PostListing({ posts, ...props }) {
   )
 }
 
-PostListing.propTypes = {
+PostList.propTypes = {
   posts: PropTypes.array.isRequired,
 }
 
-export default PostListing
+export default PostList

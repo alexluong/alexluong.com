@@ -7,6 +7,6 @@ export default styled.div`
   text-align: center;
 
   h1 {
-    margin-bottom: 0;
+    margin-bottom: 0 !important;
   }
 `

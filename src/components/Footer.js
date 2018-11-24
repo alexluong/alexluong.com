@@ -8,8 +8,8 @@ const StyledFooter = styled.footer`
   padding: 0 3rem;
   background: #000;
   color: #fff;
-  font-size: 1.8rem;
-  font-family: "Dank Mono", sans-serif;
+  font-size: 2rem;
+  font-family: "Source Sans Pro", sans-serif;
 `
 
 function Footer() {

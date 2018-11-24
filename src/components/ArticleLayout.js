@@ -18,7 +18,7 @@ const Article = styled.div`
       margin: 3rem 0;
     }
 
-    @media only screen and (max-width: 750px) {
+    @media only screen and (max-width: 1060px) {
       grid-template-columns: minmax(2.6rem, 1fr) minmax(auto, 70ch) minmax(
           2.6rem,
           1fr
@@ -31,7 +31,6 @@ const Article = styled.div`
       .gatsby-image-wrapper,
       .gatsby-highlight {
         grid-column: 1 / 4;
-        /* max-width: 100ch; */
       }
     }
   }

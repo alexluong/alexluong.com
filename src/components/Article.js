@@ -1,6 +1,8 @@
 import styled from "styled-components"
 
 const Article = styled.article`
+  padding-bottom: 10rem;
+
   img {
     width: 100%;
   }
@@ -38,12 +40,18 @@ const Article = styled.article`
 
   h3 {
     font-size: 2.6rem;
+    margin-top: 6rem;
+    margin-bottom: 1rem;
   }
 
   p,
   ul,
   ol {
     margin: 2rem 0;
+  }
+
+  li:first-of-type > p {
+    margin-top: 0;
   }
 
   p {

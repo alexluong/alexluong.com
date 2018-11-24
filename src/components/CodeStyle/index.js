@@ -23,7 +23,7 @@ const gqlColor = css`
   }
 `
 
-const PrismTheme = createGlobalStyle`
+const CodeStyle = createGlobalStyle`
   :not(pre) > code {
     font-family: "SFMono-Regular", "Menlo", "Inconsolata", monospace;
     font-size: 1.6rem;
@@ -100,4 +100,4 @@ const PrismTheme = createGlobalStyle`
   ${dracula}
 `
 
-export default PrismTheme
+export default CodeStyle

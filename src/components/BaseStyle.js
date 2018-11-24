@@ -18,7 +18,15 @@ const GlobalStyle = createGlobalStyle`
     width: 100%;
   }
   html {
-    font-size: 62.5%; /* defines 1rem = 10px */
+    font-size: 50%; /* 1rem = 8px */
+
+    @media (min-width: 780px) {
+      font-size: 56.25%; /* 1rem = 9px */
+    }
+
+    @media (min-width: 1220px) {
+      font-size: 62.5%; /* 1rem = 10px */
+    }
   }
   body {
     box-sizing: border-box;

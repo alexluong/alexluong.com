@@ -5,8 +5,8 @@ import { StaticQuery, graphql } from "gatsby"
 import Header from "components/Header"
 import Footer from "components/Footer"
 import Meta from "components/Meta"
-import GlobalStyle from "config/styles"
-import PrismStyle from "config/prism"
+import BaseStyle from "components/BaseStyle"
+import CodeStyle from "components/CodeStyle"
 // eslint-disable-next-line
 import { setConfig } from "react-hot-loader"
 
@@ -16,8 +16,8 @@ function App({ children, data }) {
   return (
     <Fragment>
       <Meta title={data.title} />
-      <PrismStyle />
-      <GlobalStyle />
+      <CodeStyle />
+      <BaseStyle />
 
       <Header />
       {children}

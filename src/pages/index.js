@@ -1,7 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { graphql } from "gatsby"
-import PostListing from "components/PostListing"
+import PostList from "components/PostList"
 
 function IndexPage({
   data: {
@@ -10,7 +10,7 @@ function IndexPage({
 }) {
   return (
     <div style={{ background: "#f4f8fb" }}>
-      <PostListing posts={posts} />
+      <PostList posts={posts} />
     </div>
   )
 }
