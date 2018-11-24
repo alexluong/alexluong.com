@@ -4,6 +4,7 @@ import { Link, graphql } from "gatsby"
 import Img from "gatsby-image"
 import styled from "styled-components"
 // UIs
+import SEO from "components/SEO"
 import Article from "components/Article"
 import ArticleLayout from "components/ArticleLayout"
 import TitleContainer from "components/TitleContainer"
@@ -13,49 +14,60 @@ const ItalicLink = styled(Link)`
   font-style: italic;
 `
 
-// TODO: Add Helmet
 function PostTemplate({
   data: {
     post: {
       title,
       featuredImage,
       date,
+      datePublished,
       categories,
       body: {
         childMarkdownRemark: { htmlAst },
       },
+      excerpt: { excerpt },
     },
   },
 }) {
   return (
-    <Article>
-      <TitleContainer>
-        <h1>{title}</h1>
-        <h4>
-          <span>{date} | </span>
-          {categories.map((category, i) => (
-            <span key={i}>
-              <ItalicLink to={category.slug}>{category.name}</ItalicLink>
-              {i < categories.length - 1 ? <span>&nbsp;|&nbsp;</span> : null}
-            </span>
-          ))}
-        </h4>
-      </TitleContainer>
+    <React.Fragment>
+      <SEO
+        title={title}
+        description={excerpt}
+        image={featuredImage.fluid.src.slice(2)}
+        datePublished={datePublished}
+        isBlogPost
+      />
 
-      <ArticleLayout>
-        <Img
-          alt={featuredImage.title}
-          fluid={featuredImage.fluid}
-          style={{
-            maxWidth: "120ch",
-            maxHeight: "30vh",
-            margin: "4rem auto",
-          }}
-        />
+      <Article>
+        <TitleContainer>
+          <h1>{title}</h1>
+          <h4>
+            <span>{date} | </span>
+            {categories.map((category, i) => (
+              <span key={i}>
+                <ItalicLink to={category.slug}>{category.name}</ItalicLink>
+                {i < categories.length - 1 ? <span>&nbsp;|&nbsp;</span> : null}
+              </span>
+            ))}
+          </h4>
+        </TitleContainer>
 
-        <HtmlRenderer>{htmlAst}</HtmlRenderer>
-      </ArticleLayout>
-    </Article>
+        <ArticleLayout>
+          <Img
+            alt={featuredImage.title}
+            fluid={featuredImage.fluid}
+            style={{
+              maxWidth: "120ch",
+              maxHeight: "30vh",
+              margin: "4rem auto",
+            }}
+          />
+
+          <HtmlRenderer>{htmlAst}</HtmlRenderer>
+        </ArticleLayout>
+      </Article>
+    </React.Fragment>
   )
 }
 
@@ -71,6 +83,7 @@ export const query = graphql`
       title
       slug
       date(formatString: "MMMM DD, YYYY")
+      datePublished: date(formatString: "YYYY-MM-DDTHH:mm:ssZ")
       categories {
         name
         slug
@@ -79,6 +92,9 @@ export const query = graphql`
         childMarkdownRemark {
           htmlAst
         }
+      }
+      excerpt {
+        excerpt
       }
       featuredImage {
         file {

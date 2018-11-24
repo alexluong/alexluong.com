@@ -41,6 +41,7 @@ const CardContent = styled.div`
   color: #333;
 
   h2 {
+    font-family: "Dank Mono", sans-serif;
     font-size: 2.4rem;
     margin: 3rem 0 2rem;
   }

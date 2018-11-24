@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { graphql } from "gatsby"
 import styled from "styled-components"
 // UIs
+import SEO from "components/SEO"
 import PostList from "components/PostList"
 import TitleContainer from "components/TitleContainer"
 
@@ -22,16 +23,19 @@ const StyledTitleContainer = styled(TitleContainer)`
   }
 `
 
-// TODO: Add Helmet
 function CategoryTemplate({ data: { category } }) {
   return (
-    <div style={{ background: "#f4f8fb" }}>
-      <StyledTitleContainer>
-        <h1>{category.name}</h1>
-        <p>{category.description}</p>
-      </StyledTitleContainer>
-      <PostList posts={category.posts} />
-    </div>
+    <React.Fragment>
+      <SEO title={category.name} description={category.description} />
+
+      <div style={{ background: "#f4f8fb" }}>
+        <StyledTitleContainer>
+          <h1>{category.name}</h1>
+          <p>{category.description}</p>
+        </StyledTitleContainer>
+        <PostList posts={category.posts} />
+      </div>
+    </React.Fragment>
   )
 }
 

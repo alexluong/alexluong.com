@@ -5,6 +5,19 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: "Alex Luong",
+    description: "",
+    canonicalUrl: "https://blog.alexluong.com",
+    social: {
+      fbAppId: "",
+      twitter: "@alexluong",
+    },
+
+    // for schema.org
+    organization: {
+      name: "Alex Luong",
+      url: "https://www.alexluong.com",
+      logo: "",
+    },
   },
   plugins: [
     "gatsby-plugin-react-helmet",
