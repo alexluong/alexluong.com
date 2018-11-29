@@ -80,6 +80,7 @@ function SEO({
   return (
     <Helmet>
       {/* General tags */}
+      <html lang="en" amp />
       <title>{pageTitle}</title>
       <meta name="description" content={description} />
       <meta name="image" content={image} />

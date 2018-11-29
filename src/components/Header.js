@@ -61,10 +61,10 @@ function Header({ me }) {
       <LinkToMe to="/">Alex Luong</LinkToMe>
 
       <SocialContainer>
-        <a href={me.twitter} className="social-twitter">
+        <a href={me.twitter} className="social-twitter" aria-label="twitter">
           <FaTwitter size={22} />
         </a>
-        <a href={me.github} className="social-github">
+        <a href={me.github} className="social-github" aria-label="github">
           <FaGithub size={22} />
         </a>
       </SocialContainer>

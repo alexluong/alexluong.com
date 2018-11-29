@@ -5,7 +5,7 @@ require("dotenv").config({
 module.exports = {
   siteMetadata: {
     title: "Alex Luong",
-    description: "",
+    description: "Hi. I'm Alex, and I write about web development.",
     canonicalUrl: "https://blog.alexluong.com",
     social: {
       fbAppId: "",
@@ -25,6 +25,7 @@ module.exports = {
     "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
     "gatsby-plugin-eslint",
+    "gatsby-plugin-offline",
 
     {
       resolve: "gatsby-source-contentful",
@@ -91,6 +92,20 @@ module.exports = {
       options: {
         trackingId: "UA-116347511-1",
         respectDNT: true,
+      },
+    },
+
+    // Manifest
+    {
+      resolve: "gatsby-plugin-manifest",
+      options: {
+        name: "Alex Luong",
+        short_name: "@alexluong",
+        start_url: ".",
+        theme_color: "#c800ec",
+        background_color: "#c800ec",
+        display: "minimal-ui",
+        icons: [],
       },
     },
   ],
