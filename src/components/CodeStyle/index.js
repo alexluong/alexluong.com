@@ -13,6 +13,21 @@ const jsColor = css`
   }
 `
 
+const jsonColor = css`
+  pre.language-json::after,
+  pre.language-json::before {
+    background: #bc443e;
+    color: #ddd;
+  }
+`
+
+const mdColor = css`
+  pre.language-md::after,
+  pre.language-md::before {
+    background: #e3a067;
+  }
+`
+
 const gqlColor = css`
   pre.language-graphql::after,
   pre.language-graphql::before,
@@ -66,6 +81,8 @@ const CodeStyle = createGlobalStyle`
 
   /* Color theme for lines based on language */
   ${jsColor}
+  ${jsonColor}
+  ${mdColor}
   ${gqlColor}
 
   /* Common typography for codes */

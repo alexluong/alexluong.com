@@ -4,8 +4,8 @@ const Article = styled.div`
   div:nth-child(2) {
     display: grid;
     grid-template-columns:
-      minmax(2.6rem, 1fr) minmax(0, 15ch) minmax(auto, 70ch)
-      minmax(0, 15ch) minmax(2.6rem, 1fr);
+      minmax(2.6rem, 1fr) minmax(0, 15rem) minmax(auto, 65rem)
+      minmax(0, 15rem) minmax(2.6rem, 1fr);
 
     & > * {
       grid-column: 3;

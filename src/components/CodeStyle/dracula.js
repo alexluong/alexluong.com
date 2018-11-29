@@ -77,7 +77,9 @@ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascr
   }
 
   .token.comment {
-    color: rgba(98, 114, 164, 1);
+    /* color: rgba(98, 114, 164, 1); */
+    color: #ccc;
+    opacity: 0.5;
   }
 
   .token.prolog {
@@ -304,6 +306,27 @@ http://prismjs.com/download.html#themes=prism&languages=markup+css+clike+javascr
     display: block;
     padding-right: 0.8em;
     text-align: right;
+  }
+
+  .gatsby-highlight-code-line {
+    display: block;
+    position: relative;
+    margin-left: -4rem;
+    margin-right: -4rem;
+    padding-left: 4rem;
+    padding-right: 4rem;
+
+    background-color: #6272a4;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 7px;
+      height: 100%;
+      background-color: blue;
+    }
   }
 `
 
