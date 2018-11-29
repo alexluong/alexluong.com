@@ -18,7 +18,7 @@ const StyledHeader = styled.header`
 `
 
 const LinkToMe = styled(Link)`
-  font-family: "Dank Mono", sans-serif;
+  font-family: "Dank Mono", "IBM Plex Mono", sans-serif;
   font-size: 3rem;
 
   &,

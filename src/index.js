@@ -6,7 +6,6 @@ import Footer from "components/Footer"
 import SEO from "components/SEO"
 import BaseStyle from "components/BaseStyle"
 import CodeStyle from "components/CodeStyle"
-import Fonts from "components/Fonts"
 // eslint-disable-next-line
 import { setConfig } from "react-hot-loader"
 
@@ -18,7 +17,6 @@ function App({ children }) {
       <SEO />
       <CodeStyle />
       <BaseStyle />
-      <Fonts />
 
       <Header />
       {children}

@@ -21,7 +21,7 @@ const Article = styled.article`
   h5,
   h6 {
     font-weight: 800;
-    font-family: "Dank Mono", sans-serif;
+    font-family: "Dank Mono", "IBM Plex Mono", sans-serif;
   }
 
   h1 {

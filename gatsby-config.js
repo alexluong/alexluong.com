@@ -81,7 +81,7 @@ module.exports = {
       resolve: "gatsby-plugin-web-font-loader",
       options: {
         google: {
-          families: ["Source Sans Pro", "Inconsolata"],
+          families: ["Source Sans Pro", "Inconsolata", "IBM Plex Mono"],
         },
       },
     },
@@ -105,7 +105,13 @@ module.exports = {
         theme_color: "#c800ec",
         background_color: "#c800ec",
         display: "minimal-ui",
-        icons: [],
+        icons: [
+          {
+            src: "/android-chrome-512x512.png",
+            sizes: "512x512",
+            type: "image/png",
+          },
+        ],
       },
     },
   ],
