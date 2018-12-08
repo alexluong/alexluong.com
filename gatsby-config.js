@@ -9,7 +9,7 @@ module.exports = {
     canonicalUrl: "https://blog.alexluong.com",
     social: {
       fbAppId: "",
-      twitter: "@alexluong",
+      twitter: "@alexluongg_",
     },
 
     // for schema.org
