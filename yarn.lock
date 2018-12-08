@@ -11201,6 +11201,14 @@ react-side-effect@^1.1.0:
     exenv "^1.2.1"
     shallowequal "^1.0.1"
 
+react-social-sharing@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-social-sharing/-/react-social-sharing-2.0.1.tgz#b55b457994e027335eb0cdcc6b50e2f5b2ea3e56"
+  integrity sha512-ix8iXf2I8GlcYI93tNtbiNn2+NPpp+pto2SR2aPFSRk8FNXVwAM3h3/FhQhLkTlIHh7dwKECUsryQfva3OZRVw==
+  dependencies:
+    styled-components "^4.1.1"
+    styled-is "^1.1.5"
+
 react-spring@^6.1.10:
   version "6.1.10"
   resolved "https://registry.yarnpkg.com/react-spring/-/react-spring-6.1.10.tgz#ae28796dccfb32baa02d34fb94289c2088f63a1b"
@@ -12832,7 +12840,7 @@ style-to-object@^0.2.1:
   dependencies:
     css "2.2.4"
 
-styled-components@^4.1.2:
+styled-components@^4.1.1, styled-components@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-4.1.2.tgz#f8a685e3b2bcd03c5beac7f2c02bb6ad237da9b3"
   integrity sha512-NdvWatJ2WLqZxAvto+oH0k7GAC/TlAUJTrHoXJddjbCrU6U23EmVbb9LXJBF+d6q6hH+g9nQYOWYPUeX/Vlc2w==
@@ -12847,6 +12855,11 @@ styled-components@^4.1.2:
     stylis "^3.5.0"
     stylis-rule-sheet "^0.0.10"
     supports-color "^5.5.0"
+
+styled-is@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/styled-is/-/styled-is-1.1.5.tgz#acd8ad180217abea036e4f2cc58593899871f02a"
+  integrity sha512-mQLF3YIiu90BUkf5bXOWFz7bCxmrQiIYa83Cu5gcqCjGiRuClp32WEo59qFZhVJz+KnxqtMTZsJLtCE1KUp1UA==
 
 stylehacks@^4.0.0:
   version "4.0.1"

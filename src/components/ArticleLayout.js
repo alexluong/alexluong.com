@@ -1,7 +1,8 @@
 import styled from "styled-components"
 
 const Article = styled.div`
-  div:nth-child(2) {
+  div:nth-child(2),
+  div.social-sharing {
     display: grid;
     grid-template-columns:
       minmax(2.6rem, 1fr)
@@ -18,6 +19,19 @@ const Article = styled.div`
       margin: 3rem auto;
       max-width: 100ch;
       width: 100%;
+    }
+  }
+
+  div.social-sharing {
+    margin-top: 10rem;
+
+    a {
+      color: #fff;
+
+      &:hover {
+        color: #fff;
+        border: none;
+      }
     }
   }
 `

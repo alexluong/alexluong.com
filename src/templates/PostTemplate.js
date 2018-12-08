@@ -9,6 +9,14 @@ import Article from "components/Article"
 import ArticleLayout from "components/ArticleLayout"
 import TitleContainer from "components/TitleContainer"
 import HtmlRenderer from "components/HtmlRenderer"
+import {
+  Twitter,
+  Facebook,
+  Linkedin,
+  Reddit,
+  HackerNews,
+  Pinterest,
+} from "react-social-sharing"
 
 const ItalicLink = styled(Link)`
   font-style: italic;
@@ -16,7 +24,11 @@ const ItalicLink = styled(Link)`
 
 function PostTemplate({
   data: {
+    site: {
+      siteMetadata: { canonicalUrl },
+    },
     post: {
+      slug,
       title,
       featuredImage,
       date,
@@ -29,6 +41,8 @@ function PostTemplate({
     },
   },
 }) {
+  const url = `${canonicalUrl}/${slug}`
+
   return (
     <React.Fragment>
       <SEO
@@ -64,7 +78,25 @@ function PostTemplate({
             }}
           />
 
-          <HtmlRenderer>{htmlAst}</HtmlRenderer>
+          <HtmlRenderer id="article-content">{htmlAst}</HtmlRenderer>
+
+          <div className="social-sharing">
+            <hr />
+
+            <p>
+              Thank you for reaching the end of my post. If you enjoy it, please
+              consider sharing to your favorite social media.
+            </p>
+
+            <div>
+              <Twitter link={url} />
+              <Facebook link={url} />
+              <Linkedin link={url} />
+              <Reddit link={url} />
+              <HackerNews link={url} />
+              <Pinterest link={url} />
+            </div>
+          </div>
         </ArticleLayout>
       </Article>
     </React.Fragment>
@@ -79,6 +111,11 @@ export default PostTemplate
 
 export const query = graphql`
   query($id: String!) {
+    site {
+      siteMetadata {
+        canonicalUrl
+      }
+    }
     post: contentfulBlogPost(id: { eq: $id }) {
       title
       slug

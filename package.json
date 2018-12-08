@@ -49,6 +49,7 @@
     "react-dom": "^16.7.0-alpha.1",
     "react-helmet": "^5.2.0",
     "react-icons": "^3.2.2",
+    "react-social-sharing": "^2.0.1",
     "react-spring": "^6.1.10",
     "rehype-react": "^3.1.0",
     "styled-components": "^4.1.2",
