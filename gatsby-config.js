@@ -48,13 +48,7 @@ module.exports = {
           },
           "gatsby-remark-smartypants",
           "gatsby-remark-emojis",
-          {
-            resolve: "gatsby-remark-prismjs",
-            options: {
-              inlineCodeMarker: ">",
-              noInlineHighlight: true,
-            },
-          },
+          "gatsby-remark-prismjs",
         ],
       },
     },
