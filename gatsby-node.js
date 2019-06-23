@@ -13,20 +13,23 @@ exports.createPages = ({ graphql, actions }) => {
 
   return new Promise(async resolve => {
     const result = await getData(graphql)
+    const {
+      data: { site, allPosts, allCategories },
+    } = result
 
     // Create blog posts
-    result.data.allPosts.edges.forEach(({ node }) => {
+    allPosts.edges.forEach(({ node }) => {
       createPage({
-        path: `blog/${node.slug}`,
+        path: `${site.siteMetadata.prefix.post}/${node.slug}`,
         context: { id: node.id },
         component: path.resolve(`${__dirname}/src/templates/PostTemplate.js`),
       })
     })
 
     // Create category pages
-    result.data.allCategories.edges.forEach(({ node }) => {
+    allCategories.edges.forEach(({ node }) => {
       createPage({
-        path: `tag/${node.slug}`,
+        path: `${site.siteMetadata.prefix.category}/${node.slug}`,
         context: { id: node.id },
         component: path.resolve(
           `${__dirname}/src/templates/CategoryTemplate.js`,
@@ -41,6 +44,14 @@ exports.createPages = ({ graphql, actions }) => {
 async function getData(graphql) {
   return graphql(`
     {
+      site {
+        siteMetadata {
+          prefix {
+            post
+            category
+          }
+        }
+      }
       allPosts: allContentfulBlogPost {
         edges {
           node {

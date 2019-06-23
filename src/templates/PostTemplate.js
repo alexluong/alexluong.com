@@ -25,7 +25,7 @@ const ItalicLink = styled(Link)`
 function PostTemplate({
   data: {
     site: {
-      siteMetadata: { canonicalUrl },
+      siteMetadata: { canonicalUrl, prefix },
     },
     post: {
       slug,
@@ -60,7 +60,9 @@ function PostTemplate({
             <span>{date} | </span>
             {categories.map((category, i) => (
               <span key={i}>
-                <ItalicLink to={category.slug}>{category.name}</ItalicLink>
+                <ItalicLink to={`${prefix.category}/${category.slug}`}>
+                  {category.name}
+                </ItalicLink>
                 {i < categories.length - 1 ? <span>&nbsp;|&nbsp;</span> : null}
               </span>
             ))}
@@ -114,6 +116,9 @@ export const query = graphql`
     site {
       siteMetadata {
         canonicalUrl
+        prefix {
+          category
+        }
       }
     }
     post: contentfulBlogPost(id: { eq: $id }) {

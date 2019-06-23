@@ -18,6 +18,12 @@ module.exports = {
       url: "https://www.alexluong.com",
       logo: "",
     },
+
+    // prefix
+    prefix: {
+      post: "blog",
+      category: "tag",
+    },
   },
   plugins: [
     "gatsby-plugin-react-helmet",

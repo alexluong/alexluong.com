@@ -2,7 +2,7 @@ import React from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 // UIs
-import { Link } from "gatsby"
+import { Link, StaticQuery, graphql } from "gatsby"
 import Img from "gatsby-image"
 
 const Card = styled(Link)`
@@ -53,9 +53,9 @@ const CardContent = styled.div`
   }
 `
 
-function Post({ post }) {
+function Post({ post, postPrefix }) {
   return (
-    <Card to={post.slug}>
+    <Card to={`${postPrefix}/${post.slug}`}>
       <Img alt={post.img.description} fluid={post.img.fluid} />
 
       <CardContent>
@@ -79,6 +79,24 @@ Post.propTypes = {
       fluid: PropTypes.object,
     }),
   }).isRequired,
+  postPrefix: PropTypes.string.isRequired,
 }
 
-export default Post
+export default props => (
+  <StaticQuery
+    query={graphql`
+      {
+        site {
+          siteMetadata {
+            prefix {
+              post
+            }
+          }
+        }
+      }
+    `}
+    render={data => (
+      <Post {...props} postPrefix={data.site.siteMetadata.prefix.post} />
+    )}
+  />
+)
