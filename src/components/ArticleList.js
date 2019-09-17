@@ -4,7 +4,7 @@ import { useStaticQuery, graphql, Link } from "gatsby"
 
 function ArtcileList() {
   const { allArticle } = useStaticQuery(graphql`
-    query HeaderQuery {
+    query ArticleQuery {
       allArticle(limit: 5) {
         nodes {
           slug

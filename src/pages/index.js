@@ -2,6 +2,7 @@
 import { jsx } from "theme-ui"
 import React from "react"
 import ArticleList from "../components/ArticleList"
+import ProjectList from "../components/ProjectList"
 
 function IndexPage() {
   return (
@@ -16,6 +17,11 @@ function IndexPage() {
       <section>
         <h2 sx={{ fontSize: 4, mb: 3, mt: 5 }}>Latest Articles</h2>
         <ArticleList />
+      </section>
+
+      <section>
+        <h2 sx={{ fontSize: 4, mb: 3, mt: 5 }}>Projects</h2>
+        <ProjectList />
       </section>
     </React.Fragment>
   )

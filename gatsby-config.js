@@ -6,6 +6,9 @@ module.exports = {
     "gatsby-plugin-emotion",
     "gatsby-plugin-theme-ui",
 
+    "@al/gatsby-type-article",
+    "@al/gatsby-type-project",
+
     {
       resolve: "gatsby-plugin-mdx",
       options: {
@@ -37,6 +40,13 @@ module.exports = {
       options: {
         name: "articles",
         path: `${__dirname}/content/articles`,
+      },
+    },
+    {
+      resolve: "gatsby-source-filesystem",
+      options: {
+        name: "projects",
+        path: `${__dirname}/content/projects`,
       },
     },
   ],
