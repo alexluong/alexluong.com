@@ -5,7 +5,7 @@ import { useStaticQuery, graphql, Link } from "gatsby"
 function ArtcileList() {
   const { allArticle } = useStaticQuery(graphql`
     query ArticleQuery {
-      allArticle(limit: 5) {
+      allArticle(limit: 5, sort: { fields: date, order: DESC }) {
         nodes {
           slug
           title
@@ -32,6 +32,7 @@ function ArtcileList() {
               mx: -2,
               borderRadius: 4,
               color: "link",
+              transition: "all 0.3s ease",
               ":hover": {
                 bg: "muted",
                 color: "text",

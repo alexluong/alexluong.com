@@ -16,7 +16,7 @@ function Navigation() {
           alignItems: "center",
         }}
       >
-        <h1 sx={{ fontFamily: "heading" }}>Alex Luong</h1>
+        <h1>Alex Luong</h1>
         <div>
           <Link to="/">About</Link>
           <Link to="/">Articles</Link>

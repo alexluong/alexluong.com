@@ -3,6 +3,7 @@ import typography from "./typography"
 import colors from "./colors"
 import styles from "./styles"
 import prism from "./prism"
+import buttons from "./buttons"
 
 export default merge(
   typography,
@@ -20,6 +21,7 @@ export default merge(
     },
     styles,
     prism,
+    buttons,
   },
   { arrayMerge: (destinationArray, sourceArray, options) => sourceArray },
 )

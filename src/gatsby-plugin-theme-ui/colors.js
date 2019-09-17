@@ -17,6 +17,8 @@ export default {
   highlight: opaqueLightYellow,
   heading: grey90,
   link: "hsla(0, 0%, 0%, 0.45)",
+  onPrimary: white,
+  primaryHover: purple30,
   prism: {
     background: "#011627",
     comment: "#809393",
