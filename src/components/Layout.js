@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
-import Navigation from "./components/Navigation"
+import Navigation from "./Navigation"
 
 function Layout({ children }) {
   return (

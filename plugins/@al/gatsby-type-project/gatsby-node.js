@@ -5,6 +5,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
 
   createTypes(`interface Project @nodeInterface {
     id: ID!
+    order: Int!
     name: String!
     description: String!
     url: String
@@ -17,6 +18,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       name: "MdxProject",
       fields: {
         id: { type: "ID!" },
+        order: { type: "Int!" },
         name: { type: "String!" },
         description: { type: "String!" },
         url: { type: "String" },
@@ -39,6 +41,7 @@ exports.onCreateNode = async ({ node, actions, getNode, createNodeId }) => {
 
   if (fileNode.sourceInstanceName === "projects") {
     const fieldData = {
+      order: node.frontmatter.order,
       name: node.frontmatter.name,
       description: node.frontmatter.description,
       url: node.frontmatter.url,

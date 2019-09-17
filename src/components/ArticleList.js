@@ -39,14 +39,15 @@ function ArtcileList() {
               },
             }}
           >
-            <h2
+            <h3
               sx={{
+                fontSize: 2,
                 fontWeight: "body",
                 my: 0,
               }}
             >
               {article.title}
-            </h2>
+            </h3>
           </div>
         </Link>
       ))}

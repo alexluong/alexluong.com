@@ -12,7 +12,7 @@ function IndexPage() {
       <div sx={{ mt: 50 }}>
         <h1 sx={{ fontSize: 5 }}>Hey, I'm Alex</h1>
         <p sx={{ fontSize: 2, mb: 3 }}>
-          I write about my journey in tech and all the technologies I love.
+          I write about JavaScript, React, and lots and lots of Gatsby.
         </p>
         <button sx={{ variant: "buttons.twitter", mr: 2 }}>
           <TwitterIcon sx={{ width: 20, height: 20, mr: 1 }} />

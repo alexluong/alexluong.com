@@ -4,6 +4,7 @@ import colors from "./colors"
 import styles from "./styles"
 import prism from "./prism"
 import buttons from "./buttons"
+import technologies from "./technologies"
 
 export default merge(
   typography,
@@ -15,13 +16,14 @@ export default merge(
       body: "Lato, sans-serif",
       monospace: "monospace",
     },
-    fontSizes: [12, 14, 18, 20, 30, 48],
+    fontSizes: [14, 16, 18, 22, 30, 48],
     sizes: {
       container: 672,
     },
     styles,
     prism,
     buttons,
+    technologies,
   },
   { arrayMerge: (destinationArray, sourceArray, options) => sourceArray },
 )

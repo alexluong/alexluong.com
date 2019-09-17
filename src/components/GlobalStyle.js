@@ -16,6 +16,11 @@ function GlobalStyle() {
 
         a {
           text-decoration: none;
+          color: currentColor;
+        }
+
+        a:visited {
+          color: currentColor;
         }
 
         h1,
