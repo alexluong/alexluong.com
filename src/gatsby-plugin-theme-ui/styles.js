@@ -28,11 +28,8 @@ export default {
   },
   a: {
     color: "primary",
-    ":hover": {
-      color: "yellow",
-    },
     ":visited": {
-      color: "green",
+      color: "primary",
     },
   },
   hr: {
@@ -49,8 +46,12 @@ export default {
     },
   },
   blockquote: {
+    ml: 0,
+    pl: 2,
     color: "inherit",
     borderLeftColor: "inherit",
+    borderLeftStyle: "solid",
+    borderLeftWidth: 4,
     opacity: 0.8,
     "&.translation": {
       fontSize: "1em",

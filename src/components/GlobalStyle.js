@@ -6,7 +6,6 @@ function GlobalStyle() {
     <Global
       styles={css`
         * {
-          font-family: "Lato", sans-serif;
           box-sizing: border-box;
         }
 

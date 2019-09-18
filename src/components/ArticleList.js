@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 import { useStaticQuery, graphql, Link } from "gatsby"
+import usePrefix from "../hooks/usePrefix"
 
 function ArtcileList() {
   const { allArticle } = useStaticQuery(graphql`
@@ -14,13 +15,14 @@ function ArtcileList() {
     }
   `)
 
+  const { post: postPrefix } = usePrefix()
+
   return (
     <div>
       {allArticle.nodes.map(article => (
         <Link
           key={article.slug}
-          // to={article.slug}
-          to={"/"}
+          to={`/${postPrefix}/${article.slug}`}
           sx={{
             display: "block",
           }}
@@ -43,6 +45,7 @@ function ArtcileList() {
               sx={{
                 fontSize: 2,
                 fontWeight: "body",
+                lineHeight: 1.2,
                 my: 0,
               }}
             >

@@ -1,4 +1,9 @@
 module.exports = {
+  siteMetadata: {
+    prefix: {
+      post: "blog",
+    },
+  },
   plugins: [
     "gatsby-plugin-react-helmet",
     "gatsby-plugin-sharp",
@@ -47,6 +52,19 @@ module.exports = {
       options: {
         name: "projects",
         path: `${__dirname}/content/projects`,
+      },
+    },
+
+    {
+      resolve: "gatsby-plugin-manifest",
+      options: {
+        name: "Alex Luong Personal Blog and Website",
+        short_name: "Alex Luong",
+        start_url: "/",
+        background_color: "#6b37bf",
+        theme_color: "#6b37bf",
+        display: "standalone",
+        icon: "static/favicon.ico",
       },
     },
   ],

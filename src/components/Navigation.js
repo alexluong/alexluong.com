@@ -1,6 +1,8 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
+import { Link as GatsbyLink } from "gatsby"
 import Link from "./Link"
+import Logo from "./icons/Logo"
 
 function Navigation() {
   return (
@@ -16,7 +18,12 @@ function Navigation() {
           alignItems: "center",
         }}
       >
-        <h1>Alex Luong</h1>
+        <GatsbyLink to="/">
+          <h1 sx={{ display: "flex", alignItems: "center" }}>
+            <Logo sx={{ width: 36, height: 36, mr: 2 }} />
+            Alex Luong
+          </h1>
+        </GatsbyLink>
         <div>
           <Link to="/">About</Link>
           <Link to="/">Articles</Link>

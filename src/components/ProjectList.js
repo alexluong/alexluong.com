@@ -4,12 +4,18 @@ import { useStaticQuery, graphql } from "gatsby"
 import LinkIcon from "./icons/LinkIcon"
 import GitHubIcon from "./icons/GitHubIcon"
 
+const ICON_SIZE = 24
+
 function Technology({ value }) {
   const color = ["React", "Node", "Gatsby", "GraphQL"].includes(value)
     ? value
     : "Default"
 
-  return <li sx={{ variant: `technologies.${color}`, mr: 1 }}>{value}</li>
+  return (
+    <li sx={{ variant: `technologies.${color}`, mr: 1, fontSize: 1 }}>
+      {value}
+    </li>
+  )
 }
 
 function IconButton({ children, ...props }) {
@@ -77,21 +83,13 @@ function ProjectList() {
             </div>
             <div>
               {project.url && (
-                <IconButton
-                  href={project.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <LinkIcon sx={{ width: 18, height: 18 }} />
+                <IconButton href={project.url}>
+                  <LinkIcon sx={{ width: ICON_SIZE, height: ICON_SIZE }} />
                 </IconButton>
               )}
               {project.github && (
-                <IconButton
-                  href={project.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <GitHubIcon sx={{ width: 18, height: 18 }} />
+                <IconButton href={project.github}>
+                  <GitHubIcon sx={{ width: ICON_SIZE, height: ICON_SIZE }} />
                 </IconButton>
               )}
             </div>

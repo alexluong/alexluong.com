@@ -16,11 +16,11 @@ function IndexPage() {
         </p>
         <button sx={{ variant: "buttons.twitter", mr: 2 }}>
           <TwitterIcon sx={{ width: 20, height: 20, mr: 1 }} />
-          Twitter
+          Follow
         </button>
         <button sx={{ variant: "buttons.github" }}>
           <GitHubIcon sx={{ width: 20, height: 20, mr: 1 }} />
-          GitHub
+          Follow
         </button>
       </div>
 
