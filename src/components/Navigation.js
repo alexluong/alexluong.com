@@ -26,7 +26,9 @@ function Navigation() {
         </GatsbyLink>
         <div>
           <Link to="/">About</Link>
-          <Link to="/blog">Articles</Link>
+          <Link to="/blog" isLast>
+            Writing
+          </Link>
         </div>
       </div>
     </nav>

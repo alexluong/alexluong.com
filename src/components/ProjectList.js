@@ -25,7 +25,7 @@ function IconButton({ children, ...props }) {
       rel="noopener noreferrer"
       {...props}
       sx={{
-        ml: 2,
+        mb: 1,
         p: 1,
         borderRadius: 3,
         bg: "rgba(0,0,0,0.1)",
@@ -51,9 +51,10 @@ function ProjectList() {
         <div key={project.id} sx={{ mb: 4 }}>
           <div
             sx={{
-              display: "flex",
+              display: "grid",
+              gridTemplateColumns: "auto 40px",
               alignItems: "center",
-              justifyContent: "space-between",
+              gap: 2,
             }}
           >
             <div>
