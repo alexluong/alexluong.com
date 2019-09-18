@@ -23,6 +23,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
   createTypes(`interface Article @nodeInterface {
     id: ID!
     title: String!
+    description: String!
     body: String!
     slug: String!
     timeToRead: Int!
@@ -36,6 +37,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
         id: { type: "ID!" },
         title: { type: "String!" },
         slug: { type: "String!" },
+        description: { type: "String!" },
         date: { type: "Date!", extensions: { dateformat: {} } },
         body: {
           type: "String!",
@@ -65,6 +67,7 @@ exports.onCreateNode = async ({ node, actions, getNode, createNodeId }) => {
       slug: node.frontmatter.slug || fileNode.relativeDirectory,
       date: node.frontmatter.date,
       title: node.frontmatter.title,
+      description: node.frontmatter.description,
     }
 
     const mdxArticleId = createNodeId(`${node.id} >>> MdxArticle`)

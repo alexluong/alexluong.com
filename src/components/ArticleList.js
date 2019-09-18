@@ -1,61 +1,37 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
-import { useStaticQuery, graphql, Link } from "gatsby"
-import usePrefix from "../hooks/usePrefix"
+import { Link } from "gatsby"
+import { usePrefix, useAllArticles } from "../utils/queries"
+import ArticleInfo from "./ArticleInfo"
 
-function ArtcileList() {
-  const { allArticle } = useStaticQuery(graphql`
-    query ArticleQuery {
-      allArticle(limit: 5, sort: { fields: date, order: DESC }) {
-        nodes {
-          slug
-          title
-        }
-      }
-    }
-  `)
-
-  const { post: postPrefix } = usePrefix()
+function ArticleList() {
+  const allArticles = useAllArticles()
+  const { article: articlePrefix } = usePrefix()
 
   return (
-    <div>
-      {allArticle.nodes.map(article => (
-        <Link
-          key={article.slug}
-          to={`/${postPrefix}/${article.slug}`}
-          sx={{
-            display: "block",
-          }}
-        >
-          <div
+    <ul sx={{ listStyleType: "none", pl: 0 }}>
+      {allArticles.map(article => (
+        <li key={article.slug} sx={{ mb: 4 }}>
+          <h2
             sx={{
-              py: 2,
-              px: 2,
-              mx: -2,
-              borderRadius: 4,
-              color: "link",
-              transition: "all 0.3s ease",
-              ":hover": {
-                bg: "muted",
-                color: "text",
-              },
+              my: 0,
+              fontSize: 4,
+              fontFamily: "heading",
+              lineHeight: 1.5,
+              color: "primary",
+              textDecoration: "underline",
             }}
           >
-            <h3
-              sx={{
-                fontSize: 2,
-                fontWeight: "body",
-                lineHeight: 1.2,
-                my: 0,
-              }}
-            >
+            <Link to={`/${articlePrefix}/${article.slug}`}>
               {article.title}
-            </h3>
-          </div>
-        </Link>
+            </Link>
+          </h2>
+          <ArticleInfo date={article.date} timeToRead={article.timeToRead} />
+          <p sx={{ mt: 0 }}>{article.description}</p>
+        </li>
       ))}
-    </div>
+    </ul>
   )
 }
 
-export default ArtcileList
+export default ArticleList

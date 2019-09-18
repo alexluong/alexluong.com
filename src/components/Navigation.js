@@ -26,7 +26,7 @@ function Navigation() {
         </GatsbyLink>
         <div>
           <Link to="/">About</Link>
-          <Link to="/">Articles</Link>
+          <Link to="/blog">Articles</Link>
         </div>
       </div>
     </nav>

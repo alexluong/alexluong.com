@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
-import { useStaticQuery, graphql } from "gatsby"
+import { useAllProjects } from "../utils/queries"
 import LinkIcon from "./icons/LinkIcon"
 import GitHubIcon from "./icons/GitHubIcon"
 
@@ -43,24 +43,11 @@ function IconButton({ children, ...props }) {
 }
 
 function ProjectList() {
-  const { allProject } = useStaticQuery(graphql`
-    query ProjectQuery {
-      allProject(sort: { fields: order, order: DESC }) {
-        nodes {
-          id
-          name
-          description
-          url
-          github
-          technologies
-        }
-      }
-    }
-  `)
+  const allProjects = useAllProjects()
 
   return (
     <div>
-      {allProject.nodes.map(project => (
+      {allProjects.map(project => (
         <div key={project.id} sx={{ mb: 4 }}>
           <div
             sx={{

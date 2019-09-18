@@ -1,19 +1,17 @@
 import { useStaticQuery, graphql } from "gatsby"
 
-function usePrefix() {
-  const data = useStaticQuery(graphql`
+export function usePrefix() {
+  const { site } = useStaticQuery(graphql`
     query PrefixQuery {
       site {
         siteMetadata {
           prefix {
-            post
+            article
           }
         }
       }
     }
   `)
 
-  return data.site.siteMetadata.prefix
+  return site.siteMetadata.prefix
 }
-
-export default usePrefix

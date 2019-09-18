@@ -6,7 +6,7 @@ function Layout({ children }) {
   return (
     <div>
       <Navigation />
-      <div sx={{ maxWidth: "container", mx: "auto" }}>{children}</div>
+      {children}
     </div>
   )
 }

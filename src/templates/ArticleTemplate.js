@@ -3,17 +3,18 @@ import { jsx } from "theme-ui"
 import { graphql } from "gatsby"
 import { Styled } from "theme-ui"
 import { MDXRenderer } from "gatsby-plugin-mdx"
-import { formatPostDate, formatReadingTime } from "../utils/helpers"
-import { useThemeUI } from "theme-ui"
+import ArticleInfo from "../components/ArticleInfo"
 
 function ArticleTemplate({ data: { article } }) {
   return (
-    <main sx={{ mt: 4 }}>
+    <main sx={{ mt: 4, mx: "auto", maxWidth: "container" }}>
       <Styled.h1>{article.title}</Styled.h1>
-      <Styled.p sx={{ mb: 4 }}>
-        {formatPostDate(article.date, "en")}
-        {` - ${formatReadingTime(article.timeToRead)}`}
-      </Styled.p>
+      <ArticleInfo
+        date={article.date}
+        timeToRead={article.timeToRead}
+        sx={{ display: "block", mb: 4 }}
+      />
+
       <MDXRenderer>{article.body}</MDXRenderer>
     </main>
   )

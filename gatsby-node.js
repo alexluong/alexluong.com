@@ -12,7 +12,7 @@ exports.createPages = ({ graphql, actions }) => {
     // Create article pages
     allArticle.nodes.forEach(node => {
       createPage({
-        path: `${site.siteMetadata.prefix.post}/${node.slug}`,
+        path: `${site.siteMetadata.prefix.article}/${node.slug}`,
         context: { id: node.id },
         component: path.resolve(
           `${__dirname}/src/templates/ArticleTemplate.js`,
@@ -30,7 +30,7 @@ async function getData(graphql) {
       site {
         siteMetadata {
           prefix {
-            post
+            article
           }
         }
       }

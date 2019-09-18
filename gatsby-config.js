@@ -1,7 +1,7 @@
 module.exports = {
   siteMetadata: {
     prefix: {
-      post: "blog",
+      article: "blog",
     },
   },
   plugins: [
