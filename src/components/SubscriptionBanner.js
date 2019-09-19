@@ -69,6 +69,7 @@ function SubscriptionBanner() {
                 lineHeight: 1.2,
                 borderRadius: 4,
                 borderStyle: "solid",
+                borderColor: "neutralVariants.200",
                 ":focus": {
                   borderColor: "primary",
                 },

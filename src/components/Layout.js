@@ -23,7 +23,7 @@ function Layout({ children }) {
           },
         }}
       >
-        <div>
+        <div sx={{ mx: -1 }}>
           <Link
             href={`https://twitter.com/${social.twitter}`}
             target="_blank"

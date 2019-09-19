@@ -60,7 +60,7 @@ function Navigation() {
           </h1>
         </GatsbyLink>
         <div>
-          <Link to="/">About</Link>
+          <Link to="/me">About</Link>
           <Link to="/blog" isLast>
             Writing
           </Link>

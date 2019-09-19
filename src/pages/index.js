@@ -33,9 +33,6 @@ function IndexPage() {
           sx={{
             variant: "buttons.twitter",
             mr: 2,
-            ":focus": {
-              bg: "yellow",
-            },
           }}
         >
           <TwitterIcon sx={{ width: 20, height: 20, mr: 1 }} />

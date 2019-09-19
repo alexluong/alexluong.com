@@ -15,17 +15,16 @@ function LatestArtcileList() {
           to={`/${articlePrefix}/${article.slug}`}
           sx={{
             display: "block",
+            transition: "all 0.3s ease",
           }}
         >
           <div
-            tabIndex="0"
             sx={{
               py: 2,
               px: 2,
               mx: -2,
               borderRadius: 4,
               color: "link",
-              transition: "all 0.3s ease",
               ":hover, :focus": {
                 bg: "neutralVariants.100",
                 color: "text",
