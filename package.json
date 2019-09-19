@@ -1,12 +1,17 @@
 {
-  "name": "blog.alexluong.com",
+  "name": "www.alexluong.com",
   "author": "Alex Luong",
-  "version": "2.0.0",
+  "version": "3.0.0",
   "license": "MIT",
+  "private": true,
   "scripts": {
-    "build": "gatsby build",
-    "develop": "gatsby develop -p 8000",
-    "start": "yarn develop"
+    "develop": "gatsby develop",
+    "clean": "gatsby clean",
+    "start:client": "yarn clean && yarn develop",
+    "start:lambda": "dotenv -e netlify/.env netlify-lambda serve netlify/functions",
+    "build": "yarn build:lambda && yarn build:client",
+    "build:client": "gatsby build",
+    "build:lambda": "netlify-lambda build netlify/functions"
   },
   "husky": {
     "husky": {
@@ -16,67 +21,56 @@
     }
   },
   "lint-staged": {
-    "*.{js,jsx}": [
-      "eslint"
-    ],
     "**/*.+(js|jsx|ts|tsx|css|yml|yaml)": [
       "prettier --write",
       "git add"
     ]
   },
   "dependencies": {
-    "gatsby": "^2.0.57",
-    "gatsby-image": "^2.0.21",
-    "gatsby-plugin-google-analytics": "^2.0.7",
-    "gatsby-plugin-layout": "^1.0.9",
-    "gatsby-plugin-manifest": "^2.0.10",
-    "gatsby-plugin-offline": "^2.0.17",
-    "gatsby-plugin-react-helmet": "^3.0.2",
-    "gatsby-plugin-sharp": "^2.0.13",
-    "gatsby-plugin-styled-components": "^3.0.3",
-    "gatsby-plugin-web-font-loader": "^1.0.4",
-    "gatsby-remark-emojis": "^0.2.3",
-    "gatsby-remark-images": "^3.0.0",
-    "gatsby-remark-prismjs": "^3.1.0",
-    "gatsby-remark-smartypants": "^2.0.6",
-    "gatsby-source-contentful": "^2.0.15",
-    "gatsby-source-filesystem": "^2.0.9",
-    "gatsby-transformer-remark": "^2.1.13",
-    "gatsby-transformer-sharp": "^2.1.8",
-    "prismjs": "^1.15.0",
-    "prop-types": "^15.6.2",
-    "react": "^16.7.0-alpha.1",
-    "react-dom": "^16.7.0-alpha.1",
-    "react-helmet": "^5.2.0",
-    "react-icons": "^3.2.2",
-    "react-social-sharing": "^2.0.1",
-    "react-spring": "^6.1.10",
-    "rehype-react": "^3.1.0",
-    "styled-components": "^4.1.2",
-    "turndown": "^5.0.1"
+    "@emotion/core": "^10.0.17",
+    "@mdx-js/mdx": "^1.4.5",
+    "@mdx-js/react": "^1.4.5",
+    "@theme-ui/prism": "^0.2.40",
+    "@theme-ui/typography": "^0.2.40",
+    "axios": "^0.19.0",
+    "deepmerge": "^4.0.0",
+    "gatsby": "^2.15.18",
+    "gatsby-image": "^2.2.19",
+    "gatsby-plugin-emotion": "^4.1.6",
+    "gatsby-plugin-google-analytics": "^2.1.16",
+    "gatsby-plugin-manifest": "^2.2.17",
+    "gatsby-plugin-mdx": "^1.0.43",
+    "gatsby-plugin-react-helmet": "^3.1.7",
+    "gatsby-plugin-sharp": "^2.2.24",
+    "gatsby-plugin-theme-ui": "^0.2.43",
+    "gatsby-remark-code-titles": "^1.1.0",
+    "gatsby-remark-copy-linked-files": "^2.1.19",
+    "gatsby-remark-images": "^3.1.22",
+    "gatsby-remark-smartypants": "^2.1.8",
+    "gatsby-source-filesystem": "^2.1.24",
+    "gatsby-transformer-sharp": "^2.2.15",
+    "isemail": "^3.2.0",
+    "mdx-utils": "^0.2.0",
+    "netlify-lambda": "^1.6.3",
+    "prismjs": "^1.17.1",
+    "prop-types": "^15.7.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-helmet": "^5.2.1",
+    "react-spring": "^8.0.27",
+    "remark-slug": "^5.1.2",
+    "theme-ui": "^0.2.43",
+    "typeface-ibm-plex-mono": "^0.0.61",
+    "typeface-ibm-plex-sans": "^0.0.75",
+    "typeface-ibm-plex-serif": "^0.0.75",
+    "typography-theme-wordpress-2016": "^0.16.19"
   },
   "devDependencies": {
-    "babel-eslint": "^10.0.1",
-    "babel-plugin-styled-components": "^1.9.1",
-    "commitizen": "^3.0.4",
-    "cz-conventional-changelog": "^2.1.0",
-    "dotenv": "^6.1.0",
-    "eslint": "^5.9.0",
-    "eslint-config-airbnb": "^17.1.0",
-    "eslint-config-prettier": "^3.3.0",
-    "eslint-loader": "^2.1.1",
-    "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-react": "^7.11.1",
-    "gatsby-plugin-eslint": "^2.0.1",
+    "dotenv": "^8.1.0",
+    "dotenv-cli": "^2.0.1",
+    "http-proxy-middleware": "^0.20.0",
     "husky": "^1.2.0",
     "lint-staged": "^8.1.0",
-    "prettier": "^1.15.2",
-    "yarn": "^1.12.3"
-  },
-  "config": {
-    "commitizen": {
-      "path": "cz-conventional-changelog"
-    }
+    "prettier": "^1.15.2"
   }
 }

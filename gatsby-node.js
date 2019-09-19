@@ -1,38 +1,21 @@
 const path = require("path")
 
-exports.onCreateWebpackConfig = ({ actions }) => {
-  actions.setWebpackConfig({
-    resolve: {
-      modules: [path.resolve(__dirname, "src"), "node_modules"],
-    },
-  })
-}
-
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions
 
   return new Promise(async resolve => {
     const result = await getData(graphql)
     const {
-      data: { site, allPosts, allCategories },
+      data: { site, allArticle },
     } = result
 
-    // Create blog posts
-    allPosts.edges.forEach(({ node }) => {
+    // Create article pages
+    allArticle.nodes.forEach(node => {
       createPage({
-        path: `${site.siteMetadata.prefix.post}/${node.slug}`,
-        context: { id: node.id },
-        component: path.resolve(`${__dirname}/src/templates/PostTemplate.js`),
-      })
-    })
-
-    // Create category pages
-    allCategories.edges.forEach(({ node }) => {
-      createPage({
-        path: `${site.siteMetadata.prefix.category}/${node.slug}`,
+        path: `${site.siteMetadata.prefix.article}/${node.slug}`,
         context: { id: node.id },
         component: path.resolve(
-          `${__dirname}/src/templates/CategoryTemplate.js`,
+          `${__dirname}/src/templates/ArticleTemplate.js`,
         ),
       })
     })
@@ -47,25 +30,14 @@ async function getData(graphql) {
       site {
         siteMetadata {
           prefix {
-            post
-            category
+            article
           }
         }
       }
-      allPosts: allContentfulBlogPost {
-        edges {
-          node {
-            id
-            slug
-          }
-        }
-      }
-      allCategories: allContentfulCategory {
-        edges {
-          node {
-            id
-            slug
-          }
+      allArticle {
+        nodes {
+          id
+          slug
         }
       }
     }

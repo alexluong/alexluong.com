@@ -1,5 +1,3 @@
-# My Blog
+# www.alexluong.com
 
----
-
-[https://blog.alexluong.com](https://blog.alexluong.com)
+[https://www.alexluong.com](https://www.alexluong.com)

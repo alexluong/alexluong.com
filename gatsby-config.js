@@ -1,118 +1,91 @@
-require("dotenv").config({
-  path: `.env.${process.env.NODE_ENV}`,
-})
+const proxy = require("http-proxy-middleware")
 
 module.exports = {
   siteMetadata: {
-    title: "Alex Luong",
-    description: "Hi. I'm Alex, and I write about web development.",
-    canonicalUrl: "https://blog.alexluong.com",
     social: {
-      fbAppId: "",
-      twitter: "@alexluongg_",
+      github: "alexluong",
+      twitter: "alex__luong",
     },
-
-    // for schema.org
-    organization: {
-      name: "Alex Luong",
-      url: "https://www.alexluong.com",
-      logo: "",
-    },
-
-    // prefix
     prefix: {
-      post: "blog",
-      category: "tag",
+      article: "blog",
     },
   },
   plugins: [
     "gatsby-plugin-react-helmet",
-    "gatsby-plugin-styled-components",
-    "gatsby-transformer-sharp",
     "gatsby-plugin-sharp",
-    "gatsby-plugin-eslint",
-    "gatsby-plugin-offline",
+    "gatsby-transformer-sharp",
+    "gatsby-plugin-emotion",
+    "gatsby-plugin-theme-ui",
+
+    "@al/gatsby-type-article",
+    "@al/gatsby-type-project",
 
     {
-      resolve: "gatsby-source-contentful",
+      resolve: "gatsby-plugin-mdx",
       options: {
-        spaceId: process.env.CONTENTFUL_SPACE_ID,
-        accessToken: process.env.CONTENTFUL_ACCESS_TOKEN,
-      },
-    },
-
-    // Transform markdown files to GraphQL nodes
-    {
-      resolve: "gatsby-transformer-remark",
-      options: {
-        plugins: [
+        extensions: [".mdx"],
+        gatsbyRemarkPlugins: [
+          "gatsby-remark-code-titles",
+          "gatsby-remark-copy-linked-files",
+          "gatsby-remark-smartypants",
           {
             resolve: "gatsby-remark-images",
             options: {
-              maxWidth: 590,
+              maxWidth: 672,
+              linkImagesToOriginal: false,
             },
           },
-          "gatsby-remark-smartypants",
-          "gatsby-remark-emojis",
-          "gatsby-remark-prismjs",
         ],
+        remarkPlugins: [require("remark-slug")],
       },
     },
 
-    // // Get assets (images)
-    // {
-    //   resolve: "gatsby-source-filesystem",
-    //   options: {
-    //     name: "images",
-    //     path: `${__dirname}/content/assets`,
-    //   },
-    // },
-
-    // Layout wrapper
     {
-      resolve: "gatsby-plugin-layout",
+      resolve: "gatsby-source-filesystem",
       options: {
-        component: require.resolve(`${__dirname}/src/index.js`),
+        name: "images",
+        path: `${__dirname}/content/assets`,
       },
     },
-
-    // Fonts
     {
-      resolve: "gatsby-plugin-web-font-loader",
+      resolve: "gatsby-source-filesystem",
       options: {
-        google: {
-          families: ["Source Sans Pro", "Inconsolata", "IBM Plex Mono"],
-        },
+        name: "articles",
+        path: `${__dirname}/content/articles`,
       },
     },
-
-    // Google Analytics
     {
-      resolve: "gatsby-plugin-google-analytics",
+      resolve: "gatsby-source-filesystem",
       options: {
-        trackingId: "UA-116347511-1",
-        respectDNT: true,
+        name: "projects",
+        path: `${__dirname}/content/projects`,
       },
     },
 
-    // Manifest
     {
       resolve: "gatsby-plugin-manifest",
       options: {
-        name: "Alex Luong",
-        short_name: "@alexluong",
-        start_url: ".",
-        theme_color: "#c800ec",
-        background_color: "#c800ec",
-        display: "minimal-ui",
-        icons: [
-          {
-            src: "/android-chrome-512x512.png",
-            sizes: "512x512",
-            type: "image/png",
-          },
-        ],
+        name: "Alex Luong Personal Blog and Website",
+        short_name: "Alex Luong",
+        start_url: "/",
+        background_color: "#6b37bf",
+        theme_color: "#6b37bf",
+        display: "standalone",
+        icon: "static/favicon.ico",
       },
     },
   ],
+
+  // Proxy local lambda server
+  developMiddleware: app => {
+    app.use(
+      "/.netlify/functions/",
+      proxy({
+        target: "http://localhost:9000",
+        pathRewrite: {
+          "/.netlify/functions/": "",
+        },
+      }),
+    )
+  },
 }

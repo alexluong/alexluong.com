@@ -1,0 +1,260 @@
+---
+date: 2019-07-30
+title: A Journey Through Gatsby Build Process via Building a Plugin
+description: Understand Gatsby build process through my experience building a plugin
+---
+
+Let me take you through my journey of building a Gatsby plugin. Hopefully, from my experience, you can learn a thing or two about Gatsby and maybe even React Hooks.
+
+## The mission
+
+This post attempts to explain what happens when you run `gatsby develop` and `gatsby build` in regards to the building and serving HTML step.
+
+This post assumes you have some experiences working with Gatsby and know some Gatsby specific API. Please feel free to ask me to explain further if I lose you somewhere.
+
+## The plugin
+
+The plugin that I'm building is `gatsby-plugin-firebase`. I want to use Firebase to build a web application with Gatsby, but there are some challenges setting things up. Mainly, the Firebase web SDK is client-only, which doesn't sit well with Gatsby server-side rendering process.
+
+I searched for a solution to integrate Firebase with Gatsby, but there doesn't seem to be many. In my search, I came across 2 resources that are very helpful, so you can check them out for better context:
+
+- Kyle Shevlin's blog post: [Firebase and Gatsby, Together At Last](https://kyleshevlin.com/firebase-and-gatsby-together-at-last)
+- Muhammad Muhajir's [starter](https://github.com/muhajirdev/gatsby-starter-firebase/), `gatsby-starter-firebase`
+
+The plugin that I'm gonna build should allow you to register it in `gatsby-config.js` and have Firebase initialized and ready to go for you.
+
+## Attempt #1
+
+### The code
+
+Taking inspiration from these 2 resources, I built `gatsby-plugin-firebase`. I will speed through my code as it is not the main focus of this post. Here is what I did:
+
+- Using `gatsby-browser.js` and `gatsby-ssr.js`, I wrapped Gatsby root in a React component:
+
+```jsx:title=gatsby-browser.js_and_gatsby-ssr.js
+import React from "react"
+import Layout from "./src"
+
+export const wrapRootElement = ({ element, props }) => (
+  <Layout {...props}>{element}</Layout>
+)
+```
+
+- In the `Layout` component at `src/index.js`, I initialized Firebase and put a `firebase` instance in a React Context:
+
+```jsx
+import React from "react"
+import FirebaseContext from "./components/FirebaseContext"
+
+function Index({ children }) {
+  const [firebase, setFirebase] = React.useState(null)
+
+  React.useEffect(() => {
+    if (!firebase && typeof window !== "undefined") {
+      const app = import("firebase/app")
+      const auth = import("firebase/auth")
+      const database = import("firebase/database")
+      const firestore = import("firebase/firestore")
+
+      Promise.all([app, auth, database, firestore]).then(values => {
+        const firebaseInstance = values[0]
+        firebaseInstance.initializeApp({
+          apiKey: process.env.GATSBY_FIREBASE_API_KEY,
+          authDomain: process.env.GATSBY_FIREBASE_AUTH_DOMAIN,
+          databaseURL: process.env.GATSBY_FIREBASE_DATABASE_URL,
+          projectId: process.env.GATSBY_FIREBASE_PROJECT_ID,
+          storageBucket: process.env.GATSBY_FIREBASE_STORAGE_BUCKET,
+          messagingSenderId: process.env.GATSBY_FIREBASE_MESSAGING_SENDER_ID,
+          appId: process.env.GATSBY_FIREBASE_APP_ID,
+        })
+        setFirebase(firebaseInstance)
+      })
+    }
+  }, [])
+
+  if (!firebase) {
+    return null
+  }
+
+  return (
+    <FirebaseContext.Provider value={firebase}>
+      {children}
+    </FirebaseContext.Provider>
+  )
+}
+
+export default Index
+```
+
+- Created `FirebaseContext` with some helpers to easily access `firebase` inside `src/index.js`:
+
+```jsx
+import React from "react"
+
+const FirebaseContext = React.createContext(null)
+
+export function useFirebase() {
+  const firebase = React.useContext(FirebaseContext)
+  return firebase
+}
+
+export const withFirebase = Component => props => (
+  <FirebaseContext.Consumer>
+    {firebase => <Component {...props} firebase={firebase} />
+  </FirebaseContext.Consumer>
+)
+
+export default FirebaseContext
+```
+
+- And inside the root `index.js` I exported some helpers:
+
+```js
+exports.FirebaseContext = require("./src/components/FirebaseContext").default
+exports.useFirebase = require("./src/components/FirebaseContext").useFirebase
+exports.withFirebase = require("./src/components/FirebaseContext").withFirebase
+```
+
+### Did it work?
+
+It did 🎉🎉. When I wrote some code to consumed the library and ran `gatsby develop`, it worked beautifully. Here is a sample component showing how I used it:
+
+```jsx
+import React from "react"
+import { useFirebase } from "gatsby-plugin-firebase"
+
+export default () => {
+  const firebase = useFirebase()
+  const [name, setName] = React.useState("there")
+
+  React.useEffect(() => {
+    firebase
+      .database()
+      .ref("/name")
+      .once("value")
+      .then(snapshot => setName(snapshot.val()))
+  }, [firebase])
+
+  return <div>Hi {name}</div>
+}
+```
+
+Problems arose when I tried to run `gatsby build && gatsby serve`. The site still built successfully and worked, but something weird happened:
+
+- When visiting a page that doesn't use Firebase, it would render the content, then a flash of white screen, and then render the content again.
+
+- When visiting a page that does use Firebase, it would render the default value, flash, default value, and then the value from Firebase.
+
+<CallOut type="think">What is going on?</CallOut>
+
+What happened was that in development phase, Gatsby uses Webpack Dev Server, so everything runs completely on the client. Gatsby is basically a React app at that point (disregarding the GraphQL part). Therefore, everything worked perfectly.
+
+When running `gatsby build`, it generates HTML files for all of your pages in a Node process. In React components, it didn't run the lifecycles like `componentDidMount` or `useEffect` hook. In the end, pages that didn't depend on Firebase were the same. And because Firebase was run inside `useEffect`, the page that I wrote just used the default `name` state and rendered "Hi there".
+
+When serving the site, after rendering the HTML, Gatsby will rehydrate the site to a React app. At that point, it would initialize Firebase and do all sort of stuff that it didn't do during the build step.
+
+In my `src/index.js` file when I set up `FirebaseContext`, I had these lines:
+
+```js
+if (!firebase) {
+  return null
+}
+```
+
+This is the reason that the white flash appeared. The source of all evil. If you replace `return null` with `return <div style={{ width: "100%", height: "100%", background: "red" }} />`, you would have a very red flash instead.
+
+## Attemp #2
+
+Well if those 3 lines are the causes of the white flash, maybe we can just remove them, right? Right?
+
+That's what I did. And boy was I wrong.
+
+On first render, `firebase = null`. Remember in my `src/index.js` file, I wrap the Firebase initialization code inside a `useEffect`. Firebase will only exist *after* the first render. When removing those 3 lines, I receive `firebase is undefined` error right from the development step.
+
+### Solution
+
+To solve the error, I can simply check whether `firebase` exists before doing anything with it. **It works**. But I don't like it. I don't want to add an extra cognitive load to the users' brain every time they try to do stuff with Firebase.
+
+Besides, to check whether `firebase` exists is quite simple in React Hooks:
+
+```js
+React.useEffect(() => {
+  if (!firebase) {
+    return
+  }
+  doSomething(firebase)
+}, [firebase])
+```
+
+Whereas in a class component, it would be a bit more involved:
+
+```js
+class Component extends React.Component {
+  componentDidUpdate(prevProps) {
+    if (!prevProps.firebase && this.props.firebase) {
+      doSomething(this.props.firebase)
+    }
+  }
+}
+
+export default withFirebase(Component)
+```
+
+Well, it's not that bad. But it could be better.
+
+## Attempt #3
+
+In search for a better API, I just randomly thought of how `useEffect` works. Since you have to use Firebase in that hook anyway, and it takes a function as its first argument, what if my `useFirebase` works like that too? In that case, the function in the argument can receive `firebase` only when it's already initialized so that the end-users would never have to care about it.
+
+The end-users would know that `firebase` is always there, ready for them.
+
+Here is my rewrite of the helper hook:
+
+```js
+function useFirebase(fn, dependencies = []) {
+  const firebase = React.useContext(FirebaseContext)
+  React.useEffect(() => {
+    if (!firebase) {
+      return
+    }
+    return fn(firebase)
+  }, [firebase, ...dependencies])
+}
+```
+
+With this hook, the users can simply write their component like so:
+
+```jsx
+function Component() {
+  const [name, setName] = React.useState("there")
+
+  useFirebase(firebase => {
+    firebase
+      .database()
+      .ref("/name")
+      .once("value")
+      .then(snapshot => setName(snapshot.val()))
+  })
+
+  return <div>Hi {name}</div>
+}
+```
+
+Beautiful, if I do say so myself.
+
+### What about Classes, bro?
+
+Now that I'm happy with this API, I try to come up with a way to support the same easy-to-use API but for class component as they cannot use hooks.
+
+And quite frankly, I just cannot come up with an API as intuitive as hook. The problem is that class component is too coupling with the render method that it's impossible to defer that aspect to the user the way hooks allow.
+
+## Conclusion
+
+Well that's it folks. Some quick recaps:
+
+- `gatsby develop` runs a React app
+- `gatsby build` builds HTML pages
+- When served, after rendering the HTML, Gatsby will rehydrate the site to React. Lifecycles method will run, which may or may not affect how your site looks, potentially causing flickering/flashes.
+- React Hooks are awesome
+
+And if you use Firebase with Gatsby, consider using [my plugin](https://github.com/alexluong/gatsby-plugin-firebase) `gatsby-plugin-firebase` maybe?

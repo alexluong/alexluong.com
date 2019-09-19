@@ -1,32 +1,14 @@
-import React, { Fragment } from "react"
-import PropTypes from "prop-types"
-// UIs
-import Header from "components/Header"
-import Footer from "components/Footer"
-import SEO from "components/SEO"
-import BaseStyle from "components/BaseStyle"
-import CodeStyle from "components/CodeStyle"
-// eslint-disable-next-line
-import { setConfig } from "react-hot-loader"
+import React from "react"
+import Layout from "./components/Layout"
+import GlobalStyle from "./components/GlobalStyle"
 
-setConfig({ pureSFC: true })
-
-function App({ children }) {
+function Index({ children }) {
   return (
-    <Fragment>
-      <SEO />
-      <CodeStyle />
-      <BaseStyle />
-
-      <Header />
-      {children}
-      <Footer />
-    </Fragment>
+    <>
+      <GlobalStyle />
+      <Layout>{children}</Layout>
+    </>
   )
 }
 
-App.propTypes = {
-  children: PropTypes.element.isRequired,
-}
-
-export default App
+export default Index
