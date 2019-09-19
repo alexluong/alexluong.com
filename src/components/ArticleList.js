@@ -20,6 +20,7 @@ function ArticleList() {
               lineHeight: 1.5,
               color: "primary",
               textDecoration: "underline",
+              transition: "all 0.3s ease",
               ":hover": {
                 color: "primaryVariants.hover",
               },

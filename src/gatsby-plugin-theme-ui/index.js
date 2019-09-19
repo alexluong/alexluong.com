@@ -14,7 +14,7 @@ export default merge(
     fonts: {
       heading: "Open Sans, sans-serif",
       body: "Lato, sans-serif",
-      monospace: "monospace",
+      monospace: "IBM Plex Mono, monospace",
     },
     fontSizes: [14, 16, 18, 22, 30, 48],
     sizes: {

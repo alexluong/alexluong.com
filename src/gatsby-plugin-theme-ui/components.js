@@ -19,6 +19,28 @@ function CodeBlock(preProps) {
   }
 }
 
+function Link({ children, ...props }) {
+  return (
+    <a
+      {...props}
+      sx={{
+        color: "primary",
+        textDecoration: "underline",
+        transition: "all 0.3s ease",
+        ":visited": {
+          color: "primary",
+        },
+        ":hover": {
+          color: "primaryVariants.hover",
+        },
+      }}
+    >
+      {children}
+    </a>
+  )
+}
+
 export default {
   pre: CodeBlock,
+  a: Link,
 }

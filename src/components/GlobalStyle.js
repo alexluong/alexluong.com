@@ -31,6 +31,22 @@ function GlobalStyle() {
         h6 {
           font-size: 1em;
         }
+
+        .gatsby-code-title {
+          font-family: "IBM Plex Mono", monospace;
+          font-size: 15px;
+          border-top-left-radius: 10px;
+          border-top-right-radius: 10px;
+          background-color: #011627;
+          border-bottom: 2px solid;
+          color: #809393;
+          padding: 10px 28px;
+        }
+
+        .gatsby-code-title + div > pre {
+          border-top-left-radius: 0;
+          border-top-right-radius: 0;
+        }
       `}
     />
   )

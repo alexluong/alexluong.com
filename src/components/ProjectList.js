@@ -33,7 +33,7 @@ function IconButton({ children, ...props }) {
         justifyContent: "center",
         alignItems: "center",
         ":hover": {
-          bg: "muted",
+          bg: "neutralVariants.100",
         },
       }}
     >

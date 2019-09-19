@@ -25,15 +25,16 @@ module.exports = {
       options: {
         extensions: [".mdx"],
         gatsbyRemarkPlugins: [
+          "gatsby-remark-code-titles",
+          "gatsby-remark-copy-linked-files",
+          "gatsby-remark-smartypants",
           {
             resolve: "gatsby-remark-images",
             options: {
-              maxWidth: 1380,
+              maxWidth: 672,
               linkImagesToOriginal: false,
             },
           },
-          { resolve: "gatsby-remark-copy-linked-files" },
-          { resolve: "gatsby-remark-smartypants" },
         ],
         remarkPlugins: [require("remark-slug")],
       },

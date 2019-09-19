@@ -19,7 +19,7 @@ The plugin that I'm building is `gatsby-plugin-firebase`. I want to use Firebase
 I searched for a solution to integrate Firebase with Gatsby, but there doesn't seem to be many. In my search, I came across 2 resources that are very helpful, so you can check them out for better context:
 
 - Kyle Shevlin's blog post: [Firebase and Gatsby, Together At Last](https://kyleshevlin.com/firebase-and-gatsby-together-at-last)
-- Muhammad Muhajir's [`gatsby-starter-firebase`](https://github.com/muhajirdev/gatsby-starter-firebase/)
+- Muhammad Muhajir's [starter](https://github.com/muhajirdev/gatsby-starter-firebase/), `gatsby-starter-firebase`
 
 The plugin that I'm gonna build should allow you to register it in `gatsby-config.js` and have Firebase initialized and ready to go for you.
 
@@ -31,7 +31,7 @@ Taking inspiration from these 2 resources, I built `gatsby-plugin-firebase`. I w
 
 - Using `gatsby-browser.js` and `gatsby-ssr.js`, I wrapped Gatsby root in a React component:
 
-```jsx
+```jsx:title=gatsby-browser.js_and_gatsby-ssr.js
 import React from "react"
 import Layout from "./src"
 
@@ -257,4 +257,4 @@ Well that's it folks. Some quick recaps:
 - When served, after rendering the HTML, Gatsby will rehydrate the site to React. Lifecycles method will run, which may or may not affect how your site looks, potentially causing flickering/flashes.
 - React Hooks are awesome
 
-And if you use Firebase with Gatsby, consider using my plugin [`gatsby-plugin-firebase`](https://github.com/alexluong/gatsby-plugin-firebase) maybe?
+And if you use Firebase with Gatsby, consider using [my plugin](https://github.com/alexluong/gatsby-plugin-firebase) `gatsby-plugin-firebase` maybe?
