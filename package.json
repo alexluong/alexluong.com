@@ -61,8 +61,8 @@
     "remark-slug": "^5.1.2",
     "theme-ui": "^0.2.42",
     "typeface-ibm-plex-mono": "^0.0.61",
-    "typeface-lato": "^0.0.75",
-    "typeface-open-sans": "^0.0.75",
+    "typeface-ibm-plex-sans": "^0.0.75",
+    "typeface-ibm-plex-serif": "^0.0.75",
     "typography-theme-wordpress-2016": "^0.16.19"
   },
   "devDependencies": {

@@ -8,6 +8,9 @@ function GlobalStyle() {
         * {
           box-sizing: border-box;
           z-index: 1;
+          -moz-osx-font-smoothing: grayscale;
+          -webkit-font-smoothing: antialiased;
+          font-smoothing: antialiased;
         }
 
         body {

@@ -66,6 +66,7 @@ function SubscriptionBanner() {
                 px: 2,
                 fontFamily: "body",
                 fontSize: 2,
+                lineHeight: 1.2,
                 borderRadius: 4,
                 borderStyle: "solid",
                 ":focus": {

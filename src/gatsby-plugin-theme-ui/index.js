@@ -12,8 +12,8 @@ export default merge(
     initialColorMode: "light",
     colors,
     fonts: {
-      heading: "Open Sans, sans-serif",
-      body: "Lato, sans-serif",
+      heading: "IBM Plex Serif, sans-serif",
+      body: "IBM Plex Sans, sans-serif",
       monospace: "IBM Plex Mono, monospace",
     },
     fontSizes: [14, 16, 18, 22, 30, 48],

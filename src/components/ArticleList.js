@@ -15,18 +15,22 @@ function ArticleList() {
           <h2
             sx={{
               my: 0,
-              fontSize: 4,
-              fontFamily: "heading",
-              lineHeight: 1.5,
               color: "primary",
-              textDecoration: "underline",
-              transition: "all 0.3s ease",
-              ":hover": {
-                color: "primaryVariants.hover",
-              },
             }}
           >
-            <Link to={`/${articlePrefix}/${article.slug}`}>
+            <Link
+              to={`/${articlePrefix}/${article.slug}`}
+              sx={{
+                fontSize: 4,
+                fontFamily: "heading",
+                lineHeight: 1.5,
+                transition: "all 0.3s ease",
+                textDecoration: "underline",
+                ":hover": {
+                  color: "primaryVariants.hover",
+                },
+              }}
+            >
               {article.title}
             </Link>
           </h2>

@@ -26,6 +26,7 @@ export default {
     paddingTop: "0.15em",
     paddingBottom: "0.05em",
     paddingX: "0.2em",
+    fontFamily: "monospace",
   },
   hr: {
     borderColor: "muted",

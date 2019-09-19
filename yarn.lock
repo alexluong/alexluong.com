@@ -12858,15 +12858,15 @@ typeface-ibm-plex-mono@^0.0.61:
   resolved "https://registry.yarnpkg.com/typeface-ibm-plex-mono/-/typeface-ibm-plex-mono-0.0.61.tgz#ee7f12643e2bfee5c5c6915350005d6dfdaa66fd"
   integrity sha512-4Pzza33ihcW1l9qSs6WmRRb6FxVoDvpoTws55V9rwN7zVqURFh1c/i4qWCmHJ0Dyr0c+pYgQVyb/aAwsRjv2Lg==
 
-typeface-lato@^0.0.75:
+typeface-ibm-plex-sans@^0.0.75:
   version "0.0.75"
-  resolved "https://registry.yarnpkg.com/typeface-lato/-/typeface-lato-0.0.75.tgz#8aa11c5611dc38416837c089b265a2abd1f7dd31"
-  integrity sha512-iA5uJD4PSTyIE4BDiSOexQeXkDkiJuX4Hu3wh3saJ06EB2TvJayab1Lbbmqq2je/LQv7KCQZHZmC0k4hedd8sw==
+  resolved "https://registry.yarnpkg.com/typeface-ibm-plex-sans/-/typeface-ibm-plex-sans-0.0.75.tgz#47fffee4b9004e9d22300ed99bb679cbeed5c6ff"
+  integrity sha512-IBxDEt5r0Xo5EshGBb1CR1ec3ApNI0jK0o2gSGNZIoKml9q99a/Qcbb8u8IK0x/M+nso8FzcMW03Hz6gSfCIAg==
 
-typeface-open-sans@^0.0.75:
+typeface-ibm-plex-serif@^0.0.75:
   version "0.0.75"
-  resolved "https://registry.yarnpkg.com/typeface-open-sans/-/typeface-open-sans-0.0.75.tgz#20d0c330f14c0c40463c334adbedd6005389abe4"
-  integrity sha512-0lLmB7pfj113OP4T78SbpSmC4OCdFQ0vUxdSXQccsSb6qF76F92iEuC/DghFgmPswTyidk8+Hwf+PS/htiJoRQ==
+  resolved "https://registry.yarnpkg.com/typeface-ibm-plex-serif/-/typeface-ibm-plex-serif-0.0.75.tgz#7f93b410c712ba86c508f5d4727649a9c404ddcf"
+  integrity sha512-pic/O3Z8wKjik6Tnin5KaiE+mFIAOI5Jn4EiF/FtxR42Fsmo6ZRWjJQN71FWXIWK4Miiu/UjhsFvJScpf2F2sw==
 
 typography-breakpoint-constants@^0.16.19:
   version "0.16.19"
