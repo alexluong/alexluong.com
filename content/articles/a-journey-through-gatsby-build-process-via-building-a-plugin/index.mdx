@@ -145,7 +145,7 @@ Problems arose when I tried to run `gatsby build && gatsby serve`. The site stil
 
 - When visiting a page that does use Firebase, it would render the default value, flash, default value, and then the value from Firebase.
 
-What is going on?
+<CallOut type="think">What is going on?</CallOut>
 
 What happened was that in development phase, Gatsby uses Webpack Dev Server, so everything runs completely on the client. Gatsby is basically a React app at that point (disregarding the GraphQL part). Therefore, everything worked perfectly.
 

@@ -40,7 +40,47 @@ function Link({ children, ...props }) {
   )
 }
 
+function CallOut({ type, children, ...props }) {
+  let callOutIcon
+
+  switch (type) {
+    case "think":
+      callOutIcon = (
+        <span role="img" aria-label="think">
+          🤔
+        </span>
+      )
+      break
+    case "question":
+      callOutIcon = (
+        <span role="img" aria-label="question">
+          ❓
+        </span>
+      )
+      break
+    default:
+      break
+  }
+
+  return (
+    <p
+      {...props}
+      sx={{
+        color: "primaryVariants.900",
+        bg: "primaryVariants.background",
+        borderRadius: 4,
+        px: 2,
+        py: 2,
+      }}
+    >
+      {callOutIcon}
+      <span sx={{ ml: 2 }}>{children}</span>
+    </p>
+  )
+}
+
 export default {
   pre: CodeBlock,
   a: Link,
+  CallOut,
 }
