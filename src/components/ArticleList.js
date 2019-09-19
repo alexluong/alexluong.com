@@ -20,6 +20,9 @@ function ArticleList() {
               lineHeight: 1.5,
               color: "primary",
               textDecoration: "underline",
+              ":hover": {
+                color: "primaryVariants.hover",
+              },
             }}
           >
             <Link to={`/${articlePrefix}/${article.slug}`}>

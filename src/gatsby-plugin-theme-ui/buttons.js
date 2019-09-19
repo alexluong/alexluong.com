@@ -19,8 +19,8 @@ export default {
     borderColor: "primary",
     color: "onPrimary",
     ":hover": {
-      bg: "primaryHover",
-      borderColor: "primaryHover",
+      bg: "primaryVariants.hover",
+      borderColor: "primaryVariants.hover",
     },
   },
   twitter: {

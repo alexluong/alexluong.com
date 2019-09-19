@@ -5,7 +5,7 @@ import ArticleList from "../components/ArticleList"
 function BlogPage() {
   return (
     <div sx={{ maxWidth: "container", mx: "auto" }}>
-      <section sx={{ mt: 4 }}>
+      <section sx={{ pt: 3 }}>
         <ArticleList />
       </section>
     </div>

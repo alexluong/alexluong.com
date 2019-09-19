@@ -7,6 +7,7 @@ function GlobalStyle() {
       styles={css`
         * {
           box-sizing: border-box;
+          z-index: 1;
         }
 
         body {

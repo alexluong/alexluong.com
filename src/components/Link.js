@@ -4,11 +4,15 @@ import { Link } from "gatsby"
 
 export default ({ isLast, to, href, children, ...props }) => {
   const style = {
-    mr: isLast ? 0 : 3,
+    mr: isLast ? 0 : 2,
     cursor: "pointer",
     color: "link",
+    px: 1,
+    py: 1,
+    borderRadius: 4,
+    transition: "all 0.3s ease",
     ":hover": {
-      color: "text",
+      bg: "primaryVariants.background",
     },
   }
 

@@ -1,13 +1,13 @@
 /** @jsx jsx */
-import { jsx } from "theme-ui"
+import { jsx, Styled } from "theme-ui"
 import Navigation from "./Navigation"
 import Link from "./Link"
 
 function Layout({ children }) {
   return (
-    <div>
+    <Styled.root>
       <Navigation />
-      {children}
+      <div sx={{ mt: 5 }}>{children}</div>
       <footer
         sx={{
           maxWidth: "container",
@@ -42,7 +42,7 @@ function Layout({ children }) {
         </div>
         <div></div>
       </footer>
-    </div>
+    </Styled.root>
   )
 }
 
