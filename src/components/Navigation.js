@@ -9,7 +9,7 @@ function Navigation() {
   const [scrolled, setScrolled] = React.useState(false)
 
   React.useState(() => {
-    if (!window) {
+    if (typeof window === "undefined") {
       return
     }
     window.addEventListener("scroll", onScroll)
@@ -17,10 +17,12 @@ function Navigation() {
   }, [])
 
   function onScroll() {
-    if (window.scrollY > 20) {
-      setScrolled(true)
-    } else {
-      setScrolled(false)
+    if (typeof window !== "undefined") {
+      if (window.scrollY > 20) {
+        setScrolled(true)
+      } else {
+        setScrolled(false)
+      }
     }
   }
 
