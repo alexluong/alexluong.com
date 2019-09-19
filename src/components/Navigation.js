@@ -12,9 +12,7 @@ function Navigation() {
     if (!window) {
       return
     }
-
     window.addEventListener("scroll", onScroll)
-
     return () => window.removeEventListener("scroll", onScroll)
   }, [])
 
@@ -25,8 +23,6 @@ function Navigation() {
       setScrolled(false)
     }
   }
-
-  console.log(scrolled)
 
   return (
     <nav
