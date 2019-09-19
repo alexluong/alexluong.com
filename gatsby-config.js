@@ -1,5 +1,11 @@
+const proxy = require("http-proxy-middleware")
+
 module.exports = {
   siteMetadata: {
+    social: {
+      github: "alexluong",
+      twitter: "alex__luong",
+    },
     prefix: {
       article: "blog",
     },
@@ -68,4 +74,17 @@ module.exports = {
       },
     },
   ],
+
+  // Proxy local lambda server
+  developMiddleware: app => {
+    app.use(
+      "/.netlify/functions/",
+      proxy({
+        target: "http://localhost:9000",
+        pathRewrite: {
+          "/.netlify/functions/": "",
+        },
+      }),
+    )
+  },
 }

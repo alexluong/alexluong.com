@@ -1,6 +1,7 @@
 export default {
   root: {
     fontFamily: "body",
+    color: "text",
   },
   pre: {
     variant: "prism",

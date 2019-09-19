@@ -1,5 +1,11 @@
+const BLACK = "#000"
+const WHITE = "#fff"
+const REACT = "rgb(97, 218, 251)"
+const NODE = "rgb(2, 110, 0)"
+const GRAPHQL = "#e535ab"
+const GATSBY = "rebeccapurple"
+
 const technologyStyle = {
-  bg: "muted",
   borderRadius: 3,
   px: 1,
   py: 0,
@@ -8,26 +14,27 @@ const technologyStyle = {
 export default {
   React: {
     ...technologyStyle,
-    bg: "rgb(97, 218, 251)",
-    color: "black",
+    bg: REACT,
+    color: BLACK,
   },
   Node: {
     ...technologyStyle,
-    bg: "rgb(2, 110, 0)",
-    color: "white",
+    bg: NODE,
+    color: WHITE,
   },
   GraphQL: {
     ...technologyStyle,
-    bg: "#e535ab ",
-    color: "white",
+    bg: GRAPHQL,
+    color: WHITE,
   },
   Gatsby: {
     ...technologyStyle,
-    bg: "rebeccapurple",
-    color: "white",
+    bg: GATSBY,
+    color: WHITE,
   },
   Default: {
     ...technologyStyle,
+    bg: "neutralVariants.100",
     color: "text",
   },
 }

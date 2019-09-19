@@ -5,10 +5,13 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "build": "gatsby build",
     "develop": "gatsby develop",
     "clean": "gatsby clean",
-    "start": "yarn clean && yarn develop"
+    "start:client": "yarn clean && yarn develop",
+    "start:lambda": "dotenv -e netlify/.env netlify-lambda serve netlify/functions",
+    "build": "yarn build:lambda && yarn build:client",
+    "build:client": "gatsby build",
+    "build:lambda": "netlify-lambda build netlify/functions"
   },
   "husky": {
     "husky": {
@@ -29,6 +32,7 @@
     "@mdx-js/react": "^1.4.5",
     "@theme-ui/prism": "^0.2.40",
     "@theme-ui/typography": "^0.2.40",
+    "axios": "^0.19.0",
     "deepmerge": "^4.0.0",
     "gatsby": "^2.15.16",
     "gatsby-image": "^2.2.19",
@@ -44,7 +48,9 @@
     "gatsby-remark-smartypants": "^2.1.8",
     "gatsby-source-filesystem": "^2.1.22",
     "gatsby-transformer-sharp": "^2.2.14",
+    "isemail": "^3.2.0",
     "mdx-utils": "^0.2.0",
+    "netlify-lambda": "^1.6.3",
     "prismjs": "^1.17.1",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
@@ -58,6 +64,9 @@
     "typography-theme-wordpress-2016": "^0.16.19"
   },
   "devDependencies": {
+    "dotenv": "^8.1.0",
+    "dotenv-cli": "^2.0.1",
+    "http-proxy-middleware": "^0.20.0",
     "husky": "^1.2.0",
     "lint-staged": "^8.1.0",
     "prettier": "^1.15.2"

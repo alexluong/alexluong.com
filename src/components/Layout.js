@@ -1,9 +1,12 @@
 /** @jsx jsx */
 import { jsx, Styled } from "theme-ui"
+import { useSocial } from "../utils/queries"
 import Navigation from "./Navigation"
 import Link from "./Link"
 
 function Layout({ children }) {
+  const social = useSocial()
+
   return (
     <Styled.root>
       <Navigation />
@@ -19,14 +22,14 @@ function Layout({ children }) {
       >
         <div>
           <Link
-            href="https://twitter.com"
+            href={`https://twitter.com/${social.twitter}`}
             target="_blank"
             rel="noopener noreferrer"
           >
             Twitter
           </Link>
           <Link
-            href="https://github.com"
+            href={`https://github.com/${social.github}`}
             target="_blank"
             rel="noopener noreferrer"
           >

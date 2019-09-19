@@ -24,25 +24,28 @@ const BLUE_GREY = {
   900: "#102A43",
 }
 
-// const RED = {
-//   50: "#FFEEEE",
-//   100: "#FACDCD",
-//   200: "#F29B9B",
-//   300: "#E66A6A",
-//   400: "#D64545",
-//   500: "#BA2525",
-//   600: "#A61B1B",
-//   700: "#911111",
-//   800: "#780A0A",
-//   900: "#610404",
-// }
+const RED = {
+  50: "#FFEEEE",
+  100: "#FACDCD",
+  200: "#F29B9B",
+  300: "#E66A6A",
+  400: "#D64545",
+  500: "#BA2525",
+  600: "#A61B1B",
+  700: "#911111",
+  800: "#780A0A",
+  900: "#610404",
+}
 
 export default {
+  black: BLUE_GREY[900],
+  white: BLUE_GREY[50],
   text: BLUE_GREY[900],
   background: BLUE_GREY[100],
   secondary: BLUE_GREY[400],
   muted: BLUE_GREY[300],
-  link: BLUE_GREY[400],
+  link: BLUE_GREY[600],
+  danger: RED[500],
 
   primary: GREEN[400],
   onPrimary: GREEN[50],
