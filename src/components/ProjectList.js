@@ -12,7 +12,7 @@ function Technology({ value }) {
     : "Default"
 
   return (
-    <li sx={{ variant: `technologies.${color}`, mr: 1, fontSize: 1 }}>
+    <li sx={{ variant: `technologies.${color}`, mr: 1, mb: 1, fontSize: 1 }}>
       {value}
     </li>
   )
@@ -35,6 +35,10 @@ function IconButton({ children, ...props }) {
         ":hover": {
           bg: "neutralVariants.100",
         },
+        "@media (max-width: 725px)": {
+          mr: 1,
+          mb: 0,
+        },
       }}
     >
       {children}
@@ -55,6 +59,9 @@ function ProjectList() {
               gridTemplateColumns: "auto 40px",
               alignItems: "center",
               gap: 2,
+              "@media (max-width: 725px)": {
+                display: "block",
+              },
             }}
           >
             <div>
@@ -62,7 +69,14 @@ function ProjectList() {
 
               <p>{project.description}</p>
               {project.technologies && (
-                <ul sx={{ listStyleType: "none", display: "flex", pl: 0 }}>
+                <ul
+                  sx={{
+                    listStyleType: "none",
+                    display: "flex",
+                    flexWrap: "wrap",
+                    pl: 0,
+                  }}
+                >
                   {project.technologies.map(technology => (
                     <Technology key={technology} value={technology} />
                   ))}

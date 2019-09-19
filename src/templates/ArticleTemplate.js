@@ -7,7 +7,16 @@ import ArticleInfo from "../components/ArticleInfo"
 
 function ArticleTemplate({ data: { article } }) {
   return (
-    <main sx={{ pt: 4, mx: "auto", maxWidth: "container" }}>
+    <main
+      sx={{
+        pt: 4,
+        mx: "auto",
+        maxWidth: "container",
+        "@media (max-width: 725px)": {
+          px: 3,
+        },
+      }}
+    >
       <Styled.h1>{article.title}</Styled.h1>
       <ArticleInfo
         date={article.date}

@@ -11,7 +11,15 @@ function IndexPage() {
   const social = useSocial()
 
   return (
-    <div sx={{ maxWidth: "container", mx: "auto" }}>
+    <div
+      sx={{
+        maxWidth: "container",
+        mx: "auto",
+        "@media (max-width: 725px)": {
+          px: 3,
+        },
+      }}
+    >
       <div sx={{ pt: 3 }}>
         <h1 sx={{ fontSize: 5, color: "primary" }}>Hey, I'm Alex</h1>
         <p sx={{ fontSize: 2, mb: 3 }}>

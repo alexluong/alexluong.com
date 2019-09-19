@@ -58,7 +58,7 @@ function SubscriptionBanner() {
         </p>
       ) : (
         <form onSubmit={subscribe}>
-          <label sx={{ mr: 2 }}>
+          <label sx={{ mr: 2, mb: 2, display: "inline-block" }}>
             <span sx={{ display: "none" }}>Join my newsletter</span>
             <input
               sx={{

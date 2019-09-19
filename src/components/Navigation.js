@@ -37,6 +37,9 @@ function Navigation() {
         background: "white",
         boxShadow: scrolled ? "1px 2px 18px" : "none",
         py: scrolled ? 2 : 3,
+        "@media (max-width: 725px)": {
+          px: 3,
+        },
       }}
     >
       <div

@@ -18,6 +18,9 @@ function Layout({ children }) {
           py: 4,
           display: "flex",
           justifyContent: "space-between",
+          "@media (max-width: 725px)": {
+            px: 3,
+          },
         }}
       >
         <div>
