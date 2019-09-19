@@ -18,6 +18,7 @@ function LatestArtcileList() {
           }}
         >
           <div
+            tabIndex="0"
             sx={{
               py: 2,
               px: 2,
@@ -25,8 +26,8 @@ function LatestArtcileList() {
               borderRadius: 4,
               color: "link",
               transition: "all 0.3s ease",
-              ":hover": {
-                bg: "muted",
+              ":hover, :focus": {
+                bg: "neutralVariants.100",
                 color: "text",
               },
             }}

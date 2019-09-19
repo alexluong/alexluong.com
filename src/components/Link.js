@@ -14,17 +14,20 @@ export default ({ isLast, to, href, children, ...props }) => {
     ":hover": {
       bg: "primaryVariants.background",
     },
+    ":focus": {
+      bg: "primaryVariants.background",
+    },
   }
 
   if (to) {
     return (
-      <Link {...props} to={to} sx={style}>
+      <Link {...props} to={to} sx={style} tabIndex="0">
         {children}
       </Link>
     )
   } else {
     return (
-      <a {...props} href={href} sx={style}>
+      <a {...props} href={href} sx={style} tabIndex="0">
         {children}
       </a>
     )
