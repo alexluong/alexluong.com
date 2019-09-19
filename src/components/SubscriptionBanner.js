@@ -45,11 +45,17 @@ function SubscriptionBanner() {
       <h3 sx={{ m: 0, fontSize: 3 }}>Join my newsletter</h3>
       <p>
         Once a month, I'll send you a curated list of the best blog posts,
-        conference talks, or podcast episodes I enjoyed to level up your skills.
+        conference talks, or podcast episodes to level up your skills.
       </p>
 
       {sent ? (
-        <p>Thank you for subscribing 🤗 Please check your email to confirm!</p>
+        <p>
+          Thank you for subscribing{" "}
+          <span role="img" aria-label="thank you">
+            🤗
+          </span>{" "}
+          Please check your email to confirm!
+        </p>
       ) : (
         <form onSubmit={subscribe}>
           <label sx={{ mr: 2 }}>
