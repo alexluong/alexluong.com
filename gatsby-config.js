@@ -2,12 +2,22 @@ const proxy = require("http-proxy-middleware")
 
 module.exports = {
   siteMetadata: {
+    title: "Alex Luong",
+    description: "Hi, I'm Alex, and I write about web development.",
+    canonicalUrl: "https://alexluong.com",
     social: {
       github: "alexluong",
       twitter: "alex__luong",
     },
     prefix: {
       article: "blog",
+    },
+
+    // for schema.org
+    organization: {
+      name: "Alex Luong",
+      url: "https://alexluong.com",
+      logo: "https://alexluong.com/favicon.ico",
     },
   },
   plugins: [
