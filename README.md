@@ -1,3 +1,3 @@
-# www.alexluong.com
+# alexluong.com
 
-[https://www.alexluong.com](https://www.alexluong.com)
+[https://alexluong.com](https://alexluong.com)

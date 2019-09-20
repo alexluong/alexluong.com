@@ -4,6 +4,7 @@ module.exports = {
   siteMetadata: {
     title: "Alex Luong",
     description: "Hi, I'm Alex, and I write about web development.",
+    siteUrl: "https://alexluong.com",
     canonicalUrl: "https://alexluong.com",
     social: {
       github: "alexluong",
@@ -82,6 +83,80 @@ module.exports = {
         theme_color: "#6b37bf",
         display: "standalone",
         icon: "static/favicon.ico",
+      },
+    },
+
+    {
+      resolve: "gatsby-plugin-google-analytics",
+      options: {
+        trackingId: "UA-116347511-1",
+        respectDNT: true,
+      },
+    },
+
+    // RSS Feed
+    // Reference: https://github.com/kentcdodds/kentcdodds.com/pull/127/files
+    {
+      resolve: "gatsby-plugin-feed",
+      options: {
+        feeds: [
+          {
+            title: "Alex Luong Blog RSS Feed",
+            output: "/blog/rss.xml",
+            query: `
+              {
+                site {
+                  siteMetadata {
+                    title
+                    description
+                    siteUrl: canonicalUrl
+                    site_url: canonicalUrl
+                    prefix {
+                      article
+                    }
+                  }
+                }
+                allArticle(sort: { fields: date, order: DESC }) {
+                  nodes {
+                    html
+                    date
+                    title
+                    slug
+                    description
+                  }
+                }
+              }
+            `,
+            serialize: ({ query: { site, allArticle } }) => {
+              const blogUrl = `${site.canonicalUrl}/blog`
+              const stripSlash = slug =>
+                slug.startsWith("/") ? slug.slice(1) : slug
+
+              return allArticle.nodes.map(article => {
+                const siteUrl = site.siteMetadata.siteUrl
+                const url = `${siteUrl}/${
+                  site.siteMetadata.prefix.article
+                }/${stripSlash(article.slug)}`
+
+                const postText = `<div style="margin-top=55px; font-style: italic;">(This article was posted to my blog at <a href="${blogUrl}">${blogUrl}</a>. You can <a href="${url}">read it online by clicking here</a>.)</div>`
+
+                // Hacky workaround for https://github.com/gaearon/overreacted.io/issues/65
+                const html = (article.html || ``)
+                  .replace(/href="\//g, `href="${siteUrl}/`)
+                  .replace(/src="\//g, `src="${siteUrl}/`)
+                  .replace(/"\/static\//g, `"${siteUrl}/static/`)
+                  .replace(/,\s*\/static\//g, `,${siteUrl}/static/`)
+
+                return {
+                  ...article,
+                  url,
+                  guid: url,
+                  custom_elements: [{ "content:encoded": html + postText }],
+                }
+              })
+            },
+          },
+        ],
       },
     },
   ],

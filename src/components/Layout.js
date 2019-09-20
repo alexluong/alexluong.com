@@ -39,7 +39,7 @@ function Layout({ children }) {
             GitHub
           </Link>
           <Link
-            href="https://alexluong.com/rss.xml"
+            href="https://alexluong.com/blog/rss.xml"
             target="_blank"
             rel="noopener noreferrer"
           >

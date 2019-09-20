@@ -25,6 +25,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
     title: String!
     description: String!
     body: String!
+    html: String!
     slug: String!
     timeToRead: Int!
     date: Date! @dateformat
@@ -42,6 +43,10 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
         body: {
           type: "String!",
           resolve: mdxResolverPassthrough("body"),
+        },
+        html: {
+          type: "String!",
+          resolve: mdxResolverPassthrough("html"),
         },
         timeToRead: {
           type: "Int!",
