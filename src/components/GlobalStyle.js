@@ -50,6 +50,14 @@ function GlobalStyle() {
           border-top-left-radius: 0;
           border-top-right-radius: 0;
         }
+
+        /**
+         * Quick fix
+         * Issue: https://github.com/gatsbyjs/gatsby/issues/17593
+         */
+        .gatsby-resp-image-background-image {
+          display: none !important;
+        }
       `}
     />
   )

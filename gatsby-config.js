@@ -21,26 +21,6 @@ module.exports = {
     "@al/gatsby-type-project",
 
     {
-      resolve: "gatsby-plugin-mdx",
-      options: {
-        extensions: [".mdx"],
-        gatsbyRemarkPlugins: [
-          "gatsby-remark-code-titles",
-          "gatsby-remark-copy-linked-files",
-          "gatsby-remark-smartypants",
-          {
-            resolve: "gatsby-remark-images",
-            options: {
-              maxWidth: 672,
-              linkImagesToOriginal: false,
-            },
-          },
-        ],
-        remarkPlugins: [require("remark-slug")],
-      },
-    },
-
-    {
       resolve: "gatsby-source-filesystem",
       options: {
         name: "images",
@@ -59,6 +39,26 @@ module.exports = {
       options: {
         name: "projects",
         path: `${__dirname}/content/projects`,
+      },
+    },
+
+    {
+      resolve: "gatsby-plugin-mdx",
+      options: {
+        extensions: [".mdx"],
+        gatsbyRemarkPlugins: [
+          "gatsby-remark-code-titles",
+          "gatsby-remark-copy-linked-files",
+          "gatsby-remark-smartypants",
+          {
+            resolve: "gatsby-remark-images",
+            options: {
+              maxWidth: 672,
+              linkImagesToOriginal: false,
+            },
+          },
+        ],
+        remarkPlugins: [require("remark-slug")],
       },
     },
 
