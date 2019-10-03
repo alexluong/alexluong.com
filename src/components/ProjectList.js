@@ -21,8 +21,8 @@ function Technology({ value }) {
 function IconButton({ children, ...props }) {
   return (
     <a
-      target="_blank"
       rel="noopener noreferrer"
+      target="_blank"
       {...props}
       sx={{
         mb: 1,
