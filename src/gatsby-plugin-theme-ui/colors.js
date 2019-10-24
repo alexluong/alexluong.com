@@ -37,6 +37,19 @@ const RED = {
   900: "#610404",
 }
 
+const YELLOW = {
+  50: "#FFFAEB",
+  100: "#FCEFC7",
+  200: "#F8E3A3",
+  300: "#F9DA8B",
+  400: "#F7D070",
+  500: "#E9B949",
+  600: "#C99A2E",
+  700: "#A27C1A",
+  800: "#7C5E10",
+  900: "#513C06",
+}
+
 export default {
   black: BLUE_GREY[900],
   white: BLUE_GREY[50],
@@ -60,6 +73,8 @@ export default {
 
   onNeutral: BLUE_GREY[50],
   neutralVariants: { ...BLUE_GREY },
+
+  yellowVariants: { ...YELLOW },
 
   prism: {
     background: "#011627",
