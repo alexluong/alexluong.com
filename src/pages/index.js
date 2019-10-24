@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { jsx } from "theme-ui"
 import React from "react"
+import { Link } from "gatsby"
 import { useSocial } from "../utils/queries"
 import SEO from "../components/SEO"
 import SubscriptionBanner from "../components/SubscriptionBanner"
@@ -57,7 +58,23 @@ function IndexPage() {
         <SubscriptionBanner />
 
         <section>
-          <h2 sx={{ fontSize: 4, mb: 3, mt: 5 }}>Latest Articles</h2>
+          <div
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              mb: 3,
+              mt: 5,
+            }}
+          >
+            <h2 sx={{ fontSize: 4, m: 0 }}>Latest Articles</h2>
+            <Link
+              to="/blog"
+              sx={{ variant: ["buttons.tertiary", "buttons.small"] }}
+            >
+              View all
+            </Link>
+          </div>
           <LatestArticleList />
         </section>
 

@@ -24,6 +24,33 @@ export default {
       borderColor: "primaryVariants.hover",
     },
   },
+  secondary: {
+    ...buttonStyle,
+    bg: "primaryVariants.100",
+    borderColor: "primaryVariants.100",
+    color: "text",
+    ":hover": {
+      bg: "primary",
+      borderColor: "primary",
+      color: "onPrimary",
+    },
+  },
+  tertiary: {
+    ...buttonStyle,
+    bg: "neutralVariants.50",
+    borderColor: "neutralVariants.50",
+    color: "text",
+    ":hover": {
+      bg: "neutralVariants.400",
+      borderColor: "neutralVariants.400",
+      color: "onNeutral",
+    },
+  },
+  small: {
+    py: 1,
+    px: 1,
+    fontSize: 0,
+  },
   twitter: {
     ...buttonStyle,
     bg: "rgb(29, 161, 242)",

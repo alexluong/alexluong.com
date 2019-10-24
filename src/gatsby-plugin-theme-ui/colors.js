@@ -58,6 +58,7 @@ export default {
     ...GREEN,
   },
 
+  onNeutral: BLUE_GREY[50],
   neutralVariants: { ...BLUE_GREY },
 
   prism: {
