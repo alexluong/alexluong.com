@@ -96,6 +96,8 @@ module.exports = {
 
     // Sitemap XML
     "gatsby-plugin-sitemap",
+    // robot.txt
+    "gatsby-plugin-robots-txt",
     // RSS Feed
     // Reference: https://github.com/kentcdodds/kentcdodds.com/pull/127/files
     {
