@@ -41,39 +41,41 @@ function Link({ children, ...props }) {
 }
 
 function CallOut({ type, children, ...props }) {
-  let callOutIcon
+  const callOutIcons = {
+    think: (
+      <span role="img" aria-label="think">
+        🤔
+      </span>
+    ),
+    question: (
+      <span role="img" aria-label="question">
+        ❓
+      </span>
+    ),
+  }
 
-  switch (type) {
-    case "think":
-      callOutIcon = (
-        <span role="img" aria-label="think">
-          🤔
-        </span>
-      )
-      break
-    case "question":
-      callOutIcon = (
-        <span role="img" aria-label="question">
-          ❓
-        </span>
-      )
-      break
-    default:
-      break
+  const colors = {
+    think: "primaryVariants.900",
+    question: "yellowVariants.900",
+  }
+
+  const bgColors = {
+    think: "primaryVariants.background",
+    question: "yellowVariants.50",
   }
 
   return (
     <p
       {...props}
       sx={{
-        color: "primaryVariants.900",
-        bg: "primaryVariants.background",
+        color: colors[type],
+        bg: bgColors[type],
         borderRadius: 4,
         px: 2,
         py: 2,
       }}
     >
-      {callOutIcon}
+      {callOutIcons[type]}
       <span sx={{ ml: 2 }}>{children}</span>
     </p>
   )
