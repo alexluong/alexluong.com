@@ -94,6 +94,8 @@ module.exports = {
       },
     },
 
+    // Sitemap XML
+    "gatsby-plugin-sitemap",
     // RSS Feed
     // Reference: https://github.com/kentcdodds/kentcdodds.com/pull/127/files
     {
