@@ -1,3 +1,6 @@
+const TWITTER_COLOR = "#1b97f0"
+const TWITTER_COLOR_ACCENT = "rgb(26, 145, 218)"
+
 const buttonStyle = {
   py: 1,
   px: 2,
@@ -53,15 +56,15 @@ export default {
   },
   twitter: {
     ...buttonStyle,
-    bg: "rgb(29, 161, 242)",
-    borderColor: "rgb(29, 161, 242)",
-    color: "white",
+    bg: TWITTER_COLOR,
+    borderColor: TWITTER_COLOR,
+    color: "#fff",
     ":visited": {
-      color: "white",
+      color: "#fff",
     },
     ":hover": {
-      bg: "rgb(26, 145, 218)",
-      borderColor: "rgb(26, 145, 218)",
+      bg: TWITTER_COLOR_ACCENT,
+      borderColor: TWITTER_COLOR_ACCENT,
     },
   },
   github: {

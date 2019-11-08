@@ -60,13 +60,13 @@ export default {
   link: BLUE_GREY[600],
   danger: RED[500],
 
-  primary: GREEN[400],
+  primary: GREEN[700],
   onPrimary: GREEN[50],
   primaryVariants: {
     background: GREEN[50],
-    hover: GREEN[700],
-    focus: GREEN[700],
-    active: GREEN[700],
+    hover: GREEN[500],
+    focus: GREEN[500],
+    active: GREEN[500],
     disabled: GREEN[100],
     ...GREEN,
   },

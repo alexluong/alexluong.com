@@ -25,7 +25,7 @@ export default {
   GraphQL: {
     ...technologyStyle,
     bg: GRAPHQL,
-    color: WHITE,
+    color: BLACK,
   },
   Gatsby: {
     ...technologyStyle,

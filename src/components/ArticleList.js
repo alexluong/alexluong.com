@@ -21,11 +21,10 @@ function ArticleList() {
             <Link
               to={`/${articlePrefix}/${article.slug}`}
               sx={{
-                fontSize: 4,
+                fontSize: 3,
                 fontFamily: "heading",
                 lineHeight: 1.5,
                 transition: "all 0.3s ease",
-                textDecoration: "underline",
                 ":hover": {
                   color: "primaryVariants.hover",
                 },

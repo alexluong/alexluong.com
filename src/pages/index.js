@@ -26,7 +26,9 @@ function IndexPage() {
         }}
       >
         <div sx={{ pt: 3 }}>
-          <h1 sx={{ fontSize: 5, color: "primary" }}>Hey, I'm Alex</h1>
+          <h1 sx={{ fontSize: 5, fontFamily: "heading", color: "primary" }}>
+            Hey, I'm Alex
+          </h1>
           <p sx={{ fontSize: 2, mb: 3 }}>
             I write about JavaScript, React, and lots and lots of Gatsby.
           </p>

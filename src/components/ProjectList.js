@@ -85,12 +85,12 @@ function ProjectList() {
             </div>
             <div>
               {project.url && (
-                <IconButton href={project.url}>
+                <IconButton href={project.url} aria-label="Project live site">
                   <LinkIcon sx={{ width: ICON_SIZE, height: ICON_SIZE }} />
                 </IconButton>
               )}
               {project.github && (
-                <IconButton href={project.github}>
+                <IconButton href={project.github} aria-label="Source code">
                   <GitHubIcon sx={{ width: ICON_SIZE, height: ICON_SIZE }} />
                 </IconButton>
               )}
