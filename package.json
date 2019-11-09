@@ -11,7 +11,8 @@
     "start:lambda": "dotenv -e netlify/.env netlify-lambda serve netlify/functions",
     "build": "yarn build:lambda && yarn build:client",
     "build:client": "gatsby build",
-    "build:lambda": "netlify-lambda build netlify/functions"
+    "build:lambda": "netlify-lambda build netlify/functions",
+    "preload-fonts": "gatsby-preload-fonts"
   },
   "husky": {
     "husky": {
@@ -41,6 +42,7 @@
     "gatsby-plugin-google-analytics": "^2.1.16",
     "gatsby-plugin-manifest": "^2.2.17",
     "gatsby-plugin-mdx": "^1.0.43",
+    "gatsby-plugin-preload-fonts": "^1.0.15",
     "gatsby-plugin-react-helmet": "^3.1.7",
     "gatsby-plugin-robots-txt": "^1.5.0",
     "gatsby-plugin-sharp": "^2.2.24",

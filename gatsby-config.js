@@ -94,6 +94,8 @@ module.exports = {
       },
     },
 
+    // Fonts
+    "gatsby-plugin-preload-fonts",
     // Sitemap XML
     "gatsby-plugin-sitemap",
     // robot.txt
