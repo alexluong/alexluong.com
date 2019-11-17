@@ -29,45 +29,40 @@ function CodeBlock(preProps) {
   if (props) {
     const { codeString, language, metastring } = props
     const shouldHighlightLine = calculateLinesToHighlight(metastring)
-    if (metastring) console.log(shouldHighlightLine)
 
     return (
       <Highlight {...defaultProps} code={codeString} language={language}>
         {({ className, tokens, getLineProps, getTokenProps }) => {
           return (
-            <div sx={{ mb: 3, overflow: "auto" }}>
-              <Styled.pre
-                className={className}
-                style={{ position: "relative" }}
-              >
-                {tokens.map((line, index) => {
-                  const { className } = getLineProps({
-                    line,
-                    key: index,
-                    className: shouldHighlightLine(index)
-                      ? "highlight-line"
-                      : "",
-                  })
+            <Styled.pre
+              className={className}
+              sx={{ position: "relative", mb: 3, overflow: "auto" }}
+            >
+              {tokens.map((line, index) => {
+                const { className } = getLineProps({
+                  line,
+                  key: index,
+                  className: shouldHighlightLine(index) ? "highlight-line" : "",
+                })
 
-                  return (
-                    <div key={index} className={className}>
-                      {line.map((token, key) => {
-                        const { className, children } = getTokenProps({
-                          token,
-                          key,
-                        })
+                return (
+                  <div key={index} className={className}>
+                    {line.map((token, key) => {
+                      const { className, children } = getTokenProps({
+                        token,
+                        key,
+                      })
 
-                        return (
-                          <span key={key} className={className}>
-                            {children}
-                          </span>
-                        )
-                      })}
-                    </div>
-                  )
-                })}
-              </Styled.pre>
-            </div>
+                      return (
+                        <span key={key} className={className}>
+                          {children}
+                        </span>
+                      )
+                    })}
+                  </div>
+                )
+              })}
+            </Styled.pre>
           )
         }}
       </Highlight>
@@ -83,7 +78,7 @@ function CodeSandbox({ id, title }) {
       title={title}
       src={`https://codesandbox.io/embed/${id}?fontsize=14&hidenavigation=1&theme=dark`}
       sx={{
-        mb: 2,
+        mb: 3,
         width: "100%",
         height: 500,
         border: 0,
