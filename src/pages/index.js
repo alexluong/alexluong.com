@@ -57,8 +57,6 @@ function IndexPage() {
           </a>
         </div>
 
-        <SubscriptionBanner />
-
         <section>
           <div
             sx={{
@@ -84,6 +82,8 @@ function IndexPage() {
           <h2 sx={{ fontSize: 4, mb: 3, mt: 5 }}>Projects</h2>
           <ProjectList />
         </section>
+
+        <SubscriptionBanner />
       </div>
     </React.Fragment>
   )

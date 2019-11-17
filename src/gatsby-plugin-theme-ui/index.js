@@ -2,7 +2,6 @@ import merge from "deepmerge"
 import typography from "./typography"
 import colors from "./colors"
 import styles from "./styles"
-import prism from "./prism"
 import buttons from "./buttons"
 import technologies from "./technologies"
 
@@ -21,7 +20,6 @@ export default merge(
       container: 672,
     },
     styles,
-    prism,
     buttons,
     technologies,
   },
