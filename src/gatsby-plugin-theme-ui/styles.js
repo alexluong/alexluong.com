@@ -1,3 +1,25 @@
+import nightOwl from "@theme-ui/prism/presets/night-owl.json"
+
+const noItalicNightOwl = {
+  ...nightOwl,
+  ".changed": {
+    ...nightOwl[".changed"],
+    fontStyle: "normal",
+  },
+  ".deleted": {
+    ...nightOwl[".deleted"],
+    fontStyle: "normal",
+  },
+  ".inserted,.attr-name": {
+    ...nightOwl[".inserted,.attr-name"],
+    fontStyle: "normal",
+  },
+  ".comment": {
+    ...nightOwl[".comment"],
+    fontStyle: "normal",
+  },
+}
+
 export default {
   root: {
     fontFamily: "body",
@@ -8,12 +30,13 @@ export default {
     fontFamily: "monospace",
     tabSize: 4,
     hyphens: "none",
-    marginBottom: 2,
+    p: 3,
+    mb: 2,
     color: "white",
     bg: "prism.background",
     overflow: "auto",
     borderRadius: 10,
-    p: 3,
+    ...noItalicNightOwl,
   },
   code: {
     fontFamily: "monospace",
