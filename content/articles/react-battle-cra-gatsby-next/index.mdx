@@ -135,3 +135,214 @@ As far as I know, it's quite impossible to handle this use case with Gatsby. Nex
 ## UX/DX, with demos
 
 SEO aside, let's discuss server-side rendering's impact on user experience (UX) and developer experience (DX).
+
+I'm going to build a persisted sidebar to demonstrate this concept. The sidebar will have 2 states, open or close. On refresh, the site should render the sidebar in its correct state.
+
+Let's build it in Create React App:
+
+```jsx:title=CreateReactApp
+import React from "react";
+import ReactDOM from "react-dom";
+import { animated } from "react-spring";
+import { useAnimation } from "./useAnimation";
+import "./styles.css";
+
+// we're saving the sidebar state in local storage
+// this is the local storage item name
+const LOCAL_STORAGE_KEY = "isSidebarOpen";
+
+// React hook that handles sidebar state
+function useSidebar() {
+  const persistedState = localStorage.getItem(LOCAL_STORAGE_KEY) === "true";
+
+  const [isOpen, setIsOpen] = React.useState(persistedState);
+  const toggle = () => setIsOpen(value => !value);
+
+  // Persist to localStorage
+  React.useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(isOpen));
+  }, [isOpen]);
+
+  return { isOpen, toggle };
+}
+
+function App() {
+  const { isOpen, toggle } = useSidebar();
+  const styles = useAnimation(isOpen);
+
+  return (
+    <div className="app">
+      <animated.div className="sidebar" style={styles.sidebar}>
+        Sidebar
+      </animated.div>
+      <animated.div className="main" style={styles.main}>
+        <button className="btn" onClick={toggle}>
+          Toggle
+        </button>
+      </animated.div>
+    </div>
+  );
+}
+
+const rootElement = document.getElementById("root");
+ReactDOM.render(<App />, rootElement);
+```
+
+Here is a CodeSandbox you can play around with:
+
+<CodeSandbox id="sidebar-cra-hv0rc" title="Sidebar Example with CRA" />
+
+When porting this to Gatsby, we need to make sure `window` is available:
+
+```jsx:title=Gatsby {5-8}
+...
+
+function useSidebar() {
+  // if window type is undefined --> server side
+  const persistedState =
+    typeof window === "undefined"
+      ? false
+      : localStorage.getItem(LOCAL_STORAGE_KEY) === "true";
+
+  const [isOpen, setIsOpen] = React.useState(persistedState);
+  const toggle = () => setIsOpen(value => !value);
+
+  React.useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(isOpen));
+  }, [isOpen]);
+
+  return { isOpen, toggle };
+}
+
+...
+```
+
+With this code, the Gatsby site is working. But only in development mode. In production, it's sadly not working as expected.
+
+![Gatsby site not working](./gatsby-error.gif)
+
+When the sidebar is opened and you refresh the page, you can see that it's closed instead. Then, when you click the toggle button, the sidebar will close instead of opening.
+
+If you want to see and explore for yourself, here is the [CodeSandbox](https://codesandbox.io/s/sidebar-gatsby-error-seg2c). I don't embed it inside this article because the error only happens in production and you don't have access to the terminal to run the commands in the embed. When you're in CodeSandbox, please open a new tab in the terminal and run this command:
+
+```bash
+yarn build && yarn serve
+```
+
+Once Gatsby finishes the build, CodeSandbox will prompt you to open the new port in the browser.
+
+What is happening is that during the build step, `persistedState` is `false`. Once the site rehydrates to React app, `persistedState` will then turn into `true`. However, since we're not updating state or anything, React does not rerender. Therefore, the sidebar remains closed. When you click the toggle button, it toggles the state from `true` to `false`, hence the sidebar closes.
+
+To fix this, we need to add a set the state during the rehydration phase (`componentDidMount`). Here is the working version:
+
+```jsx:title=WorkingGatsby {10,17-20}
+...
+
+function useSidebar() {
+  const persistedState =
+    typeof window === "undefined"
+      ? false
+      : localStorage.getItem(LOCAL_STORAGE_KEY) === "true";
+
+  // we choose a sensible initial state for the sidebar
+  const [isOpen, setIsOpen] = React.useState(false);
+  const toggle = () => setIsOpen(value => !value);
+
+  React.useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(isOpen));
+  }, [isOpen]);
+
+  // rehydrate with persisted data
+  React.useEffect(() => {
+    setIsOpen(persistedState);
+  }, []);
+
+  return { isOpen, toggle };
+}
+
+...
+```
+
+I choose to set the initial sidebar state to be closed. When the browser renders the page and the sidebar is open, you can see that the sidebar animates out. If the initial state is opened, when the sidebar is closed and you refresh the page, it will animate in. Between the two experiences, I think the former is more natural.
+
+Here is how it's behaving, and the [CodeSandbox](https://codesandbox.io/s/sidebar-gatsby-working-t1p9t) for you to play around with as well. Don't forget to run it in production.
+
+![Gatsby site is working](./gatsby-working.gif)
+
+The same code here would also [work in Next](https://codesandbox.io/s/sidebar-next-working-2w679). Furthermore, let me clarify that the problem that we have encountered was not a Gatsby issue. It's an [SSR issue that Next also endures](https://codesandbox.io/s/sidebar-next-error-60smd).
+
+However, I think we can take this sidebar one step further. Right now, when the site renders with an opened sidebar, the sidebar will animate out. I think it would be better if the sidebar is just opened without any animation. This is the behavior we initially have when using Create React App. Is there any way we can replicate that with Gatsby and Next?
+
+For Gatsby, the answer is no. As far as I know, it's impossible to achieve that experience. Because the HTML is built at build time, there is no way we can get any information about the state of the sidebar. Hopefully with the introduction of Suspense, there can be some way to deliver a better user experience in the future.
+
+On the other hand, we can totally deliver this experience with Next. What we need to do is to save the sidebar state in a cookie instead of local storage. As the cookie will be sent to the server side, we can generate the correct HTML without needing to update the UI after rehydration. Here is how you can do that:
+
+```jsx:title=NextJS {3,17,23,24,45-50}
+import React from "react";
+import { animated } from "react-spring";
+import { parseCookies, setCookie } from "nookies";
+import { useAnimation } from "../useAnimation";
+import "../styles.css";
+
+const COOKIE_KEY = "isSidebarOpen";
+
+// the useSidebar hook accept the initial sidebar state as argument
+// this value is taken from the cookie in the server side
+function useSidebar(initialIsOpen) {
+  const [isOpen, setIsOpen] = React.useState(initialIsOpen);
+  const toggle = () => setIsOpen(value => !value);
+
+  // save data to cookies
+  React.useEffect(() => {
+    setCookie({}, COOKIE_KEY, JSON.stringify(isOpen), {});
+  }, [isOpen]);
+
+  return { isOpen, toggle };
+}
+
+function IndexPage({ isSidebarOpen }) {
+  const { isOpen, toggle } = useSidebar(isSidebarOpen);
+  const styles = useAnimation(isOpen);
+
+  return (
+    <div className="app">
+      <animated.div className="sidebar" style={styles.sidebar}>
+        Sidebar
+      </animated.div>
+      <animated.div className="main" style={styles.main}>
+        <button className="btn" onClick={toggle}>
+          Toggle
+        </button>
+      </animated.div>
+    </div>
+  );
+}
+
+// - this function is run on the server
+// - it also tells Next that this page is a dynamic page
+// - what this function is doing is getting the sidebar state
+// from the cookie and send it to React component to render the correct HTML
+IndexPage.getInitialProps = async ctx => {
+  const cookies = parseCookies(ctx);
+  const sidebarState = cookies[COOKIE_KEY];
+  const isSidebarOpen = sidebarState ? sidebarState === "true" : true;
+  return { isSidebarOpen };
+};
+
+export default IndexPage;
+```
+
+And of course, CodeSandbox for you here. Go wild.
+
+<CodeSandbox id="sidebar-next-best-mtb2z" title="NextJS Sidebar with best user experience" />
+
+Hopefully, through this example you can see how SSR affects different technologies and the advantage of dynamic SSR. It also demonstrates how using client-side rendering can make things much more straightforward.
+
+Here are the lists of all available CodeSandboxes that you can explore:
+
+- [Create React App](https://codesandbox.io/s/sidebar-cra-hv0rc)
+- [Gatsby - issue](https://codesandbox.io/s/sidebar-gatsby-error-seg2c)
+- [Gatsby - working](https://codesandbox.io/s/sidebar-gatsby-working-t1p9t)
+- [Next - issue](https://codesandbox.io/s/sidebar-next-error-60smd)
+- [Next - working](https://codesandbox.io/s/sidebar-next-working-2w679)
+- [Next - best experience](https://codesandbox.io/s/sidebar-next-best-mtb2z)
