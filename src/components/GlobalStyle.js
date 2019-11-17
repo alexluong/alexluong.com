@@ -51,6 +51,20 @@ function GlobalStyle() {
           border-top-right-radius: 0;
         }
 
+        .token-line.highlight-line {
+          background-color: rgba(255, 255, 255, 0.1);
+          margin: 0 -28px;
+          padding: 0 28px;
+          border-left: 4px solid rgb(127, 219, 202);
+        }
+
+        /**
+         * blank lines
+         */
+        .token.plain {
+          display: inline-block;
+        }
+
         /**
          * Quick fix
          * Issue: https://github.com/gatsbyjs/gatsby/issues/17593
