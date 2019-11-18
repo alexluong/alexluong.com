@@ -82,11 +82,11 @@ Gatsby's pattern is an interesting take on SSR as it's different from other SSR 
 
 We've gone through the technical rundown of client-side rendering and server-side rendering as well as Gatsby vs Next, but what does that mean?
 
-**Which tool should you choose for your next React project?**
+**Which tool should I choose for my next React project?**
 
 *(next, lowercase, no pun intended)*
 
-Let's discuss a few scenarios and discuss which would be the right tool for the job:
+Let's discuss a few scenarios and discuss the right tool for the job:
 
 ### 1. Application behind an authentication gateway
 
@@ -188,7 +188,7 @@ const rootElement = document.getElementById("root");
 ReactDOM.render(<App />, rootElement);
 ```
 
-Here is a CodeSandbox you can play around with:
+Here is a CodeSandbox you can play around with. Toggle it a couple times. Refresh the page. Go wild!
 
 <CodeSandbox id="sidebar-cra-hv0rc" title="Sidebar Example with CRA" />
 
@@ -221,7 +221,7 @@ With this code, the Gatsby site is working. But only in development mode. In pro
 
 ![Gatsby site not working](./gatsby-error.gif)
 
-When the sidebar is opened and you refresh the page, you can see that it's closed instead. Then, when you click the toggle button, the sidebar will close instead of opening.
+When the sidebar is opened and you refresh the page, you can see that it's closed instead. Then, when you click the toggle button, the sidebar will close instead of open.
 
 If you want to see and explore for yourself, here is the [CodeSandbox](https://codesandbox.io/s/sidebar-gatsby-error-seg2c). I don't embed it inside this article because the error only happens in production and you don't have access to the terminal to run the commands in the embed. When you're in CodeSandbox, please open a new tab in the terminal and run this command:
 
@@ -332,7 +332,7 @@ IndexPage.getInitialProps = async ctx => {
 export default IndexPage;
 ```
 
-And of course, CodeSandbox for you here. Go wild.
+And of course, a CodeSandbox for you here.
 
 <CodeSandbox id="sidebar-next-best-mtb2z" title="NextJS Sidebar with best user experience" />
 
