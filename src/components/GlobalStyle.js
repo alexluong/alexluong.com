@@ -46,9 +46,32 @@ function GlobalStyle() {
           padding: 10px 28px;
         }
 
-        .gatsby-code-title + div > pre {
+        .gatsby-code-title + pre.prism-code {
           border-top-left-radius: 0;
           border-top-right-radius: 0;
+        }
+
+        .token-line.highlight-line {
+          background-color: rgba(255, 255, 255, 0.1);
+          margin: 0 -28px;
+          padding: 0 28px;
+          position: relative;
+          &::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 4px;
+            background-color: rgb(127, 219, 202);
+          }
+        }
+
+        /**
+         * blank lines
+         */
+        .token.plain {
+          display: inline-block;
         }
 
         /**

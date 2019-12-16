@@ -2,6 +2,10 @@ import nightOwl from "@theme-ui/prism/presets/night-owl.json"
 
 const noItalicNightOwl = {
   ...nightOwl,
+  ".doctype": {
+    ...nightOwl[".doctype"],
+    fontStyle: "normal",
+  },
   ".changed": {
     ...nightOwl[".changed"],
     fontStyle: "normal",
