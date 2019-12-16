@@ -1,5 +1,5 @@
 ---
-date: 2019-11-16
+date: 2019-12-16
 title: "React Battle: CRA vs Gatsby vs Next"
 description: It's time you master server-side rendering and know which React framework to choose in the process.
 ---
@@ -77,6 +77,8 @@ And here is Next's:
 Gatsby's pattern is an interesting take on SSR as it's different from other SSR technologieslike WordPress, PHP sites, Ruby on Rails, etc. Gatsby is originally a static site generator, a technology that produces a static website. Because it also utilizes the power or React, users can build dynamic web application on top of it.
 
 [Ben Awad](https://twitter.com/benawad97) refers to Gatsby as [client-side rendering with prerendering](https://twitter.com/benawad97/status/1195398838758072320). My friend [Tejas Kumar](https://twitter.com/tejaskumar_) calls it "static server-side rendering" in contrast to "dynamic server-side rendering" in Next.
+
+https://twitter.com/benawad97/status/1195398838758072320
 
 ## Which to choose
 
@@ -190,7 +192,7 @@ ReactDOM.render(<App />, rootElement);
 
 Here is a CodeSandbox you can play around with. Toggle it a couple times. Refresh the page. Go wild!
 
-<CodeSandbox id="sidebar-cra-hv0rc" title="Sidebar Example with CRA" />
+https://codesandbox.io/s/sidebar-cra-hv0rc?fontsize=12&hidenavigation=1
 
 When porting this to Gatsby, we need to make sure `window` is available:
 
@@ -334,7 +336,7 @@ export default IndexPage;
 
 And of course, a CodeSandbox for you here.
 
-<CodeSandbox id="sidebar-next-best-mtb2z" title="NextJS Sidebar with best user experience" />
+https://codesandbox.io/s/sidebar-next-best-mtb2z?fontsize=12&hidenavigation=1
 
 Hopefully, through this example you can see how SSR affects different technologies and the advantage of dynamic SSR. It also demonstrates how using client-side rendering can make things much more straightforward.
 
@@ -346,3 +348,18 @@ Here are the lists of all available CodeSandboxes that you can explore:
 - [Next - issue](https://codesandbox.io/s/sidebar-next-error-60smd)
 - [Next - working](https://codesandbox.io/s/sidebar-next-working-2w679)
 - [Next - best experience](https://codesandbox.io/s/sidebar-next-best-mtb2z)
+
+## Summary
+
+To recap:
+
+- If SEO is **important**:
+  + CRA is out, sorry
+  + Gatsby if your SEO content is static
+  + Next if your SEO content is dynamic
+- If SEO is **NOT important**:
+  + CRA is the easiest
+  + Gatsby has nice built-ins
+  + NextJS gives you full control
+
+Hopefully this article has been helpful to you. Please feel free to reach out if you have any questions or feedback.

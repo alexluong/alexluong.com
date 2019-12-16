@@ -61,6 +61,7 @@ module.exports = {
           "gatsby-remark-code-titles",
           "gatsby-remark-copy-linked-files",
           "gatsby-remark-smartypants",
+          "gatsby-remark-embedder",
           {
             resolve: "gatsby-remark-images",
             options: {

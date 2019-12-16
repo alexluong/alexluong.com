@@ -72,25 +72,6 @@ function CodeBlock(preProps) {
   }
 }
 
-function CodeSandbox({ id, title }) {
-  return (
-    <iframe
-      title={title}
-      src={`https://codesandbox.io/embed/${id}?fontsize=14&hidenavigation=1&theme=dark`}
-      sx={{
-        mb: 3,
-        width: "100%",
-        height: 500,
-        border: 0,
-        borderRadius: 4,
-        overflow: "hidden",
-      }}
-      allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
-      sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
-    />
-  )
-}
-
 function Link({ children, ...props }) {
   return (
     <a
@@ -157,5 +138,4 @@ export default {
   pre: CodeBlock,
   a: Link,
   CallOut,
-  CodeSandbox,
 }
