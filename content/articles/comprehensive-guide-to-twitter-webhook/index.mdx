@@ -10,7 +10,7 @@ For the past 3 months, I've done a few development explorations with Twitter API
 
 Here is how Twitter webhook works.
 
-![webhook diagram](./webhook.png) 
+![webhook diagram](./webhook.png)
 
 When you use Twitter webhook to follow a user, you get notified whenever new events related to that user happen. Here is [the list of all events](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview) that you can subscribe to.
 
@@ -28,7 +28,7 @@ In many cases, in order to let a Twitter user to subscribe to your app, you need
 
 ### Use case 1
 
-You're building a Twitter bot where it subscribes to  **its** own activities. For example, [@this_vid](https://twitter.com/this_vid), a Twitter bot that will download the video for users on mention, subscribes to the mention event.
+You're building a Twitter bot where it subscribes to **its** own activities. For example, [@this_vid](https://twitter.com/this_vid), a Twitter bot that will download the video for users on mention, subscribes to the mention event.
 
 In this case, when creating the Twitter app from that bot account, Twitter will give you an access token and secret that work for that account only. It is good enough for this use case, so you don't have to worry about OAuth. You will still need to use those token and secret to add a subscription to your webhook.
 
@@ -73,7 +73,7 @@ Let me explain what these tokens do:
 
 Next, go to the `Permissions` tab and change your access permission to `Read, write, and Direct Messages`. Even if you don't need to access DM, you still need to use this permission because the Account Activity API automatically sends the DM data to your webhook.
 
-Finally need to create a Twitter development environment to use subscription APIs. Navigate to the [environment dashboard](https://developer.twitter.com/en/account/environments) and click the "Set up dev environment" button in the Account Activity API / Sandbox section. You'll then be prompted to name your environment and select which app it belongs to. In my case, I name it  `development` and select the app that I just created.
+Finally need to create a Twitter development environment to use subscription APIs. Navigate to the [environment dashboard](https://developer.twitter.com/en/account/environments) and click the "Set up dev environment" button in the Account Activity API / Sandbox section. You'll then be prompted to name your environment and select which app it belongs to. In my case, I name it `development` and select the app that I just created.
 
 That's it. We're finally done with Twitter set up and ready to write some code.
 
@@ -115,52 +115,52 @@ Inside `package.json` file, add in the start and build scripts:
 Now, let's create the webhook function:
 
 ```js:title=gimmedadjoke/api/webhook.js
-const crypto = require("crypto");
+const crypto = require("crypto")
 
 function createCrcResponseToken(crcToken) {
   const hmac = crypto
     .createHmac("sha256", process.env.TWITTER_CONSUMER_SECRET)
     .update(crcToken)
-    .digest("base64");
-  
-  return `sha256=${hmac}`;
+    .digest("base64")
+
+  return `sha256=${hmac}`
 }
 
 function getHandler(req, res) {
-  const crcToken = req.query.crc_token;
+  const crcToken = req.query.crc_token
 
   if (crcToken) {
     res.status(200).send({
-      response_token: createCrcResponseToken(crcToken)
-    });
+      response_token: createCrcResponseToken(crcToken),
+    })
   } else {
     res.status(400).send({
-      message: "Error: crc_token missing from request."
-    });
+      message: "Error: crc_token missing from request.",
+    })
   }
 }
 
 function postHandler(req, res) {
-  const body = req.body;
-  console.log(body);
-  res.status(200).json(body);
+  const body = req.body
+  console.log(body)
+  res.status(200).json(body)
 }
 
 module.exports = (req, res) => {
   try {
     switch (req.method) {
       case "GET":
-        return getHandler(req, res);
+        return getHandler(req, res)
       case "POST":
-        return postHandler(req, res);
+        return postHandler(req, res)
       default:
-        return res.status(410).json({ message: "Unsupported Request Method" });
+        return res.status(410).json({ message: "Unsupported Request Method" })
     }
   } catch (error) {
-    console.log(error.message);
-    res.status(500).send();
+    console.log(error.message)
+    res.status(500).send()
   }
-};
+}
 ```
 
 Some brief explanation of the purpose of the code:
@@ -200,7 +200,7 @@ now secrets add gimmedadjoke-access-token-secret TWITTER_ACCESS_TOKEN_SECRET
 
 Don't forget to change `gimmedadjoke` to your bot name and use the correct tokens for their values.
 
-After this, you are ready to deploy your function that powers the Twitter bot.  Run `yarn deploy`.
+After this, you are ready to deploy your function that powers the Twitter bot. Run `yarn deploy`.
 
 Now, to test if your deployment is successful:
 
@@ -237,88 +237,88 @@ WEBHOOK_URL=https://gimmedadjoke.now.sh/webhook.js (your Now webhook function)
 To make the scripts files simpler, you will write a big `api` file that takes care of the Twitter API interaction. Here are everything we're going to do with our scripts:
 
 ```js:title=gimmedadjoke/scripts/src/api.js
-require("dotenv").config();
-const request = require("request-promise");
+require("dotenv").config()
+const request = require("request-promise")
 
-const TWITTER_API_URL = process.env.TWITTER_API_URL;
-const TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY;
-const TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET;
-const TWITTER_ACCESS_TOKEN = process.env.TWITTER_ACCESS_TOKEN;
-const TWITTER_ACCESS_TOKEN_SECRET = process.env.TWITTER_ACCESS_TOKEN_SECRET;
-const TWITTER_BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN;
-const TWITTER_WEBHOOK_ENV = process.env.TWITTER_WEBHOOK_ENV;
+const TWITTER_API_URL = process.env.TWITTER_API_URL
+const TWITTER_CONSUMER_KEY = process.env.TWITTER_CONSUMER_KEY
+const TWITTER_CONSUMER_SECRET = process.env.TWITTER_CONSUMER_SECRET
+const TWITTER_ACCESS_TOKEN = process.env.TWITTER_ACCESS_TOKEN
+const TWITTER_ACCESS_TOKEN_SECRET = process.env.TWITTER_ACCESS_TOKEN_SECRET
+const TWITTER_BEARER_TOKEN = process.env.TWITTER_BEARER_TOKEN
+const TWITTER_WEBHOOK_ENV = process.env.TWITTER_WEBHOOK_ENV
 
 const oauth = {
   consumer_key: TWITTER_CONSUMER_KEY,
   consumer_secret: TWITTER_CONSUMER_SECRET,
   token: TWITTER_ACCESS_TOKEN,
-  token_secret: TWITTER_ACCESS_TOKEN_SECRET
-};
+  token_secret: TWITTER_ACCESS_TOKEN_SECRET,
+}
 
 const authorizationHeaders = {
-  authorization: `Bearer ${TWITTER_BEARER_TOKEN}`
-};
+  authorization: `Bearer ${TWITTER_BEARER_TOKEN}`,
+}
 
-exports.getBearerToken = function() {
- return [request.post](http://request.post)({
-    url: "[https://api.twitter.com/oauth2/token?grant_type=client_credentials](https://api.twitter.com/oauth2/token?grant_type=client_credentials)",
+exports.getBearerToken = function () {
+  return request.post({
+    url: "https://api.twitter.com/oauth2/token?grant_type=client_credentials",
     auth: {
       user: process.env.TWITTER_CONSUMER_KEY,
-      pass: process.env.TWITTER_CONSUMER_SECRET
+      pass: process.env.TWITTER_CONSUMER_SECRET,
     },
-    json: true
-  });
-};
+    json: true,
+  })
+}
 
-exports.getWebhook = function() {
+exports.getWebhook = function () {
   return request.get({
     url: `${TWITTER_API_URL}/account_activity/all/${TWITTER_WEBHOOK_ENV}/webhooks.json`,
     headers: authorizationHeaders,
-    json: true
-  });
-};
+    json: true,
+  })
+}
 
-exports.createWebhook = function(webhookUrl) {
-  return [request.post](http://request.post)({
+exports.createWebhook = function (webhookUrl) {
+  return request.post({
     url: `${TWITTER_API_URL}/account_activity/all/${TWITTER_WEBHOOK_ENV}/webhooks.json`,
     oauth,
     form: {
-      url: webhookUrl
+      url: webhookUrl,
     },
-    json: true
-  });
-};
+    json: true,
+  })
+}
 
-exports.deleteWebhook = function(webhookId) {
+exports.deleteWebhook = function (webhookId) {
   return request.delete({
     url: `${TWITTER_API_URL}/account_activity/all/${TWITTER_WEBHOOK_ENV}/webhooks/${webhookId}.json`,
-    oauth
-  });
-};
+    oauth,
+  })
+}
 
-exports.getSubscription = function() {
+exports.getSubscription = function () {
   return request.get({
     url: `${TWITTER_API_URL}/account_activity/all/${this.webhookEnv}/subscriptions.json`,
     oauth,
-    json: true
-  });
-};
+    json: true,
+  })
+}
 
-exports.createSubscription = function() {
+exports.createSubscription = function () {
   return request.post({
     url: `${TWITTER_API_URL}/account_activity/all/${TWITTER_WEBHOOK_ENV}/subscriptions.json`,
     oauth,
-    json: true
-  });
-};
+    json: true,
+  })
+}
 
-exports.deleteSubscription = function(userId) {
+exports.deleteSubscription = function (userId) {
   return request.delete({
     url: `${TWITTER_API_URL}/account_activity/all/${this.webhookEnv}/subscriptions/${userId}.json`,
     headers: authorizationHeaders,
-    json: true
-  });
-};
+    json: true,
+  })
+}
 ```
 
 Here are all the functions we've written:
@@ -348,20 +348,20 @@ Now, go get a snack or grab a cup of tea. You totally deserve it.
 First of all, let's write a script to retrieve your app bearer token:
 
 ```js:title=gimmedadjoke/scripts/src/bearerToken.js
-const api = require("./api");
+const api = require("./api")
 
 function run() {
   api
     .getBearerToken()
-    .then(response => {
-      console.log(response);
+    .then((response) => {
+      console.log(response)
     })
-    .catch(error => {
-      console.log(error.message);
-    });
+    .catch((error) => {
+      console.log(error.message)
+    })
 }
 
-run();
+run()
 ```
 
 Then, in the terminal:
@@ -387,20 +387,20 @@ Copy that token and put it into your `.env` file. You're ready to write some web
 Let's warm up by writing a script that retrieve all current webhooks associate with our app.
 
 ```js:title=gimmedadjoke/scripts/src/webhook.get.js
-const api = require("./api");
+const api = require("./api")
 
 function run() {
   api
     .getWebhook()
-    .then(response => {
-      console.log(response);
+    .then((response) => {
+      console.log(response)
     })
-    .catch(error => {
-      console.log(error.message);
-    });
+    .catch((error) => {
+      console.log(error.message)
+    })
 }
 
-run();
+run()
 ```
 
 Then, run `node src/webhook.get.js`. If the response is `[]`, you're on the right track.
@@ -408,22 +408,22 @@ Then, run `node src/webhook.get.js`. If the response is `[]`, you're on the righ
 To add webhook to your app:
 
 ```js:title=gimmedadjoke/scripts/src/webhook.post.js
-const api = require("./api");
+const api = require("./api")
 
-const WEBHOOK_URL = process.env.WEBHOOK_URL;
+const WEBHOOK_URL = process.env.WEBHOOK_URL
 
 function run() {
   api
     .createWebhook(WEBHOOK_URL)
-    .then(response => {
-      console.log(response);
+    .then((response) => {
+      console.log(response)
     })
-    .catch(error => {
-      console.log(error.message);
-    });
+    .catch((error) => {
+      console.log(error.message)
+    })
 }
 
-run();
+run()
 ```
 
 When you run it, you may notice it takes slightly longer than other commands you've run. That is because a lot is going on here:
@@ -435,28 +435,28 @@ When you run it, you may notice it takes slightly longer than other commands you
 And lastly, let's create a script that remove the webhook:
 
 ```js:title=gimmedadjoke/scripts/src/webhook.delete.js
-const api = require("./api");
+const api = require("./api")
 
 function run() {
   api
     .getWebhook()
-    .then(response => {
-      const webhookId = response[0].id;
+    .then((response) => {
+      const webhookId = response[0].id
       api
         .deleteWebhook(webhookId)
-        .then(response => {
-          console.log("Successfully delete webhook");
+        .then((response) => {
+          console.log("Successfully delete webhook")
         })
-        .catch(error => {
-          console.log(error.message);
-        });
+        .catch((error) => {
+          console.log(error.message)
+        })
     })
-    .catch(error => {
-      console.log(error.message);
-    });
+    .catch((error) => {
+      console.log(error.message)
+    })
 }
 
-run();
+run()
 ```
 
 Now, with these 3 scripts, you can register your webhook, get its information, and remove it when you want to.
@@ -468,56 +468,56 @@ Although you can register your webhook, it is not doing anything just yet. You a
 Similar to the scripts you wrote for webhooks, you will now write another 3 scripts for subscriptions. I'm going to show you the code, and we can talk about it afterwards:
 
 ```js:title=gimmedadjoke/scripts/src/subscription.get.js
-const api = require("./api");
+const api = require("./api")
 
 function run() {
   api
     .createSubscription()
-    .then(response => {
-      console.log("Successfully subscribe the app owner user to webhook.");
+    .then((response) => {
+      console.log("Successfully subscribe the app owner user to webhook.")
     })
-    .catch(error => {
-      console.log(error.message);
-    });
+    .catch((error) => {
+      console.log(error.message)
+    })
 }
 
-run();
+run()
 ```
 
 ```js:title=gimmedadjoke/scripts/src/subscription.post.js
-const api = require("./api");
+const api = require("./api")
 
 function run() {
   api
     .createSubscription()
-    .then(response => {
-      console.log("Successfully subscribe the app owner user to webhook.");
+    .then((response) => {
+      console.log("Successfully subscribe the app owner user to webhook.")
     })
-    .catch(error => {
-      console.log(error.message);
-    });
+    .catch((error) => {
+      console.log(error.message)
+    })
 }
 
-run();
+run()
 ```
 
 ```js:title=gimmedadjoke/scripts/src/subscription.delete.js
-const api = require("./api");
+const api = require("./api")
 
 function run() {
-  const userId = process.env.TWITTER_ACCESS_TOKEN.split("-")[0];
+  const userId = process.env.TWITTER_ACCESS_TOKEN.split("-")[0]
 
   api
     .deleteSubscription(userId)
-    .then(response => {
-      console.log("Successfully remove subscription.");
+    .then((response) => {
+      console.log("Successfully remove subscription.")
     })
-    .catch(error => {
-      console.log(error.message);
-    });
+    .catch((error) => {
+      console.log(error.message)
+    })
 }
 
-run();
+run()
 ```
 
 Try subscribing the app owner Twitter user (the user associated with the developer account -- i.e in this case @gimmedadjoke) to your webhook.
@@ -544,14 +544,14 @@ In general, this is how you can handle it:
 
 ```js
 function postHandler(req, res) {
-  const body = req.body;
+  const body = req.body
 
   if (body[THE_EVENT_YOU_CARE_ABOUT]) {
     // do stuff
 
-    return res.status(200).send();
+    return res.status(200).send()
   } else {
-    return res.status(200).send();
+    return res.status(200).send()
   }
 }
 ```
@@ -602,8 +602,8 @@ I'm actively working on [an open source command line tool](https://github.com/al
 
 ## Resources
 
-- [Twitter API Documentation](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview) 
-- [Twitter Sample Webhook on GitHub](https://github.com/twitterdev/account-activity-dashboard):  The Twitter dev team created  a sample dashboard for you to handle this process. This is super helpful, and I'd highly recommend you check this out. This project was how I got started with Twitter webhook.
+- [Twitter API Documentation](https://developer.twitter.com/en/docs/accounts-and-users/subscribe-account-activity/overview)
+- [Twitter Sample Webhook on GitHub](https://github.com/twitterdev/account-activity-dashboard): The Twitter dev team created a sample dashboard for you to handle this process. This is super helpful, and I'd highly recommend you check this out. This project was how I got started with Twitter webhook.
 
 ---
 
