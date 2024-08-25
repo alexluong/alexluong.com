@@ -1,10 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
 
 	"github.com/a-h/templ"
+	"github.com/alexluong/alexluong.com/internal/models"
 	"github.com/alexluong/alexluong.com/internal/views"
 	"github.com/labstack/echo/v5"
 	"github.com/pocketbase/pocketbase"
@@ -16,7 +18,17 @@ func main() {
 
 	app.OnBeforeServe().Add(func(e *core.ServeEvent) error {
 		e.Router.GET("/", func(c echo.Context) error {
-			return render(c, http.StatusOK, views.Index())
+			return render(c, http.StatusOK, views.IndexView())
+		})
+
+		e.Router.GET("/articles/:slug", func(c echo.Context) error {
+			slug := c.PathParam("slug")
+			article, err := models.FindArticleBySlug(app.Dao(), slug)
+			if err != nil {
+				fmt.Println(err)
+				return c.JSON(http.StatusBadRequest, map[string]string{"error": "Error"})
+			}
+			return render(c, http.StatusOK, views.ArticleView(article))
 		})
 
 		return nil
