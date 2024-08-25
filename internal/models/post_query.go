@@ -5,28 +5,23 @@ import (
 	"github.com/pocketbase/pocketbase/daos"
 )
 
-const articleTagSlug = "article"
-const noteTagSlug = "note"
+const articleType = "article"
+const noteType = "note"
 
 func PostQuery(dao *daos.Dao) *dbx.SelectQuery {
 	return dao.ModelQuery(&Post{})
 }
 
-func findPostBySlugAndTagSlug(dao *daos.Dao, slug, tagSlug string) (*Post, error) {
+func retrievePostBySlugAndType(dao *daos.Dao, slug, postType string) (*Post, error) {
 	post := &Post{}
 
 	err := dao.DB().
 		NewQuery(`
-			SELECT p.*
-			FROM posts p
-			JOIN json_each(p.tags) jt ON jt.value = t.id
-			JOIN tags t ON jt.value = t.id
-			WHERE LOWER(t.slug) = LOWER({:tagSlug})
-			AND LOWER(p.slug) = LOWER({:postSlug});`,
+			SELECT * FROM posts WHERE slug = {:slug} AND type = {:postType}`,
 		).
 		Bind(dbx.Params{
-			"tagSlug":  tagSlug,
-			"postSlug": slug,
+			"slug":     slug,
+			"postType": postType,
 		}).
 		One(post)
 
@@ -37,10 +32,10 @@ func findPostBySlugAndTagSlug(dao *daos.Dao, slug, tagSlug string) (*Post, error
 	return post, nil
 }
 
-func FindArticleBySlug(dao *daos.Dao, slug string) (*Post, error) {
-	return findPostBySlugAndTagSlug(dao, slug, articleTagSlug)
+func RetrieveArticleBySlug(dao *daos.Dao, slug string) (*Post, error) {
+	return retrievePostBySlugAndType(dao, slug, articleType)
 }
 
-func FindNoteBySlug(dao *daos.Dao, slug string) (*Post, error) {
-	return findPostBySlugAndTagSlug(dao, slug, noteTagSlug)
+func RetrieveNoteBySlug(dao *daos.Dao, slug string) (*Post, error) {
+	return retrievePostBySlugAndType(dao, slug, noteType)
 }

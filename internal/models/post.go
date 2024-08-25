@@ -11,12 +11,12 @@ var _ models.Model = (*Post)(nil)
 type Post struct {
 	models.BaseModel
 
-	Title     string                  `db:"title" json:"title"`
-	Slug      string                  `db:"slug" json:"slug"`
-	Content   string                  `db:"content" json:"content"`
-	Published types.DateTime          `db:"published" json:"published"`
-	Tags      types.JsonArray[string] `db:"tags" json:"tags"`
-	Cover     string                  `db:"cover" json:"cover"`
+	Type      string         `db:"type" json:"type"`
+	Title     string         `db:"title" json:"title"`
+	Slug      string         `db:"slug" json:"slug"`
+	Content   string         `db:"content" json:"content"`
+	Published types.DateTime `db:"published" json:"published"`
+	Cover     string         `db:"cover" json:"cover"`
 }
 
 func (m *Post) TableName() string {

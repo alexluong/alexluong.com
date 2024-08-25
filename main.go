@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -13,15 +12,20 @@ import (
 	"github.com/labstack/echo/v5"
 	"github.com/pocketbase/pocketbase"
 	"github.com/pocketbase/pocketbase/core"
+	"github.com/pocketbase/pocketbase/plugins/migratecmd"
 )
 
 func main() {
 	app := pocketbase.New()
 
-	isGoRun := strings.HasPrefix(os.Args[0], os.TempDir())
-	isDevelopmentReleaseMode := os.Getenv("RELEASE_MODE") == "development"
-	isDevelopment := isGoRun || isDevelopmentReleaseMode
-	fmt.Println(isGoRun, isDevelopmentReleaseMode, isDevelopment)
+	isLocalDev := checkIsLocalDev()
+
+	migratecmd.MustRegister(app, app.RootCmd, migratecmd.Config{
+		// enable auto creation of migration files when making collection changes in the Admin UI
+		// should only be enabled during local development
+		Automigrate: isLocalDev,
+		Dir:         "internal/migrations",
+	})
 
 	app.OnBeforeServe().Add(func(e *core.ServeEvent) error {
 		e.Router.Static("/assets", "build/assets")
@@ -32,7 +36,7 @@ func main() {
 
 		e.Router.GET("/articles/:slug", func(c echo.Context) error {
 			slug := c.PathParam("slug")
-			post, err := models.FindArticleBySlug(app.Dao(), slug)
+			post, err := models.RetrieveArticleBySlug(app.Dao(), slug)
 			if err != nil {
 				return c.JSON(http.StatusBadRequest, map[string]string{"error": "Error"})
 			}
@@ -41,7 +45,7 @@ func main() {
 
 		e.Router.GET("/notes/:slug", func(c echo.Context) error {
 			slug := c.PathParam("slug")
-			post, err := models.FindNoteBySlug(app.Dao(), slug)
+			post, err := models.RetrieveNoteBySlug(app.Dao(), slug)
 			if err != nil {
 				return c.JSON(http.StatusBadRequest, map[string]string{"error": "Error"})
 			}
@@ -66,4 +70,11 @@ func render(ctx echo.Context, statusCode int, t templ.Component) error {
 	}
 
 	return ctx.HTML(statusCode, buf.String())
+}
+
+func checkIsLocalDev() bool {
+	isGoRun := strings.HasPrefix(os.Args[0], os.TempDir())
+	isAirBuiltFile := strings.Contains(os.Args[0], "tmp/")
+	isDevelopmentReleaseMode := os.Getenv("RELEASE_MODE") == "development"
+	return isGoRun || isAirBuiltFile || isDevelopmentReleaseMode
 }
