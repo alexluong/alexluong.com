@@ -9,8 +9,12 @@ import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
 import (
+	"bytes"
 	"fmt"
+	"github.com/PuerkitoBio/goquery"
 	"github.com/alexluong/alexluong.com/internal/models"
+	"github.com/sourcegraph/syntaxhighlight"
+	"strings"
 	"time"
 )
 
@@ -71,7 +75,7 @@ func PostView(post *models.Post) templ.Component {
 				var templ_7745c5c3_Var4 string
 				templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(post.Title)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/views/post.templ`, Line: 15, Col: 66}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/views/post.templ`, Line: 19, Col: 66}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 				if templ_7745c5c3_Err != nil {
@@ -89,7 +93,7 @@ func PostView(post *models.Post) templ.Component {
 					var templ_7745c5c3_Var5 string
 					templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(coverImageUrl(post))
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/views/post.templ`, Line: 17, Col: 34}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/views/post.templ`, Line: 21, Col: 34}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 					if templ_7745c5c3_Err != nil {
@@ -102,7 +106,7 @@ func PostView(post *models.Post) templ.Component {
 					var templ_7745c5c3_Var6 string
 					templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(post.Title)
 					if templ_7745c5c3_Err != nil {
-						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/views/post.templ`, Line: 17, Col: 53}
+						return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/views/post.templ`, Line: 21, Col: 53}
 					}
 					_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 					if templ_7745c5c3_Err != nil {
@@ -117,7 +121,7 @@ func PostView(post *models.Post) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templ.Raw(post.Content).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = templ.Raw(tokenizeContent(post.Content)).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -142,6 +146,31 @@ func coverImageUrl(post *models.Post) string {
 		return post.Cover
 	}
 	return fmt.Sprintf("/api/files/posts/%s/%s", post.Id, post.Cover)
+}
+
+// thanks zupzup
+// @see https://www.zupzup.org/go-markdown-syntax-highlight/index.html
+func tokenizeContent(content string) string {
+	doc, err := goquery.NewDocumentFromReader(bytes.NewReader([]byte(content)))
+	if err != nil {
+		panic(err)
+	}
+	doc.Find("pre[class*=\"language-\"] > code").Each(func(i int, s *goquery.Selection) {
+		oldCode := s.Text()
+		formatted, err := syntaxhighlight.AsHTML([]byte(oldCode))
+		if err != nil {
+			panic(err)
+		}
+		s.SetHtml(string(formatted))
+	})
+	new, err := doc.Html()
+	if err != nil {
+		panic(err)
+	}
+	// replace unnecessarily added html tags
+	new = strings.Replace(new, "<html><head></head><body>", "", 1)
+	new = strings.Replace(new, "</body></html>", "", 1)
+	return new
 }
 
 var _ = templruntime.GeneratedTemplate

@@ -1,8 +1,12 @@
 package views
 
 import (
+	"bytes"
 	"fmt"
+	"github.com/PuerkitoBio/goquery"
 	"github.com/alexluong/alexluong.com/internal/models"
+	"github.com/sourcegraph/syntaxhighlight"
+	"strings"
 	"time"
 )
 
@@ -16,7 +20,7 @@ templ PostView(post *models.Post) {
 			if post.Cover != "" {
 				<img src={ coverImageUrl(post) } alt={ post.Title } class="mx-auto mt-8 rounded-xl"/>
 			}
-			@templ.Raw(post.Content)
+			@templ.Raw(tokenizeContent(post.Content))
 		}
 	}
 }
@@ -26,4 +30,29 @@ func coverImageUrl(post *models.Post) string {
 		return post.Cover
 	}
 	return fmt.Sprintf("/api/files/posts/%s/%s", post.Id, post.Cover)
+}
+
+// thanks zupzup
+// @see https://www.zupzup.org/go-markdown-syntax-highlight/index.html
+func tokenizeContent(content string) string {
+	doc, err := goquery.NewDocumentFromReader(bytes.NewReader([]byte(content)))
+	if err != nil {
+		panic(err)
+	}
+	doc.Find("pre[class*=\"language-\"] > code").Each(func(i int, s *goquery.Selection) {
+		oldCode := s.Text()
+		formatted, err := syntaxhighlight.AsHTML([]byte(oldCode))
+		if err != nil {
+			panic(err)
+		}
+		s.SetHtml(string(formatted))
+	})
+	new, err := doc.Html()
+	if err != nil {
+		panic(err)
+	}
+	// replace unnecessarily added html tags
+	new = strings.Replace(new, "<html><head></head><body>", "", 1)
+	new = strings.Replace(new, "</body></html>", "", 1)
+	return new
 }

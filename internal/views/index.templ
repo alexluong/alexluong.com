@@ -38,7 +38,7 @@ templ IndexView(props IndexViewProps) {
 
 templ postLinkItem(url string, title string, published time.Time) {
 	<div class="flex space-x-2">
-		<p class="font-light dark:text-gray-300">
+		<p class="font-light dark:text-gray-400">
 			@datetime(published, time.DateOnly, time.DateOnly)
 		</p>
 		<a href={ templ.SafeURL(url) } class="underline dark:text-indigo-400">{ title }</a>
