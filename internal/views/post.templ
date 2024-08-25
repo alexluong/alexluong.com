@@ -1,6 +1,7 @@
 package views
 
 import (
+	"fmt"
 	"github.com/alexluong/alexluong.com/internal/models"
 	"time"
 )
@@ -9,8 +10,18 @@ templ PostView(post *models.Post) {
 	@Layout() {
 		<main class="px-4 py-8">
 			<h1>{ post.Title }</h1>
+			if post.Cover != "" {
+				<img src={ coverImageUrl(post) } alt={ post.Title }/>
+			}
 			<p>Published { post.Published.Time().Format(time.DateOnly) }</p>
 			@templ.Raw(post.Content)
 		</main>
 	}
+}
+
+func coverImageUrl(post *models.Post) string {
+	if post.Cover == "" {
+		return post.Cover
+	}
+	return fmt.Sprintf("/api/files/posts/%s/%s", post.Id, post.Cover)
 }
