@@ -8,13 +8,15 @@ import (
 
 templ PostView(post *models.Post) {
 	@Layout() {
-		<main class="px-4 py-8">
-			<h1>{ post.Title }</h1>
+		<main class="max-w-2xl px-4 py-8 mx-auto">
+			<h1 class="text-4xl font-semibold text-center dark:text-white">{ post.Title }</h1>
+			<p class="mt-2 text-center dark:text-gray-300">Published { post.Published.Time().Format(time.DateOnly) }</p>
 			if post.Cover != "" {
-				<img src={ coverImageUrl(post) } alt={ post.Title }/>
+				<img src={ coverImageUrl(post) } alt={ post.Title } class="mx-auto mt-8 rounded-xl"/>
 			}
-			<p>Published { post.Published.Time().Format(time.DateOnly) }</p>
-			@templ.Raw(post.Content)
+			@prose("mt-8") {
+				@templ.Raw(post.Content)
+			}
 		</main>
 	}
 }
