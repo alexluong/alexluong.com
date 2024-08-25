@@ -28,5 +28,11 @@ go.work.sum
 pb_data/
 pb_migrations/
 
+# Build files
+build/
+
 # Air
 tmp/
+
+# Templ
+internal/views/*.txt

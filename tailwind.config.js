@@ -1,3 +1,7 @@
-// noop
-// mainly for VSCode Headwind extension to pick up that this project uses Tailwind
-// and format the CSS classes accordingly
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: ["./**/*.html", "./**/*.templ", "./**/*.go"],
+  theme: { extend: {} },
+  plugins: [require("@tailwindcss/typography")],
+  darkMode: "selector",
+};

@@ -1,8 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"strings"
 
 	"github.com/a-h/templ"
 	"github.com/alexluong/alexluong.com/internal/models"
@@ -15,7 +18,14 @@ import (
 func main() {
 	app := pocketbase.New()
 
+	isGoRun := strings.HasPrefix(os.Args[0], os.TempDir())
+	isDevelopmentReleaseMode := os.Getenv("RELEASE_MODE") == "development"
+	isDevelopment := isGoRun || isDevelopmentReleaseMode
+	fmt.Println(isGoRun, isDevelopmentReleaseMode, isDevelopment)
+
 	app.OnBeforeServe().Add(func(e *core.ServeEvent) error {
+		e.Router.Static("/assets", "build/assets")
+
 		e.Router.GET("/", func(c echo.Context) error {
 			return render(c, http.StatusOK, views.IndexView())
 		})
