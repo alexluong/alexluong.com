@@ -31,7 +31,11 @@ func main() {
 		e.Router.Static("/assets", "build/assets")
 
 		e.Router.GET("/", func(c echo.Context) error {
-			return render(c, http.StatusOK, views.IndexView())
+			props := views.IndexViewProps{
+				Articles: models.ListArticle(app.Dao()),
+				Notes:    models.ListNote(app.Dao()),
+			}
+			return render(c, http.StatusOK, views.IndexView(props))
 		})
 
 		e.Router.GET("/articles/:slug", func(c echo.Context) error {

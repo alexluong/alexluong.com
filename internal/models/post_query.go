@@ -39,3 +39,30 @@ func RetrieveArticleBySlug(dao *daos.Dao, slug string) (*Post, error) {
 func RetrieveNoteBySlug(dao *daos.Dao, slug string) (*Post, error) {
 	return retrievePostBySlugAndType(dao, slug, noteType)
 }
+
+func ListArticle(dao *daos.Dao) []*Post {
+	return listPostByType(dao, articleType)
+}
+
+func ListNote(dao *daos.Dao) []*Post {
+	return listPostByType(dao, noteType)
+}
+
+func listPostByType(dao *daos.Dao, postType string) []*Post {
+	posts := []*Post{}
+
+	err := dao.DB().
+		NewQuery(`
+			SELECT * FROM posts WHERE type = {:postType} ORDER BY published DESC`,
+		).
+		Bind(dbx.Params{
+			"postType": postType,
+		}).
+		All(&posts)
+
+	if err != nil {
+		return []*Post{}
+	}
+
+	return posts
+}

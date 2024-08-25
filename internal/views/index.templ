@@ -1,9 +1,54 @@
 package views
 
-templ IndexView() {
+import (
+	"github.com/alexluong/alexluong.com/internal/models"
+	"time"
+)
+
+type IndexViewProps struct {
+	Articles []*models.Post
+	Notes    []*models.Post
+}
+
+templ IndexView(props IndexViewProps) {
 	@Layout() {
-		<main class="px-4 py-8">
-			<p>Hello, world</p>
-		</main>
+		<p>Hello world</p>
+		<div class="mt-8">
+			<h3 class="font-semibold dark:text-white">Articles</h3>
+			<ul class="mt-4 space-y-4">
+				for _, article := range props.Articles {
+					<li>
+						@postLinkItem(articleURL(article.Slug), article.Title, article.Published.Time())
+					</li>
+				}
+			</ul>
+		</div>
+		<div class="mt-8">
+			<h3 class="font-semibold dark:text-white">Notes</h3>
+			<ul class="mt-4 space-y-4">
+				for _, note := range props.Notes {
+					<li>
+						@postLinkItem(noteURL(note.Slug), note.Title, note.Published.Time())
+					</li>
+				}
+			</ul>
+		</div>
 	}
+}
+
+templ postLinkItem(url string, title string, published time.Time) {
+	<div class="flex space-x-2">
+		<p class="font-light dark:text-gray-300">
+			@datetime(published, time.DateOnly, time.DateOnly)
+		</p>
+		<a href={ templ.SafeURL(url) } class="underline dark:text-indigo-400">{ title }</a>
+	</div>
+}
+
+func articleURL(slug string) string {
+	return "/articles/" + slug
+}
+
+func noteURL(slug string) string {
+	return "/notes/" + slug
 }

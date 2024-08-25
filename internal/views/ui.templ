@@ -1,0 +1,13 @@
+package views
+
+import "time"
+
+templ prose(classNames string) {
+	<div class={ "prose dark:prose-invert " + classNames }>
+		{ children... }
+	</div>
+}
+
+templ datetime(t time.Time, layout string, datetimeLayout string) {
+	<time datetime={ t.Format(datetimeLayout) }>{ t.Format(layout) }</time>
+}
