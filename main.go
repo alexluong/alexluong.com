@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"net/http"
 
@@ -23,12 +22,20 @@ func main() {
 
 		e.Router.GET("/articles/:slug", func(c echo.Context) error {
 			slug := c.PathParam("slug")
-			article, err := models.FindArticleBySlug(app.Dao(), slug)
+			post, err := models.FindArticleBySlug(app.Dao(), slug)
 			if err != nil {
-				fmt.Println(err)
 				return c.JSON(http.StatusBadRequest, map[string]string{"error": "Error"})
 			}
-			return render(c, http.StatusOK, views.ArticleView(article))
+			return render(c, http.StatusOK, views.PostView(post))
+		})
+
+		e.Router.GET("/notes/:slug", func(c echo.Context) error {
+			slug := c.PathParam("slug")
+			post, err := models.FindNoteBySlug(app.Dao(), slug)
+			if err != nil {
+				return c.JSON(http.StatusBadRequest, map[string]string{"error": "Error"})
+			}
+			return render(c, http.StatusOK, views.PostView(post))
 		})
 
 		return nil

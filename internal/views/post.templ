@@ -1,0 +1,16 @@
+package views
+
+import (
+	"github.com/alexluong/alexluong.com/internal/models"
+	"time"
+)
+
+templ PostView(post *models.Post) {
+	@Layout() {
+		<main class="px-4 py-8">
+			<h1>{ post.Title }</h1>
+			<p>Published { post.Published.Time().Format(time.DateOnly) }</p>
+			@templ.Raw(post.Content)
+		</main>
+	}
+}
