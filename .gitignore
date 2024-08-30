@@ -31,6 +31,9 @@ pb_migrations/
 # Build files
 build/
 
+# Data file (for Docker Compose)
+data/
+
 # Air
 tmp/
 
