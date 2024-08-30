@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/a-h/templ"
+	_ "github.com/alexluong/alexluong.com/internal/migrations"
 	"github.com/alexluong/alexluong.com/internal/models"
 	"github.com/alexluong/alexluong.com/internal/views"
 	"github.com/labstack/echo/v5"
