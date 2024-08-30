@@ -1,10 +1,10 @@
 services:
   app:
-    image: alexluong/personal:alexluong.com-5.0
+    image: alexluong/personal:alexluong.com-5.1
     restart: unless-stopped
     ports:
       - "8090:8090"
     volumes:
       - type: bind
-        source: ${PWD}/data
+        source: ./data
         target: /pb_data
