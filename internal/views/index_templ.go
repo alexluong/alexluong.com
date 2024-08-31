@@ -48,12 +48,12 @@ func IndexView(props IndexViewProps) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 1)
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex items-center space-x-2 dark:text-white\"><svg xmlns=\"http://www.w3.org/2000/svg\" fill=\"none\" viewBox=\"0 0 24 24\" stroke-width=\"1.5\" stroke=\"currentColor\" class=\"size-6\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z\"></path></svg><h1 class=\"font-semibold\">Alex Luong</h1></div><div class=\"mt-12\"><p>Hi there, I'm Alex. I write code and build things. I <i>attempt</i> to share my experiences through my writings here (emphasis on attempt).</p><p class=\"mt-4\">When not doing those, I enjoy spending time with my pup Charlie, playing chess, and doing sports.</p></div><div class=\"mt-16\"><h3 class=\"font-semibold dark:text-white\">Articles</h3><ul class=\"mt-4 space-y-4\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			for _, article := range props.Articles {
-				templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 2)
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<li>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -61,17 +61,17 @@ func IndexView(props IndexViewProps) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 3)
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</li>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 			}
-			templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 4)
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</ul></div><div class=\"mt-8\"><h3 class=\"font-semibold dark:text-white\">Notes</h3><ul class=\"mt-4 space-y-4\">")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			for _, note := range props.Notes {
-				templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 5)
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<li>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -79,12 +79,12 @@ func IndexView(props IndexViewProps) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 6)
+				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</li>")
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
 			}
-			templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 7)
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</ul></div>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -116,7 +116,7 @@ func postLinkItem(url string, title string, published time.Time) templ.Component
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 8)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"flex space-x-2\"><p class=\"font-light dark:text-gray-400\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -124,7 +124,7 @@ func postLinkItem(url string, title string, published time.Time) templ.Component
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 9)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</p><a href=\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -133,20 +133,20 @@ func postLinkItem(url string, title string, published time.Time) templ.Component
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 10)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"underline dark:text-fuchsia-400\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var5 string
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(title)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/views/index.templ`, Line: 52, Col: 79}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `internal/views/index.templ`, Line: 73, Col: 80}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templ.WriteWatchModeString(templ_7745c5c3_Buffer, 11)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

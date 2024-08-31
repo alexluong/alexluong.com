@@ -3,13 +3,12 @@
 @tailwind utilities;
 
 /*! Color themes for Google Code Prettify | MIT License | github.com/jmblog/color-themes-for-google-code-prettify */
-/* This one is unnecessary */
-/* .prettyprint {
+pre[class*="language-"] {
   background: #1d1f21;
-  font-family: Menlo, Bitstream Vera Sans Mono, DejaVu Sans Mono, Monaco,
+  /* font-family: Menlo, Bitstream Vera Sans Mono, DejaVu Sans Mono, Monaco,
     Consolas, monospace;
-  border: 0 !important;
-} */
+  border: 0 !important; */
+}
 .pln {
   color: #c5c8c6;
 }
