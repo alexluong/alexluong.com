@@ -4,6 +4,10 @@ WORKDIR /app
 COPY go.* ./
 RUN go mod download
 COPY . .
+# Generate Templ
+RUN go install github.com/a-h/templ/cmd/templ@$(go list -m -f '{{ .Version }}' github.com/a-h/templ)
+RUN templ generate
+# Build main binary
 RUN go build -o main .
 # RUN go build \
 #   -ldflags="-linkmode external -extldflags -static" \
