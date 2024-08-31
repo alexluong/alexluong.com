@@ -39,3 +39,4 @@ tmp/
 
 # Templ
 internal/views/*.txt
+internal/views/*_templ.go
