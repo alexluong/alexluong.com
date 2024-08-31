@@ -1,6 +1,6 @@
 services:
   app:
-    image: alexluong/personal:alexluong.com-5.1
+    image: alexluong/personal:alexluong.com-${VERSION}
     restart: unless-stopped
     ports:
       - "8090:8090"

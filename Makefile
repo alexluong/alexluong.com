@@ -15,3 +15,12 @@ live/tailwind:
 
 live:
 	make -j3 live/templ live/server live/tailwind
+
+release:
+	./scripts/release.sh
+
+up:
+	./scripts/up.sh
+
+down:
+	./scripts/down.sh
