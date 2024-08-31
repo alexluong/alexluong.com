@@ -1,5 +1,7 @@
 package views
 
+import "os"
+
 templ Layout() {
 	<!DOCTYPE html>
 	<html lang="en">
@@ -7,7 +9,7 @@ templ Layout() {
 			<title>Alex Luong</title>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-			<link rel="stylesheet" href="/assets/styles.css"/>
+			<link rel="stylesheet" href={ styleAsset() }/>
 		</head>
 		<body class="antialiased text-gray-500 bg-white dark dark:text-gray-300 dark:bg-black">
 			<main class="max-w-2xl px-4 py-8 mx-auto">
@@ -15,4 +17,12 @@ templ Layout() {
 			</main>
 		</body>
 	</html>
+}
+
+func styleAsset() string {
+	baseAssetPath := "/assets/styles.css"
+	if os.Getenv("VERSION") == "" {
+		return baseAssetPath
+	}
+	return baseAssetPath + "?" + os.Getenv("VERSION")
 }

@@ -2,6 +2,8 @@ services:
   app:
     image: alexluong/personal:alexluong.com-${VERSION}
     restart: unless-stopped
+    environment:
+      - VERSION=${VERSION}
     ports:
       - "8090:8090"
     volumes:
