@@ -1,6 +1,10 @@
 package views
 
-import "os"
+import (
+	"os"
+	"strconv"
+	"time"
+)
 
 templ Layout(canonicalHref string) {
 	<!DOCTYPE html>
@@ -21,10 +25,15 @@ templ Layout(canonicalHref string) {
 			@canonical(canonicalHref)
 			<link rel="stylesheet" href={ styleAsset() }/>
 		</head>
-		<body class="antialiased text-gray-500 bg-white dark dark:text-gray-300 dark:bg-black">
-			<main class="max-w-2xl px-4 py-8 mx-auto">
+		<body class="flex flex-col min-h-screen antialiased text-gray-500 bg-white dark dark:text-gray-300 dark:bg-black">
+			<main class="flex-1 w-full max-w-2xl px-4 py-8 mx-auto">
 				{ children... }
 			</main>
+			<footer class="w-full max-w-2xl px-4 mx-auto mt-12">
+				<div class="py-8 border-t dark:border-t-gray-600">
+					&copy; 2018 - { strconv.Itoa(time.Now().Year()) } <a href="mailto:alex@alexluong.com" class="underline dark:text-fuchsia-400">Alex Luong</a>. Feed: <a href="/feed.xml" class="underline dark:text-fuchsia-400">RSS</a>
+				</div>
+			</footer>
 		</body>
 	</html>
 }
@@ -35,4 +44,20 @@ func styleAsset() string {
 		return baseAssetPath
 	}
 	return baseAssetPath + "?" + os.Getenv("VERSION")
+}
+
+templ NotFoundView() {
+	@Layout("") {
+		<div class="flex items-center space-x-2 dark:text-white">
+			<a href="/" class="flex items-center space-x-2 font-semibold text-gray-700 dark:text-white">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M21 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061A1.125 1.125 0 0 1 21 8.689v8.122ZM11.25 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061a1.125 1.125 0 0 1 1.683.977v8.122Z"></path>
+				</svg>
+				<span>Alex's website</span>
+			</a>
+		</div>
+		<div class="mt-12">
+			<p>404: Well, this is awkward. It seems you've ventured into uncharted territory. How about we head back home?</p>
+		</div>
+	}
 }

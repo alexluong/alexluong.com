@@ -49,6 +49,9 @@ func main() {
 			if err != nil {
 				return c.JSON(http.StatusBadRequest, map[string]string{"error": "Error"})
 			}
+			if post == nil {
+				return render(c, http.StatusNotFound, views.NotFoundView())
+			}
 			if post.External != "" {
 				return c.Redirect(http.StatusPermanentRedirect, post.External)
 			}
@@ -60,6 +63,9 @@ func main() {
 			post, err := models.RetrieveNoteBySlug(app.Dao(), slug)
 			if err != nil {
 				return c.JSON(http.StatusBadRequest, map[string]string{"error": "Error"})
+			}
+			if post == nil {
+				return render(c, http.StatusNotFound, views.NotFoundView())
 			}
 			if post.External != "" {
 				return c.Redirect(http.StatusPermanentRedirect, post.External)
@@ -85,6 +91,10 @@ func main() {
 				return c.String(http.StatusInternalServerError, "Error generating feed")
 			}
 			return c.Blob(http.StatusOK, "application/json", []byte(jsonFeed))
+		})
+
+		e.Router.GET("/*", func(c echo.Context) error {
+			return render(c, http.StatusNotFound, views.NotFoundView())
 		})
 
 		return nil
