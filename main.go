@@ -40,6 +40,10 @@ func main() {
 			return render(c, http.StatusOK, views.IndexView(props))
 		})
 
+		e.Router.GET("/blog/:slug", func(c echo.Context) error {
+			return c.Redirect(http.StatusPermanentRedirect, "/articles/"+c.PathParam("slug"))
+		})
+
 		e.Router.GET("/articles/:slug", func(c echo.Context) error {
 			slug := c.PathParam("slug")
 			post, err := models.RetrieveArticleBySlug(app.Dao(), slug)
