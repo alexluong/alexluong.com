@@ -34,8 +34,7 @@ func main() {
 
 		e.Router.GET("/", func(c echo.Context) error {
 			props := views.IndexViewProps{
-				Articles: models.ListArticle(app.Dao()),
-				Notes:    models.ListNote(app.Dao()),
+				Posts: models.ListPost(app.Dao()),
 			}
 			return render(c, http.StatusOK, views.IndexView(props))
 		})

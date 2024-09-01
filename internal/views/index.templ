@@ -6,8 +6,7 @@ import (
 )
 
 type IndexViewProps struct {
-	Articles []*models.Post
-	Notes    []*models.Post
+	Posts []*models.Post
 }
 
 templ IndexView(props IndexViewProps) {
@@ -43,21 +42,11 @@ templ IndexView(props IndexViewProps) {
 			// </div>
 		</div>
 		<div class="mt-16">
-			<h3 class="font-semibold dark:text-white">Articles</h3>
+			<h3 class="font-semibold dark:text-white">Writings</h3>
 			<ul class="mt-4 space-y-4">
-				for _, article := range props.Articles {
+				for _, post := range props.Posts {
 					<li>
-						@postLinkItem(articleURL(article.Slug), article.Title, article.Published.Time(), article.External)
-					</li>
-				}
-			</ul>
-		</div>
-		<div class="mt-8">
-			<h3 class="font-semibold dark:text-white">Notes</h3>
-			<ul class="mt-4 space-y-4">
-				for _, note := range props.Notes {
-					<li>
-						@postLinkItem(noteURL(note.Slug), note.Title, note.Published.Time(), note.External)
+						@postLinkItem(*post)
 					</li>
 				}
 			</ul>
@@ -65,26 +54,33 @@ templ IndexView(props IndexViewProps) {
 	}
 }
 
-templ postLinkItem(url string, title string, published time.Time, externalURL string) {
-	<div class="flex space-x-2">
+templ postLinkItem(post models.Post) {
+	<div class="flex space-x-4">
 		<div class="w-24 font-light dark:text-gray-400">
-			@datetime(published, time.DateOnly, time.DateOnly)
+			@datetime(post.Published.Time(), time.DateOnly, time.DateOnly)
+		</div>
+		<div class="w-16 font-light dark:text-gray-400">
+			{ post.Type }
 		</div>
 		<a
 			class="flex items-center space-x-2 underline dark:text-fuchsia-400"
-			if externalURL != "" {
-				href={ templ.SafeURL(externalURL) }
-			} else {
-				href={ templ.SafeURL(url) }
+			if post.External != "" {
+				href={ templ.SafeURL(post.External) }
+			}
+			if post.Type == "note" {
+				href={ templ.SafeURL(noteURL(post.Slug)) }
+			}
+			if post.Type == "article" {
+				href={ templ.SafeURL(articleURL(post.Slug)) }
 			}
 		>
-			if externalURL != "" {
-				<span>{ title }</span>
+			if post.External != "" {
+				<span>{ post.Title }</span>
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
 				</svg>
 			} else {
-				{ title }
+				{ post.Title }
 			}
 		</a>
 	</div>
