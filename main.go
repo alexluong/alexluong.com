@@ -65,7 +65,7 @@ func main() {
 			if err != nil {
 				return c.String(http.StatusInternalServerError, "Error generating feed")
 			}
-			return c.Blob(http.StatusOK, "text/xml", []byte(xmlFeed))
+			return c.Blob(http.StatusOK, "application/xml", []byte(xmlFeed))
 		})
 
 		e.Router.GET("/feed.json", func(c echo.Context) error {
