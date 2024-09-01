@@ -23,7 +23,7 @@ func New(baseURL string, posts []*models.Post) *feeds.Feed {
 	for _, post := range posts {
 		feed.Items = append(feed.Items, &feeds.Item{
 			Title:       post.Title,
-			Link:        &feeds.Link{Href: baseURL + getSlugPrefixByType(post.Type) + post.Slug},
+			Link:        &feeds.Link{Href: baseURL + MakePostPath(post.Type, post.Slug)},
 			Description: post.Content,
 			Created:     post.Published.Time(),
 			Updated:     post.Updated.Time(),
@@ -42,4 +42,8 @@ func getSlugPrefixByType(postType string) string {
 	default:
 		return ""
 	}
+}
+
+func MakePostPath(postType string, slug string) string {
+	return getSlugPrefixByType(postType) + slug
 }

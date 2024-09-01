@@ -11,3 +11,15 @@ templ prose(classNames string) {
 templ datetime(t time.Time, layout string, datetimeLayout string) {
 	<time datetime={ t.Format(datetimeLayout) }>{ t.Format(layout) }</time>
 }
+
+var canonicalHandle = templ.NewOnceHandle()
+
+templ canonical(path string) {
+	@canonicalHandle.Once() {
+		<link rel="canonical" href={ makeCanonicalURL(path) }/>
+	}
+}
+
+func makeCanonicalURL(path string) string {
+	return "https://alexluong.com" + path
+}

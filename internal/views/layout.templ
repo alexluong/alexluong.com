@@ -2,16 +2,24 @@ package views
 
 import "os"
 
-templ Layout() {
+templ Layout(canonicalHref string) {
 	<!DOCTYPE html>
 	<html lang="en">
 		<head>
 			<title>Alex Luong</title>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-			<link rel="stylesheet" href={ styleAsset() }/>
+			<meta name="author" content="Alex Luong"/>
+			<meta name="description" content="Welcome to my personal website. I'm Alex, an indie developer from Vietnam."/>
+			<meta name="robots" content="noimageai"/>
+			<meta name="robots" content="noai"/>
+			<link rel="me" href="mailto:alex@alexluong.com"/>
+			<link rel="me" href="https://github.com/alexluong"/>
+			<link rel="me" href="https://twitter.com/alex__luong"/>
 			<link rel="alternate" type="application/rss+xml" title="RSS" href="/feed.xml"/>
 			<link rel="alternate" type="application/json" title="JSON Feed" href="/feed.json"/>
+			@canonical(canonicalHref)
+			<link rel="stylesheet" href={ styleAsset() }/>
 		</head>
 		<body class="antialiased text-gray-500 bg-white dark dark:text-gray-300 dark:bg-black">
 			<main class="max-w-2xl px-4 py-8 mx-auto">
