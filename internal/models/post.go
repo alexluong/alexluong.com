@@ -18,6 +18,7 @@ type Post struct {
 	Published types.DateTime `db:"published" json:"published"`
 	Updated   types.DateTime `db:"updated" json:"updated"`
 	Cover     string         `db:"cover" json:"cover"`
+	External  string         `db:"external" json:"external"`
 }
 
 func (m *Post) TableName() string {

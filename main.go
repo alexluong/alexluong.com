@@ -46,6 +46,9 @@ func main() {
 			if err != nil {
 				return c.JSON(http.StatusBadRequest, map[string]string{"error": "Error"})
 			}
+			if post.External != "" {
+				return c.Redirect(http.StatusPermanentRedirect, post.External)
+			}
 			return render(c, http.StatusOK, views.PostView(post))
 		})
 
@@ -54,6 +57,9 @@ func main() {
 			post, err := models.RetrieveNoteBySlug(app.Dao(), slug)
 			if err != nil {
 				return c.JSON(http.StatusBadRequest, map[string]string{"error": "Error"})
+			}
+			if post.External != "" {
+				return c.Redirect(http.StatusPermanentRedirect, post.External)
 			}
 			return render(c, http.StatusOK, views.PostView(post))
 		})
