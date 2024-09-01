@@ -67,9 +67,9 @@ templ IndexView(props IndexViewProps) {
 
 templ postLinkItem(url string, title string, published time.Time, externalURL string) {
 	<div class="flex space-x-2">
-		<p class="font-light dark:text-gray-400">
+		<div class="w-24 font-light dark:text-gray-400">
 			@datetime(published, time.DateOnly, time.DateOnly)
-		</p>
+		</div>
 		<a
 			class="flex items-center space-x-2 underline dark:text-fuchsia-400"
 			if externalURL != "" {
