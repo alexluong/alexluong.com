@@ -1,6 +1,9 @@
 package models
 
 import (
+	"database/sql"
+	"errors"
+
 	"github.com/pocketbase/dbx"
 	"github.com/pocketbase/pocketbase/daos"
 )
@@ -17,7 +20,7 @@ func retrievePostBySlugAndType(dao *daos.Dao, slug, postType string) (*Post, err
 
 	err := dao.DB().
 		NewQuery(`
-			SELECT * FROM posts WHERE slug = {:slug} AND type = {:postType}`,
+			SELECT * FROM posts WHERE slug = {:slug} AND type = {:postType} AND published != ""`,
 		).
 		Bind(dbx.Params{
 			"slug":     slug,
@@ -26,7 +29,11 @@ func retrievePostBySlugAndType(dao *daos.Dao, slug, postType string) (*Post, err
 		One(post)
 
 	if err != nil {
-		return nil, err
+		if errors.Is(err, sql.ErrNoRows) {
+			return nil, nil
+		} else {
+			return nil, err
+		}
 	}
 
 	return post, nil
@@ -45,7 +52,7 @@ func ListPost(dao *daos.Dao) []*Post {
 
 	err := dao.DB().
 		NewQuery(`
-			SELECT * FROM posts ORDER BY published DESC`,
+			SELECT * FROM posts WHERE published != "" ORDER BY published DESC`,
 		).
 		All(&posts)
 
