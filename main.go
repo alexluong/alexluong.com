@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/a-h/templ"
+	"github.com/alexluong/alexluong.com/internal/feed"
 	_ "github.com/alexluong/alexluong.com/internal/migrations"
 	"github.com/alexluong/alexluong.com/internal/models"
 	"github.com/alexluong/alexluong.com/internal/views"
@@ -57,6 +58,26 @@ func main() {
 			return render(c, http.StatusOK, views.PostView(post))
 		})
 
+		e.Router.GET("/feed.xml", func(c echo.Context) error {
+			posts := models.ListPost(app.Dao())
+			feed := feed.New(getBaseURL(c), posts)
+			xmlFeed, err := feed.ToAtom()
+			if err != nil {
+				return c.String(http.StatusInternalServerError, "Error generating feed")
+			}
+			return c.Blob(http.StatusOK, "text/xml", []byte(xmlFeed))
+		})
+
+		e.Router.GET("/feed.json", func(c echo.Context) error {
+			posts := models.ListPost(app.Dao())
+			feed := feed.New(getBaseURL(c), posts)
+			jsonFeed, err := feed.ToJSON()
+			if err != nil {
+				return c.String(http.StatusInternalServerError, "Error generating feed")
+			}
+			return c.Blob(http.StatusOK, "application/json", []byte(jsonFeed))
+		})
+
 		return nil
 	})
 
@@ -82,4 +103,13 @@ func checkIsLocalDev() bool {
 	isAirBuiltFile := strings.Contains(os.Args[0], "tmp/")
 	isDevelopmentReleaseMode := os.Getenv("RELEASE_MODE") == "development"
 	return isGoRun || isAirBuiltFile || isDevelopmentReleaseMode
+}
+
+func getBaseURL(c echo.Context) string {
+	scheme := "http"
+	if c.Request().TLS != nil {
+		scheme = "https"
+	}
+	host := c.Request().Host
+	return scheme + "://" + host
 }

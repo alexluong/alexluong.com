@@ -16,6 +16,7 @@ type Post struct {
 	Slug      string         `db:"slug" json:"slug"`
 	Content   string         `db:"content" json:"content"`
 	Published types.DateTime `db:"published" json:"published"`
+	Updated   types.DateTime `db:"published" json:"updated"`
 	Cover     string         `db:"cover" json:"cover"`
 }
 
