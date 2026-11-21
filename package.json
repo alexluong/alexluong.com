@@ -9,12 +9,13 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "start": "node ./dist/server/entry.mjs",
-    "typecheck": "astro check"
+    "deploy": "astro build && wrangler deploy",
+    "typecheck": "wrangler types && astro check"
   },
   "dependencies": {
-    "@astrojs/node": "^11.1.5",
+    "@astrojs/cloudflare": "^14.4.9",
     "@astrojs/react": "^7.0.0",
+    "@emdash-cms/cloudflare": "^1.5.0",
     "@portabletext/to-html": "^6.0.0",
     "@tailwindcss/typography": "^0.5.20",
     "@tailwindcss/vite": "^4.3.5",
@@ -25,6 +26,7 @@
     "tailwindcss": "^4.3.5"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.10"
+    "@astrojs/check": "^0.9.10",
+    "wrangler": "^4.165.0"
   }
 }

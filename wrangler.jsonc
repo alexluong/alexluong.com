@@ -1,0 +1,15 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "alexluong-com",
+	"main": "./src/worker.ts",
+	"compatibility_date": "2026-11-01",
+	"compatibility_flags": ["nodejs_compat"],
+	// Served only from its custom domain (managed outside this repo).
+	"workers_dev": false,
+	"preview_urls": false,
+	"d1_databases": [{ "binding": "DB", "database_name": "alexluong-com", "database_id": "TODO" }],
+	"r2_buckets": [{ "binding": "MEDIA", "bucket_name": "alexluong-com-media" }],
+	"kv_namespaces": [{ "binding": "SESSION", "id": "TODO" }],
+	"triggers": { "crons": ["* * * * *"] },
+	"observability": { "enabled": true },
+}

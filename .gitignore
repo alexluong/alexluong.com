@@ -10,3 +10,7 @@ data.db-*
 .env
 .env.*
 !.env.example
+
+# Cloudflare
+.wrangler
+worker-configuration.d.ts
