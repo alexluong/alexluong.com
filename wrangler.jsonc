@@ -10,6 +10,7 @@
 	"d1_databases": [{ "binding": "DB", "database_name": "alexluong-com", "database_id": "a048b263-d099-4dba-a091-616c0be69b03" }],
 	"r2_buckets": [{ "binding": "MEDIA", "bucket_name": "alexluong-com-media" }],
 	"kv_namespaces": [{ "binding": "SESSION", "id": "6e8246cf6e674a19bea34f89dae6876a" }],
+	"vars": { "EMDASH_SITE_URL": "https://alexluong.com" },
 	"triggers": { "crons": ["* * * * *"] },
 	"observability": { "enabled": true },
 }
