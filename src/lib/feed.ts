@@ -43,15 +43,23 @@ export function toFeedItem(post: Post, site: URL): FeedItem {
 		id: `tag:${site.host},${idDate}:${path}`,
 		url: new URL(path, site).href,
 		title: post.title,
-		html: post.content ? toHTML(post.content, { components: { types: { code: codeBlock } } }) : "",
+		html: post.content ? toHTML(post.content, { components: { types: blockTypes(site) } }) : "",
 		published: post.publishedAt,
 		updated: post.updatedAt,
 	};
 }
 
-function codeBlock({ value }: { value: { code: string; language?: string } }): string {
-	const lang = value.language ? ` class="language-${escapeHTML(value.language)}"` : "";
-	return `<pre${lang}><code>${escapeHTML(value.code)}</code></pre>`;
+function blockTypes(site: URL) {
+	return {
+		code: ({ value }: { value: { code: string; language?: string } }) => {
+			const lang = value.language ? ` class="language-${escapeHTML(value.language)}"` : "";
+			return `<pre${lang}><code>${escapeHTML(value.code)}</code></pre>`;
+		},
+		image: ({ value }: { value: { asset: { url: string }; alt?: string } }) => {
+			const src = new URL(value.asset.url, site).href;
+			return `<img src="${escapeHTML(src)}" alt="${escapeHTML(value.alt ?? "")}">`;
+		},
+	};
 }
 
 export { escapeHTML as escapeXml };
