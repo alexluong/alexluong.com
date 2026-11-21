@@ -1,0 +1,13 @@
+---
+import HomeIcon from "../components/HomeIcon.astro";
+import Layout from "../layouts/Layout.astro";
+
+Astro.response.status = 404;
+---
+
+<Layout>
+	<HomeIcon />
+	<div class="mt-12">
+		<p>404: Well, this is awkward. It seems you've ventured into uncharted territory. How about we head back home?</p>
+	</div>
+</Layout>

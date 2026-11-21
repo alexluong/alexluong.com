@@ -1,0 +1,48 @@
+{
+	"$schema": "https://emdashcms.com/seed.schema.json",
+	"version": "1",
+	"meta": {
+		"name": "alexluong.com",
+		"description": "Articles and notes"
+	},
+	"settings": {
+		"title": "Alex Luong",
+		"tagline": "Welcome to my website, where I write about my projects and share my learnings as a software developer."
+	},
+	"collections": [
+		{
+			"slug": "articles",
+			"label": "Articles",
+			"labelSingular": "Article",
+			"urlPattern": "/articles/{slug}",
+			"supports": ["drafts", "revisions", "preview"],
+			"fields": [
+				{ "slug": "title", "label": "Title", "type": "string", "required": true },
+				{ "slug": "content", "label": "Content", "type": "portableText" },
+				{
+					"slug": "external",
+					"label": "External URL",
+					"type": "url",
+					"description": "If set, the post links to this URL instead of its own page."
+				}
+			]
+		},
+		{
+			"slug": "notes",
+			"label": "Notes",
+			"labelSingular": "Note",
+			"urlPattern": "/notes/{slug}",
+			"supports": ["drafts", "revisions", "preview"],
+			"fields": [
+				{ "slug": "title", "label": "Title", "type": "string", "required": true },
+				{ "slug": "content", "label": "Content", "type": "portableText" },
+				{
+					"slug": "external",
+					"label": "External URL",
+					"type": "url",
+					"description": "If set, the post links to this URL instead of its own page."
+				}
+			]
+		}
+	]
+}

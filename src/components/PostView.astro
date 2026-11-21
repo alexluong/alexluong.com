@@ -1,0 +1,25 @@
+---
+import { PortableText } from "emdash/ui";
+
+import Layout from "../layouts/Layout.astro";
+import { formatDate, postPath, type Post } from "../lib/posts";
+import Code from "./Code.astro";
+import HomeIcon from "./HomeIcon.astro";
+
+interface Props {
+	post: Post;
+}
+
+const { post } = Astro.props;
+---
+
+<Layout canonicalPath={postPath(post.kind, post.slug)}>
+	<HomeIcon />
+	<div class="prose mt-6 dark:prose-invert">
+		<p class="text-sm font-light dark:text-gray-300">
+			<time datetime={formatDate(post.publishedAt)}>{formatDate(post.publishedAt)}</time>
+		</p>
+		<h1 class="text-4xl font-semibold dark:text-white">{post.title}</h1>
+		<PortableText value={post.content} components={{ type: { code: Code } }} />
+	</div>
+</Layout>

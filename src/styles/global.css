@@ -1,0 +1,18 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Tomorrow Night, fed to Shiki's css-variables theme (see components/Code.astro) */
+:root {
+	--astro-code-background: #1d1f21;
+	--astro-code-foreground: #c5c8c6;
+	--astro-code-token-keyword: #b294bb;
+	--astro-code-token-string: #b5bd68;
+	--astro-code-token-string-expression: #b5bd68;
+	--astro-code-token-comment: #969896;
+	--astro-code-token-constant: #de935f;
+	--astro-code-token-function: #81a2be;
+	--astro-code-token-parameter: #c5c8c6;
+	--astro-code-token-punctuation: #c5c8c6;
+	--astro-code-token-link: #8abeb7;
+}

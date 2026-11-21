@@ -1,0 +1,10 @@
+---
+import PostView from "../../components/PostView.astro";
+import { getPost } from "../../lib/posts";
+
+const post = await getPost("note", Astro.params.slug!);
+if (!post) return Astro.rewrite("/404");
+if (post.external) return Astro.redirect(post.external, 308);
+---
+
+<PostView post={post} />

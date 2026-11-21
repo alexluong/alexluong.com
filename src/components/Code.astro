@@ -1,0 +1,14 @@
+---
+import type { CodeLanguage } from "astro";
+import { Code } from "astro:components";
+
+interface Props {
+	node: { code: string; language?: string };
+}
+
+const { node } = Astro.props;
+// Astro's <Code> falls back to plaintext for languages Shiki doesn't bundle.
+const lang = (node.language || "plaintext") as CodeLanguage;
+---
+
+<Code code={node.code} lang={lang} theme="css-variables" />

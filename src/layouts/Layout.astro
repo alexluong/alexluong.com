@@ -1,0 +1,40 @@
+---
+import "../styles/global.css";
+
+interface Props {
+	/** Path for <link rel="canonical">, e.g. "/notes/hello-world". */
+	canonicalPath?: string;
+}
+
+const { canonicalPath } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<title>Alex Luong</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="author" content="Alex Luong" />
+		<meta name="description" content="Welcome to my personal website. I'm Alex, an indie developer from Vietnam." />
+		<meta name="robots" content="noimageai" />
+		<meta name="robots" content="noai" />
+		<link rel="me" href="mailto:alex@alexluong.com" />
+		<link rel="me" href="https://github.com/alexluong" />
+		<link rel="me" href="https://twitter.com/alex__luong" />
+		<link rel="alternate" type="application/atom+xml" title="Atom" href="/feed.xml" />
+		<link rel="alternate" type="application/json" title="JSON Feed" href="/feed.json" />
+		{canonicalPath && <link rel="canonical" href={new URL(canonicalPath, Astro.site)} />}
+	</head>
+	<body class="dark flex min-h-screen flex-col bg-white text-gray-500 antialiased dark:bg-black dark:text-gray-300">
+		<main class="mx-auto w-full max-w-2xl flex-1 px-4 py-8">
+			<slot />
+		</main>
+		<footer class="mx-auto mt-12 w-full max-w-2xl px-4">
+			<div class="border-t py-8 dark:border-t-gray-600">
+				&copy; 2018 - {year} <a href="mailto:alex@alexluong.com" class="underline dark:text-fuchsia-400">Alex Luong</a>. Feed: <a href="/feed.xml" class="underline dark:text-fuchsia-400">RSS</a>
+			</div>
+		</footer>
+	</body>
+</html>

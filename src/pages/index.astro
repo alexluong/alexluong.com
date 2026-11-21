@@ -1,0 +1,44 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { formatDate, listPosts, postPath } from "../lib/posts";
+
+const posts = await listPosts();
+---
+
+<Layout>
+	<div class="flex items-center space-x-2 dark:text-white">
+		<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+			<path stroke-linecap="round" stroke-linejoin="round" d="m6.75 7.5 3 2.25-3 2.25m4.5 0h3m-9 8.25h13.5A2.25 2.25 0 0 0 21 18V6a2.25 2.25 0 0 0-2.25-2.25H5.25A2.25 2.25 0 0 0 3 6v12a2.25 2.25 0 0 0 2.25 2.25Z"></path>
+		</svg>
+		<h1 class="font-semibold">Alex Luong</h1>
+	</div>
+	<div class="mt-12">
+		<p>Hi there, I'm Alex. I write code and build things. I <i>attempt</i> to share my experiences through my writings here (emphasis on attempt).</p>
+		<p class="mt-4">When not doing those, I enjoy spending time with my pup Charlie, playing chess, and doing sports.</p>
+	</div>
+	<div class="mt-16">
+		<h3 class="font-semibold dark:text-white">Writings</h3>
+		<ul class="mt-4 space-y-12 md:space-y-4">
+			{
+				posts.map((post) => (
+					<li class="flex flex-col gap-2 md:flex-row md:gap-4">
+						<div class="flex space-x-4">
+							<div class="w-24 font-light dark:text-gray-400">
+								<time datetime={formatDate(post.publishedAt)}>{formatDate(post.publishedAt)}</time>
+							</div>
+							<div class="w-16 font-light dark:text-gray-400">{post.kind}</div>
+						</div>
+						<a class="flex items-center space-x-2 underline dark:text-fuchsia-400" href={post.external ?? postPath(post.kind, post.slug)}>
+							<span>{post.title}</span>
+							{post.external && (
+								<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+									<path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"></path>
+								</svg>
+							)}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</Layout>
